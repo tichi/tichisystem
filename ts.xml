@@ -1396,6 +1396,8 @@ function TichiSystem:Initialize()
 
 	self:InitializeDisplay()
 
+	clearWindow(self.data.display.consoles.system)
+
 	self:Echo(function(console)
 		setFgColor(console, 200, 200, 0)
 		echo(console, &quot;TichiSystem&quot;)
@@ -2324,7 +2326,6 @@ function BalanceTracking:InitializeDisplay()
 	setBackgroundColor(self.data.display.consoles.border, 0, 0, 0, 255)
 	resizeWindow(self.data.display.consoles.border, 315, fontHeight*2+10)
 	moveWindow(self.data.display.consoles.border, TichiSystem:Get(&quot;borderWidth&quot;)+626, mainHeight-374)
-	showWindow(self.data.display.consoles.border)
 	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.consoles.border)
 
 	if not self.data.display.labels.physical then
@@ -2335,7 +2336,6 @@ function BalanceTracking:InitializeDisplay()
 	resizeWindow(self.data.display.labels.physical, 50, fontHeight*2)
 	moveWindow(self.data.display.labels.physical, TichiSystem:Get(&quot;borderWidth&quot;)+631, mainHeight-369)
 	echo(self.data.display.labels.physical, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;phys&lt;/center&gt;&lt;/p&gt;]])
-	showWindow(self.data.display.labels.physical)
 	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.physical)
 
 	if not self.data.display.labels.mental then
@@ -2346,7 +2346,6 @@ function BalanceTracking:InitializeDisplay()
 	resizeWindow(self.data.display.labels.mental, 50, fontHeight*2)
 	moveWindow(self.data.display.labels.mental, TichiSystem:Get(&quot;borderWidth&quot;)+682, mainHeight-369)
 	echo(self.data.display.labels.mental, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;equi&lt;/center&gt;&lt;/p&gt;]])
-	showWindow(self.data.display.labels.mental)
 	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.mental)
 
 	if not self.data.display.labels.potion then
@@ -2357,7 +2356,6 @@ function BalanceTracking:InitializeDisplay()
 	resizeWindow(self.data.display.labels.potion, 50, fontHeight*2)
 	moveWindow(self.data.display.labels.potion, TichiSystem:Get(&quot;borderWidth&quot;)+733, mainHeight-369)
 	echo(self.data.display.labels.potion, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;poti&lt;/center&gt;&lt;/p&gt;]])
-	showWindow(self.data.display.labels.potion)
 	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.potion)
 
 	if not self.data.display.labels.salve then
@@ -2368,7 +2366,6 @@ function BalanceTracking:InitializeDisplay()
 	resizeWindow(self.data.display.labels.salve, 50, fontHeight*2)
 	moveWindow(self.data.display.labels.salve, TichiSystem:Get(&quot;borderWidth&quot;)+784, mainHeight-369)
 	echo(self.data.display.labels.salve, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;salv&lt;/center&gt;&lt;/p&gt;]])
-	showWindow(self.data.display.labels.salve)
 	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.salve)
 
 	if not self.data.display.labels.herb then
@@ -2379,7 +2376,6 @@ function BalanceTracking:InitializeDisplay()
 	resizeWindow(self.data.display.labels.herb, 50, fontHeight*2)
 	moveWindow(self.data.display.labels.herb, TichiSystem:Get(&quot;borderWidth&quot;)+835, mainHeight-369)
 	echo(self.data.display.labels.herb, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;herb&lt;/center&gt;&lt;/p&gt;]])
-	showWindow(self.data.display.labels.herb)
 	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.herb)
 
 	if not self.data.display.labels.smoke then
@@ -2390,7 +2386,6 @@ function BalanceTracking:InitializeDisplay()
 	resizeWindow(self.data.display.labels.smoke, 50, fontHeight*2)
 	moveWindow(self.data.display.labels.smoke, TichiSystem:Get(&quot;borderWidth&quot;)+886, mainHeight-369)
 	echo(self.data.display.labels.smoke, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;smok&lt;/center&gt;&lt;/p&gt;]])
-	showWindow(self.data.display.labels.smoke)
 	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.smoke)
 
 	resetFormat()
