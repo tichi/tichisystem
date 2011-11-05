@@ -1034,6 +1034,27 @@ resetFormat()</script>
                 <regexCodeList/>
                 <regexCodePropertyList/>
             </TriggerGroup>
+            <Trigger isActive="no" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                <name>Connected</name>
+                <script>echo(&quot;raising connected event&quot;)
+raiseEvent(&quot;tsConnected&quot;)</script>
+                <triggerType>0</triggerType>
+                <conditonLineDelta>3</conditonLineDelta>
+                <mStayOpen>0</mStayOpen>
+                <mCommand></mCommand>
+                <packageName></packageName>
+                <mFgColor>#ff0000</mFgColor>
+                <mBgColor>#ffff00</mBgColor>
+                <mSoundFile></mSoundFile>
+                <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                <regexCodeList>
+                    <string>Enter an option or enter your character's name.</string>
+                </regexCodeList>
+                <regexCodePropertyList>
+                    <integer>0</integer>
+                </regexCodePropertyList>
+            </Trigger>
         </TriggerGroup>
         <TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
             <name>achaea-fixed-map-bottom-right</name>
@@ -1340,6 +1361,20 @@ end</script>
                     <regex>^mv(?:| (\w+))$</regex>
                 </Alias>
             </AliasGroup>
+            <AliasGroup isActive="yes" isFolder="yes">
+                <name>tsChannels</name>
+                <script></script>
+                <command></command>
+                <packageName></packageName>
+                <regex></regex>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Show Channels GUI</name>
+                    <script>Channels:Open()</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^showgui channels$</regex>
+                </Alias>
+            </AliasGroup>
         </AliasGroup>
     </AliasPackage>
     <ActionPackage/>
@@ -1347,8 +1382,8 @@ end</script>
         <ScriptGroup isActive="yes" isFolder="yes">
             <name>tsTichiSystem</name>
             <packageName></packageName>
-            <script>function tsNewTichiSystem(event)
-	if (event == &quot;sysLoadEvent&quot;) then
+            <script>function tsTichiSystem(event)
+	if (event == &quot;tsConnected&quot;) then
 		TichiSystem:Initialize()
 	elseif event == &quot;sysWindowResizeEvent&quot; then
 		TichiSystem:UpdateDisplay()
@@ -1363,40 +1398,64 @@ function TichiSystem:AddToBucket(bucket, window)
 	table.insert(self.data.display.buckets[bucket], window)
 end
 
+function TichiSystem:Close(name)
+	local showgui = self:Get(&quot;showgui&quot;)
+
+	for k, v in ipairs(showgui) do
+		if v == name then
+			table.remove(showgui, k)
+			break
+		end
+	end
+
+	self:Set(&quot;showgui&quot;, showgui)
+end
+
 function TichiSystem:Echo(msg)
 	self:InitializeData()
 
-	if type(msg) == &quot;function&quot; then
-		msg(self.data.display.consoles.system)
-	else
-		echo(self.data.display.consoles.system, msg)
+	if self:Get(&quot;showgui&quot;) and table.contains(self:Get(&quot;showgui&quot;), &quot;system&quot;) then
+		if type(msg) == &quot;function&quot; then
+			msg(self.data.display.consoles.system)
+		else
+			echo(self.data.display.consoles.system, msg)
+		end
+		resetFormat()
 	end
-	resetFormat()
 end
 
 function TichiSystem:Get(name)
+	if self.data.config[name] then
+		return self.data.config[name]
+	end
+
 	if name == &quot;timerDuration&quot; then
 		return 1.0
 	elseif name == &quot;borderWidth&quot; then
 		local fontWidth, fontHeight = calcFontSize(10)
 		return fontWidth*45
+	elseif name == &quot;showgui&quot; then
+		return {&quot;system&quot;, &quot;channels&quot;, &quot;map&quot;}
 	end
 end
 
 function TichiSystem:Initialize()
 	self:InitializeData(true)
+	self:LoadPermanentData()
 
-	self.data.display.buckets.gui = {
-	}
+	if self:Get(&quot;showgui&quot;) and table.contains(self:Get(&quot;showgui&quot;), &quot;system&quot;) then
+		self.data.display.buckets.gui = {
+		}
 
-	self.data.display.buckets.system = {
-		self.data.display.consoles.systempadding,
-		self.data.display.consoles.system
-	}
+		self.data.display.buckets.system = {
+			self.data.display.consoles.systempadding,
+			self.data.display.consoles.system
+		}
 
-	self:InitializeDisplay()
+		self:InitializeDisplay()
 
-	clearWindow(self.data.display.consoles.system)
+		clearWindow(self.data.display.consoles.system)
+	end
 
 	self:Echo(function(console)
 		setFgColor(console, 200, 200, 0)
@@ -1412,7 +1471,17 @@ function TichiSystem:Initialize()
 	Learning:Initialize()
 	Hunting:Initialize()
 
-	self:OnClickSystemLabel()
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;map&quot;) then
+		showWindow(&quot;mk_map&quot;)
+	else
+		hideWindow(&quot;mk_map&quot;)
+	end
+
+	if self:Get(&quot;showgui&quot;) and table.contains(self:Get(&quot;showgui&quot;), &quot;system&quot;) then
+		self:OnClickSystemLabel()
+	end
+
+	self.data.initialized = true
 end
 
 function TichiSystem:InitializeData(reset)
@@ -1434,6 +1503,10 @@ function TichiSystem:InitializeData(reset)
 
 	if not self.data.display.buckets or reset then
 		self.data.display.buckets = {}
+	end
+
+	if not self.data.config or reset then
+		self.data.config = {}
 	end
 end
 
@@ -1498,6 +1571,45 @@ function TichiSystem:InitializeDisplay()
 	resetFormat()
 end
 
+function TichiSystem:InitializePermanentData()
+	db:create(&quot;tsDB&quot;, {
+		tsconfig={
+			category=&quot;&quot;,
+			name=&quot;&quot;,
+			value=&quot;&quot;
+		}
+	})
+end
+
+function TichiSystem:IsInitialized()
+	return (self.data.initialized == true)
+end
+
+function TichiSystem:LoadPermanentData()
+	self:InitializeData()
+	self:InitializePermanentData()
+
+	self.data.config = {}
+
+	local tsDB = db:get_database(&quot;tsDB&quot;)
+	local result = db:fetch(tsDB.tsconfig, db:eq(tsDB.tsconfig.category, &quot;system&quot;))
+
+	for k, v in ipairs(result) do
+		if self.data.config[v[&quot;name&quot;]] then
+			if type(self.data.config[v[&quot;name&quot;]]) == &quot;table&quot; then
+				table.insert(self.data.config[v[&quot;name&quot;]], v[&quot;value&quot;])
+			else
+				local oldValue = self.data.config[v[&quot;name&quot;]]
+				self.data.config[v[&quot;name&quot;]] = {}
+				table.insert(self.data.config[v[&quot;name&quot;]], oldValue)
+				table.insert(self.data.config[v[&quot;name&quot;]], v[&quot;value&quot;])
+			end
+		else
+			self.data.config[v[&quot;name&quot;]] = v[&quot;value&quot;]
+		end
+	end
+end
+
 function TichiSystemOnClickGUILabel()
 	TichiSystem:OnClickGUILabel()
 end
@@ -1540,6 +1652,30 @@ function TichiSystem:OnClickSystemLabel()
 	resetFormat()
 end
 
+function TichiSystem:Open(name)
+	local showgui = self:Get(&quot;showgui&quot;)
+	table.insert(showgui, name)
+
+	self:Set(&quot;showgui&quot;, showgui)
+end
+
+function TichiSystem:Set(name, value)
+	self:InitializePermanentData()
+
+	self.data.config[name] = value
+
+	local tsDB = db:get_database(&quot;tsDB&quot;)
+	db:delete(tsDB.tsconfig, db:AND(db:eq(tsDB.tsconfig.category, &quot;system&quot;), db:eq(tsDB.tsconfig.name, name)))
+
+	if type(value) == &quot;table&quot; then
+		for k, v in ipairs(value) do
+			db:add(tsDB.tsconfig, {category=&quot;system&quot;, name=name, value=v})
+		end
+	else
+		db:add(tsDB.tsconfig, {category=&quot;system&quot;, name=name, value=value})
+	end
+end
+
 function TichiSystem:ShowHideBucket(name)
 	for k, v in pairs(self.data.display.buckets) do
 		for _, y in pairs(v) do
@@ -1561,15 +1697,17 @@ function TichiSystem:UpdateDisplay()
 	end
 end</script>
             <eventHandlerList>
-                <string>sysLoadEvent</string>
                 <string>sysWindowResizeEvent</string>
+                <string>tsConnected</string>
             </eventHandlerList>
             <ScriptGroup isActive="yes" isFolder="yes">
                 <name>tsMovement</name>
                 <packageName></packageName>
                 <script>function tsMovement(event)
-	if event == &quot;sysWindowResizeEvent&quot; then
-		Movement:UpdateDisplay()
+	if TichiSystem:IsInitialized() then
+		if event == &quot;sysWindowResizeEvent&quot; then
+			Movement:UpdateDisplay()
+		end
 	end
 end
 
@@ -1622,32 +1760,32 @@ end
 function Movement:InitializeDisplay()
 	self:InitializeData()
 
-	local mainWidth, mainHeight = getMainWindowSize()
-	mainWidth = mainWidth - TichiSystem:Get(&quot;borderWidth&quot;)
-	local fontWidth, fontHeight = calcFontSize(10)
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;system&quot;) then
+		local mainWidth, mainHeight = getMainWindowSize()
+		mainWidth = mainWidth - TichiSystem:Get(&quot;borderWidth&quot;)
+		local fontWidth, fontHeight = calcFontSize(10)
 
-	if not self.data.display.consoles.border then
-		self.data.display.consoles.border = &quot;tichisystem.movement.consoles.border&quot;
-		createMiniConsole(self.data.display.consoles.border, 0, 0, 0, 0)
+		if not self.data.display.consoles.border then
+			self.data.display.consoles.border = &quot;tichisystem.movement.consoles.border&quot;
+			createMiniConsole(self.data.display.consoles.border, 0, 0, 0, 0)
+		end
+		setBackgroundColor(self.data.display.consoles.border, 0, 0, 0, 255)
+		resizeWindow(self.data.display.consoles.border, 315, fontHeight+10)
+		moveWindow(self.data.display.consoles.border, TichiSystem:Get(&quot;borderWidth&quot;)+626, mainHeight-374+(fontHeight*2+10)+1+(fontHeight+10)+1)
+		TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.consoles.border)
+
+		if not self.data.display.consoles.all then
+			self.data.display.consoles.all = &quot;tichisystem.movement.consoles.all&quot;
+			createMiniConsole(self.data.display.consoles.all, 0, 0, 0, 0)
+		end
+		setBackgroundColor(self.data.display.consoles.all, 0, 0, 0, 255)
+		resizeWindow(self.data.display.consoles.all, 305, fontHeight)
+		moveWindow(self.data.display.consoles.all, TichiSystem:Get(&quot;borderWidth&quot;)+631, mainHeight-374+(fontHeight*2+10)+1+(fontHeight+10)+6)
+		setMiniConsoleFontSize(self.data.display.consoles.all, 10)
+		TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.consoles.all)
+
+		resetFormat()
 	end
-	setBackgroundColor(self.data.display.consoles.border, 0, 0, 0, 255)
-	resizeWindow(self.data.display.consoles.border, 315, fontHeight+10)
-	moveWindow(self.data.display.consoles.border, TichiSystem:Get(&quot;borderWidth&quot;)+626, mainHeight-374+(fontHeight*2+10)+1+(fontHeight+10)+1)
-	showWindow(self.data.display.consoles.border)
-	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.consoles.border)
-
-	if not self.data.display.consoles.all then
-		self.data.display.consoles.all = &quot;tichisystem.movement.consoles.all&quot;
-		createMiniConsole(self.data.display.consoles.all, 0, 0, 0, 0)
-	end
-	setBackgroundColor(self.data.display.consoles.all, 0, 0, 0, 255)
-	resizeWindow(self.data.display.consoles.all, 305, fontHeight)
-	moveWindow(self.data.display.consoles.all, TichiSystem:Get(&quot;borderWidth&quot;)+631, mainHeight-374+(fontHeight*2+10)+1+(fontHeight+10)+6)
-	setMiniConsoleFontSize(self.data.display.consoles.all, 10)
-	showWindow(self.data.display.consoles.all)
-	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.consoles.all)
-
-	resetFormat()
 end
 
 function Movement:KillTimers(group)
@@ -1690,12 +1828,14 @@ function Movement:SetMode(mode)
 end
 
 function Movement:UpdateDisplay()
-	self:InitializeDisplay()
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;system&quot;) then
+		self:InitializeDisplay()
 
-	clearWindow(self.data.display.consoles.all)
-	setFgColor(self.data.display.consoles.all, 200, 200, 200)
-	echo(self.data.display.consoles.all, &quot;Movement mode: &quot; .. (self.data.mode or &quot;normal&quot;))
-	resetFormat()
+		clearWindow(self.data.display.consoles.all)
+		setFgColor(self.data.display.consoles.all, 200, 200, 200)
+		echo(self.data.display.consoles.all, &quot;Movement mode: &quot; .. (self.data.mode or &quot;normal&quot;))
+		resetFormat()
+	end
 end</script>
                 <eventHandlerList>
                     <string>sysWindowResizeEvent</string>
@@ -1705,8 +1845,10 @@ end</script>
                 <name>tsChannels</name>
                 <packageName></packageName>
                 <script>function tsChannels(event)
-	if event == &quot;sysWindowResizeEvent&quot; then
-		Channels:UpdateDisplay()
+	if TichiSystem:IsInitialized() then
+		if event == &quot;sysWindowResizeEvent&quot; then
+			Channels:UpdateDisplay()
+		end
 	end
 end
 
@@ -1715,29 +1857,31 @@ if not Channels then
 end
 
 function Channels:Capture(channel)
-	selectString(line, 1)
-	copy()
-	appendBuffer(self.data.display.consoles.all)
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;channels&quot;) then
+		selectString(line, 1)
+		copy()
+		appendBuffer(self.data.display.consoles.all)
 
-	if channel == &quot;tells&quot; then
-		appendBuffer(self.data.display.consoles.tells)
-		self:Highlight(&quot;tells&quot;)
-	elseif channel == &quot;Hunters&quot; then
-		appendBuffer(self.data.display.consoles.guild)
-		self:Highlight(&quot;guild&quot;)
-	elseif channel == &quot;Celidon&quot; then
-		appendBuffer(self.data.display.consoles.city)
-		self:Highlight(&quot;city&quot;)
-	elseif channel == &quot;Congregation&quot; then
-		appendBuffer(self.data.display.consoles.congregation)
-		self:Highlight(&quot;congregation&quot;)
-	elseif channel == &quot;Ring&quot; then
-		appendBuffer(self.data.display.consoles.ring)
-		self:Highlight(&quot;ring&quot;)
+		if channel == &quot;tells&quot; then
+			appendBuffer(self.data.display.consoles.tells)
+			self:Highlight(&quot;tells&quot;)
+		elseif channel == &quot;Hunters&quot; then
+			appendBuffer(self.data.display.consoles.guild)
+			self:Highlight(&quot;guild&quot;)
+		elseif channel == &quot;Celidon&quot; then
+			appendBuffer(self.data.display.consoles.city)
+			self:Highlight(&quot;city&quot;)
+		elseif channel == &quot;Congregation&quot; then
+			appendBuffer(self.data.display.consoles.congregation)
+			self:Highlight(&quot;congregation&quot;)
+		elseif channel == &quot;Ring&quot; then
+			appendBuffer(self.data.display.consoles.ring)
+			self:Highlight(&quot;ring&quot;)
+		end
+
+		deselect()
+		resetFormat()
 	end
-
-	deselect()
-	resetFormat()
 end
 
 function Channels:Highlight(tab)
@@ -1750,33 +1894,35 @@ end
 function Channels:Initialize()
 	self:InitializeData(true)
 
-	self.data.display.buckets.all = {
-		self.data.display.consoles.all
-	}
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;channels&quot;) then
+		self:InitializeDisplay()
 
-	self.data.display.buckets.tells = {
-		self.data.display.consoles.tells
-	}
+		self.data.display.buckets.all = {
+			self.data.display.consoles.all
+		}
 
-	self.data.display.buckets.guild = {
-		self.data.display.consoles.guild
-	}
+		self.data.display.buckets.tells = {
+			self.data.display.consoles.tells
+		}
 
-	self.data.display.buckets.city = {
-		self.data.display.consoles.city
-	}
+		self.data.display.buckets.guild = {
+			self.data.display.consoles.guild
+		}
 
-	self.data.display.buckets.congregation = {
-		self.data.display.consoles.congregation
-	}
+		self.data.display.buckets.city = {
+			self.data.display.consoles.city
+		}
 
-	self.data.display.buckets.ring = {
-		self.data.display.consoles.ring
-	}
+		self.data.display.buckets.congregation = {
+			self.data.display.consoles.congregation
+		}
 
-	self:InitializeDisplay()
+		self.data.display.buckets.ring = {
+			self.data.display.consoles.ring
+		}
 
-	self:OnClickAllLabel()
+		self:OnClickAllLabel()
+	end
 
 	TichiSystem:Echo(function(console)
 		setFgColor(console, 200, 200, 0)
@@ -1809,158 +1955,183 @@ function Channels:InitializeData(reset)
 end
 
 function Channels:InitializeDisplay()
-	self:InitializeData()
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;channels&quot;) then
+		self:InitializeData()
 
-	local mainWidth, mainHeight = getMainWindowSize()
-	mainWidth = mainWidth - TichiSystem:Get(&quot;borderWidth&quot;)
+		local mainWidth, mainHeight = getMainWindowSize()
+		mainWidth = mainWidth - TichiSystem:Get(&quot;borderWidth&quot;)
 
-	if not self.data.display.labels.all then
-		self.data.display.labels.all = &quot;tichisystem.channels.labels.all&quot;
-		createLabel(self.data.display.labels.all, 0, 0, 0, 0, 1) 
+		if not self.data.display.consoles.border then
+			self.data.display.consoles.border = &quot;tichisystem.channels.consoles.border&quot;
+			createMiniConsole(self.data.display.consoles.border, 0, 0, 0, 0)
+		end
+		setBackgroundColor(self.data.display.consoles.border, 0, 33, 33, 255)
+		resizeWindow(self.data.display.consoles.border, mainWidth-625-15, mainHeight-430)
+		moveWindow(self.data.display.consoles.border, TichiSystem:Get(&quot;borderWidth&quot;)+625, 25)
+		showWindow(self.data.display.consoles.border)
+
+		if not self.data.display.consoles.padding then
+			self.data.display.consoles.padding = &quot;tichisystem.channels.consoles.padding&quot;
+			createMiniConsole(self.data.display.consoles.padding, 0, 0, 0, 0)
+		end
+		clearWindow(self.data.display.consoles.padding)
+		setBackgroundColor(self.data.display.consoles.padding, 0, 0, 0, 255)
+		resizeWindow(self.data.display.consoles.padding, mainWidth-629-15, mainHeight-432)
+		moveWindow(self.data.display.consoles.padding, TichiSystem:Get(&quot;borderWidth&quot;)+626, 26)
+		showWindow(self.data.display.consoles.padding)
+
+		local fontWidth, fontHeight = calcFontSize(10)
+
+		if not self.data.display.labels.all then
+			self.data.display.labels.all = &quot;tichisystem.channels.labels.all&quot;
+			createLabel(self.data.display.labels.all, 0, 0, 0, 0, 1) 
+		end
+		--setBackgroundColor(self.data.display.labels.all, 0, 33, 33, 255)
+		resizeWindow(self.data.display.labels.all, 50, 24)
+		moveWindow(self.data.display.labels.all, TichiSystem:Get(&quot;borderWidth&quot;)+625, 0)
+		echo(self.data.display.labels.all, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;All&lt;/center&gt;&lt;/p&gt;]])
+		setLabelClickCallback(self.data.display.labels.all, &quot;ChannelsOnClickAllLabel&quot;)
+		showWindow(self.data.display.labels.all)
+
+		if not self.data.display.consoles.all then
+			self.data.display.consoles.all = &quot;tichisystem.channels.consoles.all&quot;
+			createMiniConsole(self.data.display.consoles.all, 0, 0, 0, 0)
+		end
+		setBackgroundColor(self.data.display.consoles.all, 0, 0, 0, 255)
+--		resizeWindow(self.data.display.consoles.all, mainWidth-625-15, mainHeight-430)
+--		moveWindow(self.data.display.consoles.all, TichiSystem:Get(&quot;borderWidth&quot;)+625, 25)
+		resizeWindow(self.data.display.consoles.all, mainWidth-639-15, mainHeight-443)
+		moveWindow(self.data.display.consoles.all, TichiSystem:Get(&quot;borderWidth&quot;)+631, 31)
+		setMiniConsoleFontSize(self.data.display.consoles.all, 10)
+		setWindowWrap(self.data.display.consoles.all, math.floor((mainWidth-639-15)/fontWidth))
+
+		if not self.data.display.labels.tells then
+			self.data.display.labels.tells = &quot;tichisystem.channels.labels.tells&quot;
+			createLabel(self.data.display.labels.tells, 0, 0, 0, 0, 1)
+		end
+		--setBackgroundColor(self.data.display.labels.tells, 0, 33, 33, 255)
+		resizeWindow(self.data.display.labels.tells, 50, 25)
+		moveWindow(self.data.display.labels.tells, TichiSystem:Get(&quot;borderWidth&quot;)+676, 0)
+		echo(self.data.display.labels.tells, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Tells&lt;/center&gt;&lt;/p&gt;]])
+		setLabelClickCallback(self.data.display.labels.tells, &quot;ChannelsOnClickTellsLabel&quot;)
+		showWindow(self.data.display.labels.tells)
+
+		if not self.data.display.consoles.tells then
+			self.data.display.consoles.tells = &quot;tichisystem.channels.consoles.tells&quot;
+			createMiniConsole(self.data.display.consoles.tells, 0, 0, 0, 0)
+		end
+		setBackgroundColor(self.data.display.consoles.tells, 0, 0, 0, 255)
+--		resizeWindow(self.data.display.consoles.tells, mainWidth-625-15, mainHeight-430)
+--		moveWindow(self.data.display.consoles.tells, TichiSystem:Get(&quot;borderWidth&quot;)+625, 25)
+		resizeWindow(self.data.display.consoles.tells, mainWidth-639-15, mainHeight-443)
+		moveWindow(self.data.display.consoles.tells, TichiSystem:Get(&quot;borderWidth&quot;)+631, 31)
+		setMiniConsoleFontSize(self.data.display.consoles.tells, 10)
+		setWindowWrap(self.data.display.consoles.tells, math.floor((mainWidth-639-15)/fontWidth))
+
+		if not self.data.display.labels.guild then
+			self.data.display.labels.guild = &quot;tichisystem.channels.labels.guild&quot;
+			createLabel(self.data.display.labels.guild, 0, 0, 0, 0, 1)
+		end
+		--setBackgroundColor(self.data.display.labels.guild, 0, 33, 33, 255)
+		resizeWindow(self.data.display.labels.guild, 50, 25)
+		moveWindow(self.data.display.labels.guild, TichiSystem:Get(&quot;borderWidth&quot;)+727, 0)
+		echo(self.data.display.labels.guild, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Guild&lt;/center&gt;&lt;/p&gt;]])
+		setLabelClickCallback(self.data.display.labels.guild, &quot;ChannelsOnClickGuildLabel&quot;)
+		showWindow(self.data.display.labels.guild)
+
+		if not self.data.display.consoles.guild then
+			self.data.display.consoles.guild = &quot;tichisystem.channels.consoles.guild&quot;
+			createMiniConsole(self.data.display.consoles.guild, 0, 0, 0, 0)
+		end
+		setBackgroundColor(self.data.display.consoles.guild, 0, 0, 0, 255)
+--		resizeWindow(self.data.display.consoles.guild, mainWidth-625-15, mainHeight-430)
+--		moveWindow(self.data.display.consoles.guild, TichiSystem:Get(&quot;borderWidth&quot;)+625, 25)
+		resizeWindow(self.data.display.consoles.guild, mainWidth-639-15, mainHeight-443)
+		moveWindow(self.data.display.consoles.guild, TichiSystem:Get(&quot;borderWidth&quot;)+631, 31)
+		setMiniConsoleFontSize(self.data.display.consoles.guild, 10)
+		setWindowWrap(self.data.display.consoles.guild, math.floor((mainWidth-639-15)/fontWidth))
+
+		if not self.data.display.labels.city then
+			self.data.display.labels.city = &quot;tichisystem.channels.labels.city&quot;
+			createLabel(self.data.display.labels.city, 0, 0, 0, 0, 1)
+		end
+		--setBackgroundColor(self.data.display.labels.city, 0, 33, 33, 255)
+		resizeWindow(self.data.display.labels.city, 50, 25)
+		moveWindow(self.data.display.labels.city, TichiSystem:Get(&quot;borderWidth&quot;)+778, 0)
+		echo(self.data.display.labels.city, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;City&lt;/center&gt;&lt;/p&gt;]])
+		setLabelClickCallback(self.data.display.labels.city, &quot;ChannelsOnClickCityLabel&quot;)
+		showWindow(self.data.display.labels.city)
+
+		if not self.data.display.consoles.city then
+			self.data.display.consoles.city = &quot;tichisystem.channels.consoles.city&quot;
+			createMiniConsole(self.data.display.consoles.city, 0, 0, 0, 0)
+		end
+		setBackgroundColor(self.data.display.consoles.city, 0, 0, 0, 255)
+--		resizeWindow(self.data.display.consoles.city, mainWidth-625-15, mainHeight-430)
+--		moveWindow(self.data.display.consoles.city, TichiSystem:Get(&quot;borderWidth&quot;)+625, 25)
+		resizeWindow(self.data.display.consoles.city, mainWidth-639-15, mainHeight-443)
+		moveWindow(self.data.display.consoles.city, TichiSystem:Get(&quot;borderWidth&quot;)+631, 31)
+		setMiniConsoleFontSize(self.data.display.consoles.city, 10)
+		setWindowWrap(self.data.display.consoles.city, math.floor((mainWidth-639-15)/fontWidth))
+
+		if not self.data.display.labels.congregation then
+			self.data.display.labels.congregation = &quot;tichisystem.channels.labels.congregation&quot;
+			createLabel(self.data.display.labels.congregation, 0, 0, 0, 0, 1)
+		end
+		--setBackgroundColor(self.data.display.labels.congregation, 0, 33, 33, 255)
+		resizeWindow(self.data.display.labels.congregation, 125, 25)
+		moveWindow(self.data.display.labels.congregation, TichiSystem:Get(&quot;borderWidth&quot;)+829, 0)
+		echo(self.data.display.labels.congregation, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Congregation&lt;/center&gt;&lt;/p&gt;]])
+		setLabelClickCallback(self.data.display.labels.congregation, &quot;ChannelsOnClickCongregationLabel&quot;)
+		showWindow(self.data.display.labels.congregation)
+
+		if not self.data.display.consoles.congregation then
+			self.data.display.consoles.congregation = &quot;tichisystem.channels.consoles.congregation&quot;
+			createMiniConsole(self.data.display.consoles.congregation, 0, 0, 0, 0)
+		end
+		setBackgroundColor(self.data.display.consoles.congregation, 0, 0, 0, 255)
+--		resizeWindow(self.data.display.consoles.congregation, mainWidth-625-15, mainHeight-430)
+--		moveWindow(self.data.display.consoles.congregation, TichiSystem:Get(&quot;borderWidth&quot;)+625, 25)
+		resizeWindow(self.data.display.consoles.congregation, mainWidth-639-15, mainHeight-443)
+		moveWindow(self.data.display.consoles.congregation, TichiSystem:Get(&quot;borderWidth&quot;)+631, 31)
+		setMiniConsoleFontSize(self.data.display.consoles.congregation, 10)
+		setWindowWrap(self.data.display.consoles.congregation, math.floor((mainWidth-639-15)/fontWidth))
+
+		if not self.data.display.labels.ring then
+			self.data.display.labels.ring = &quot;tichisystem.channels.labels.ring&quot;
+			createLabel(self.data.display.labels.ring, 0, 0, 0, 0, 1)
+		end
+		--setBackgroundColor(self.data.display.labels.ring, 0, 33, 33, 255)
+		resizeWindow(self.data.display.labels.ring, 50, 25)
+		moveWindow(self.data.display.labels.ring, TichiSystem:Get(&quot;borderWidth&quot;)+955, 0)
+		echo(self.data.display.labels.ring, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Ring&lt;/center&gt;&lt;/p&gt;]])
+		setLabelClickCallback(self.data.display.labels.ring, &quot;ChannelsOnClickRingLabel&quot;)
+		showWindow(self.data.display.labels.ring)
+
+		if not self.data.display.consoles.ring then
+			self.data.display.consoles.ring = &quot;tichisystem.channels.consoles.ring&quot;
+			createMiniConsole(self.data.display.consoles.ring, 0, 0, 0, 0)
+		end
+		setBackgroundColor(self.data.display.consoles.ring, 0, 0, 0, 255)
+--		resizeWindow(self.data.display.consoles.ring, mainWidth-625-15, mainHeight-430)
+--		moveWindow(self.data.display.consoles.ring, TichiSystem:Get(&quot;borderWidth&quot;)+625, 25)
+		resizeWindow(self.data.display.consoles.ring, mainWidth-639-15, mainHeight-443)
+		moveWindow(self.data.display.consoles.ring, TichiSystem:Get(&quot;borderWidth&quot;)+631, 31)
+		setMiniConsoleFontSize(self.data.display.consoles.ring, 10)
+		setWindowWrap(self.data.display.consoles.ring, math.floor((mainWidth-639-15)/fontWidth))
+
+		if not self.data.display.labels.close then
+			self.data.display.labels.close = &quot;tichisystem.channels.labels.close&quot;
+			createLabel(self.data.display.labels.close, 0, 0, 0, 0, 1)
+		end
+		resizeWindow(self.data.display.labels.close, 25, 25)
+		moveWindow(self.data.display.labels.close, mainWidth-25-16+TichiSystem:Get(&quot;borderWidth&quot;), 0)
+		echo(self.data.display.labels.close, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 0, 0);&quot;&gt;&lt;center&gt;&lt;b&gt;X&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;]])
+		setLabelClickCallback(self.data.display.labels.close, &quot;ChannelsOnClickCloseLabel&quot;)
+		showWindow(self.data.display.labels.close)
+
+		resetFormat()
 	end
-	--setBackgroundColor(self.data.display.labels.all, 0, 33, 33, 255)
-	resizeWindow(self.data.display.labels.all, 50, 24)
-	moveWindow(self.data.display.labels.all, TichiSystem:Get(&quot;borderWidth&quot;)+625, 0)
-	echo(self.data.display.labels.all, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;All&lt;/center&gt;&lt;/p&gt;]])
-	setLabelClickCallback(self.data.display.labels.all, &quot;ChannelsOnClickAllLabel&quot;)
-	showWindow(self.data.display.labels.all)
-
-	if not self.data.display.consoles.border then
-		self.data.display.consoles.border = &quot;tichisystem.channels.consoles.border&quot;
-		createMiniConsole(self.data.display.consoles.border, 0, 0, 0, 0)
-	end
-	setBackgroundColor(self.data.display.consoles.border, 0, 33, 33, 255)
-	resizeWindow(self.data.display.consoles.border, mainWidth-625-15, mainHeight-430)
-	moveWindow(self.data.display.consoles.border, TichiSystem:Get(&quot;borderWidth&quot;)+625, 25)
-	showWindow(self.data.display.consoles.border)
-
-	if not self.data.display.consoles.padding then
-		self.data.display.consoles.padding = &quot;tichisystem.channels.consoles.padding&quot;
-		createMiniConsole(self.data.display.consoles.padding, 0, 0, 0, 0)
-	end
-	clearWindow(self.data.display.consoles.padding)
-	setBackgroundColor(self.data.display.consoles.padding, 0, 0, 0, 255)
-	resizeWindow(self.data.display.consoles.padding, mainWidth-629-15, mainHeight-432)
-	moveWindow(self.data.display.consoles.padding, TichiSystem:Get(&quot;borderWidth&quot;)+626, 26)
-
-	local fontWidth, fontHeight = calcFontSize(10)
-
-	if not self.data.display.consoles.all then
-		self.data.display.consoles.all = &quot;tichisystem.channels.consoles.all&quot;
-		createMiniConsole(self.data.display.consoles.all, 0, 0, 0, 0)
-	end
-	setBackgroundColor(self.data.display.consoles.all, 0, 0, 0, 255)
-	resizeWindow(self.data.display.consoles.all, mainWidth-639-15, mainHeight-443)
-	moveWindow(self.data.display.consoles.all, TichiSystem:Get(&quot;borderWidth&quot;)+631, 31)
-	setMiniConsoleFontSize(self.data.display.consoles.all, 10)
-	setWindowWrap(self.data.display.consoles.all, math.floor((mainWidth-639-15)/fontWidth))
-
-	if not self.data.display.labels.tells then
-		self.data.display.labels.tells = &quot;tichisystem.channels.labels.tells&quot;
-		createLabel(self.data.display.labels.tells, 0, 0, 0, 0, 1)
-	end
-	--setBackgroundColor(self.data.display.labels.tells, 0, 33, 33, 255)
-	resizeWindow(self.data.display.labels.tells, 50, 25)
-	moveWindow(self.data.display.labels.tells, TichiSystem:Get(&quot;borderWidth&quot;)+676, 0)
-	echo(self.data.display.labels.tells, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;&lt;b&gt;&lt;u&gt;Tells&lt;/u&gt;&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;]])
-	setLabelClickCallback(self.data.display.labels.tells, &quot;ChannelsOnClickTellsLabel&quot;)
-	showWindow(self.data.display.labels.tells)
-
-	if not self.data.display.consoles.tells then
-		self.data.display.consoles.tells = &quot;tichisystem.channels.consoles.tells&quot;
-		createMiniConsole(self.data.display.consoles.tells, 0, 0, 0, 0)
-	end
-	setBackgroundColor(self.data.display.consoles.tells, 0, 0, 0, 255)
-	resizeWindow(self.data.display.consoles.tells, mainWidth-639-15, mainHeight-443)
-	moveWindow(self.data.display.consoles.tells, TichiSystem:Get(&quot;borderWidth&quot;)+631, 31)
-	setMiniConsoleFontSize(self.data.display.consoles.tells, 10)
-	setWindowWrap(self.data.display.consoles.tells, math.floor((mainWidth-639-15)/fontWidth))
-
-	if not self.data.display.labels.guild then
-		self.data.display.labels.guild = &quot;tichisystem.channels.labels.guild&quot;
-		createLabel(self.data.display.labels.guild, 0, 0, 0, 0, 1)
-	end
-	--setBackgroundColor(self.data.display.labels.guild, 0, 33, 33, 255)
-	resizeWindow(self.data.display.labels.guild, 50, 25)
-	moveWindow(self.data.display.labels.guild, TichiSystem:Get(&quot;borderWidth&quot;)+727, 0)
-	echo(self.data.display.labels.guild, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;&lt;b&gt;&lt;u&gt;Guild&lt;/u&gt;&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;]])
-	setLabelClickCallback(self.data.display.labels.guild, &quot;ChannelsOnClickGuildLabel&quot;)
-	showWindow(self.data.display.labels.guild)
-
-	if not self.data.display.consoles.guild then
-		self.data.display.consoles.guild = &quot;tichisystem.channels.consoles.guild&quot;
-		createMiniConsole(self.data.display.consoles.guild, 0, 0, 0, 0)
-	end
-	setBackgroundColor(self.data.display.consoles.guild, 0, 0, 0, 255)
-	resizeWindow(self.data.display.consoles.guild, mainWidth-639-15, mainHeight-443)
-	moveWindow(self.data.display.consoles.guild, TichiSystem:Get(&quot;borderWidth&quot;)+631, 31)
-	setMiniConsoleFontSize(self.data.display.consoles.guild, 10)
-	setWindowWrap(self.data.display.consoles.guild, math.floor((mainWidth-639-15)/fontWidth))
-
-	if not self.data.display.labels.city then
-		self.data.display.labels.city = &quot;tichisystem.channels.labels.city&quot;
-		createLabel(self.data.display.labels.city, 0, 0, 0, 0, 1)
-	end
-	--setBackgroundColor(self.data.display.labels.city, 0, 33, 33, 255)
-	resizeWindow(self.data.display.labels.city, 50, 25)
-	moveWindow(self.data.display.labels.city, TichiSystem:Get(&quot;borderWidth&quot;)+778, 0)
-	echo(self.data.display.labels.city, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;&lt;b&gt;&lt;u&gt;City&lt;/u&gt;&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;]])
-	setLabelClickCallback(self.data.display.labels.city, &quot;ChannelsOnClickCityLabel&quot;)
-	showWindow(self.data.display.labels.city)
-
-	if not self.data.display.consoles.city then
-		self.data.display.consoles.city = &quot;tichisystem.channels.consoles.city&quot;
-		createMiniConsole(self.data.display.consoles.city, 0, 0, 0, 0)
-	end
-	setBackgroundColor(self.data.display.consoles.city, 0, 0, 0, 255)
-	resizeWindow(self.data.display.consoles.city, mainWidth-639-15, mainHeight-443)
-	moveWindow(self.data.display.consoles.city, TichiSystem:Get(&quot;borderWidth&quot;)+631, 31)
-	setMiniConsoleFontSize(self.data.display.consoles.city, 10)
-	setWindowWrap(self.data.display.consoles.city, math.floor((mainWidth-639-15)/fontWidth))
-
-	if not self.data.display.labels.congregation then
-		self.data.display.labels.congregation = &quot;tichisystem.channels.labels.congregation&quot;
-		createLabel(self.data.display.labels.congregation, 0, 0, 0, 0, 1)
-	end
-	--setBackgroundColor(self.data.display.labels.congregation, 0, 33, 33, 255)
-	resizeWindow(self.data.display.labels.congregation, 125, 25)
-	moveWindow(self.data.display.labels.congregation, TichiSystem:Get(&quot;borderWidth&quot;)+829, 0)
-	echo(self.data.display.labels.congregation, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;&lt;b&gt;&lt;u&gt;Congregation&lt;/u&gt;&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;]])
-	setLabelClickCallback(self.data.display.labels.congregation, &quot;ChannelsOnClickCongregationLabel&quot;)
-	showWindow(self.data.display.labels.congregation)
-
-	if not self.data.display.consoles.congregation then
-		self.data.display.consoles.congregation = &quot;tichisystem.channels.consoles.congregation&quot;
-		createMiniConsole(self.data.display.consoles.congregation, 0, 0, 0, 0)
-	end
-	setBackgroundColor(self.data.display.consoles.congregation, 0, 0, 0, 255)
-	resizeWindow(self.data.display.consoles.congregation, mainWidth-639-15, mainHeight-443)
-	moveWindow(self.data.display.consoles.congregation, TichiSystem:Get(&quot;borderWidth&quot;)+631, 31)
-	setMiniConsoleFontSize(self.data.display.consoles.congregation, 10)
-	setWindowWrap(self.data.display.consoles.congregation, math.floor((mainWidth-639-15)/fontWidth))
-
-	if not self.data.display.labels.ring then
-		self.data.display.labels.ring = &quot;tichisystem.channels.labels.ring&quot;
-		createLabel(self.data.display.labels.ring, 0, 0, 0, 0, 1)
-	end
-	--setBackgroundColor(self.data.display.labels.ring, 0, 33, 33, 255)
-	resizeWindow(self.data.display.labels.ring, 50, 25)
-	moveWindow(self.data.display.labels.ring, TichiSystem:Get(&quot;borderWidth&quot;)+955, 0)
-	echo(self.data.display.labels.ring, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;&lt;b&gt;&lt;u&gt;Ring&lt;/u&gt;&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;]])
-	setLabelClickCallback(self.data.display.labels.ring, &quot;ChannelsOnClickRingLabel&quot;)
-	showWindow(self.data.display.labels.ring)
-
-	if not self.data.display.consoles.ring then
-		self.data.display.consoles.ring = &quot;tichisystem.channels.consoles.ring&quot;
-		createMiniConsole(self.data.display.consoles.ring, 0, 0, 0, 0)
-	end
-	setBackgroundColor(self.data.display.consoles.ring, 0, 0, 0, 255)
-	resizeWindow(self.data.display.consoles.ring, mainWidth-639-15, mainHeight-443)
-	moveWindow(self.data.display.consoles.ring, TichiSystem:Get(&quot;borderWidth&quot;)+631, 31)
-	setMiniConsoleFontSize(self.data.display.consoles.ring, 10)
-	setWindowWrap(self.data.display.consoles.ring, math.floor((mainWidth-639-15)/fontWidth))
-
-	resetFormat()
 end
 
 function ChannelsOnClickAllLabel()
@@ -2039,6 +2210,22 @@ function Channels:OnClickCityLabel()
 	self:ShowHideBucket(&quot;city&quot;)
 
 	resetFormat()
+end
+
+function ChannelsOnClickCloseLabel()
+	Channels:OnClickCloseLabel()
+end
+
+function Channels:OnClickCloseLabel()
+	for k, v in pairs(self.data.display.labels) do
+		hideWindow(v)
+	end
+
+	for k, v in pairs(self.data.display.consoles) do
+		hideWindow(v)
+	end
+
+	TichiSystem:Close(&quot;channels&quot;)
 end
 
 function ChannelsOnClickCongregationLabel()
@@ -2197,6 +2384,12 @@ function Channels:OnClickRingLabel()
 	resetFormat()
 end
 
+function Channels:Open()
+	TichiSystem:Open(&quot;channels&quot;)
+
+	self:Initialize()
+end
+
 function Channels:ShowHideBucket(name)
 	for k, v in pairs(self.data.display.buckets) do
 		for _, y in pairs(v) do
@@ -2209,20 +2402,22 @@ function Channels:ShowHideBucket(name)
 end
 
 function Channels:UpdateDisplay()
-	self:InitializeDisplay()
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;channels&quot;) then
+		self:InitializeDisplay()
 
-	if self.data.display.selectedTab == &quot;all&quot; then
-		ChannelsOnClickAllLabel()
-	elseif self.data.display.selectedTab == &quot;tells&quot; then
-		ChannelsOnClickTellsLabel()
-	elseif self.data.display.selectedTab == &quot;guild&quot; then
-		ChannelsOnClickGuildLabel()
-	elseif self.data.display.selectedTab == &quot;city&quot; then
-		ChannelsOnClickCityLabel()
-	elseif self.data.display.selectedTab == &quot;congregation&quot; then
-		ChannelsOnClickCongregationLabel()
-	elseif self.data.display.selectedTab == &quot;ring&quot; then
-		ChannelsOnClickRingLabel()
+		if self.data.display.selectedTab == &quot;all&quot; then
+			ChannelsOnClickAllLabel()
+		elseif self.data.display.selectedTab == &quot;tells&quot; then
+			ChannelsOnClickTellsLabel()
+		elseif self.data.display.selectedTab == &quot;guild&quot; then
+			ChannelsOnClickGuildLabel()
+		elseif self.data.display.selectedTab == &quot;city&quot; then
+			ChannelsOnClickCityLabel()
+		elseif self.data.display.selectedTab == &quot;congregation&quot; then
+			ChannelsOnClickCongregationLabel()
+		elseif self.data.display.selectedTab == &quot;ring&quot; then
+			ChannelsOnClickRingLabel()
+		end
 	end
 end</script>
                 <eventHandlerList>
@@ -2233,8 +2428,10 @@ end</script>
                 <name>tsBalanceTracking</name>
                 <packageName></packageName>
                 <script>function tsBalanceTracking(event)
-	if event == &quot;sysWindowResizeEvent&quot; then
-		BalanceTracking:UpdateDisplay()
+	if TichiSystem:IsInitialized() then
+		if event == &quot;sysWindowResizeEvent&quot; then
+			BalanceTracking:UpdateDisplay()
+		end
 	end
 end
 
@@ -2314,81 +2511,83 @@ end
 function BalanceTracking:InitializeDisplay()
 	self:InitializeData()
 
-	local mainWidth, mainHeight = getMainWindowSize()
-	mainWidth = mainWidth - TichiSystem:Get(&quot;borderWidth&quot;)
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;system&quot;) then
+		local mainWidth, mainHeight = getMainWindowSize()
+		mainWidth = mainWidth - TichiSystem:Get(&quot;borderWidth&quot;)
 
-	local fontWidth, fontHeight = calcFontSize(10)
+		local fontWidth, fontHeight = calcFontSize(10)
 
-	if not self.data.display.consoles.border then
-		self.data.display.consoles.border = &quot;tichisystem.balancetracking.consoles.border&quot;
-		createMiniConsole(self.data.display.consoles.border, 0, 0, 0, 0)
+		if not self.data.display.consoles.border then
+			self.data.display.consoles.border = &quot;tichisystem.balancetracking.consoles.border&quot;
+			createMiniConsole(self.data.display.consoles.border, 0, 0, 0, 0)
+		end
+		setBackgroundColor(self.data.display.consoles.border, 0, 0, 0, 255)
+		resizeWindow(self.data.display.consoles.border, 315, fontHeight*2+10)
+		moveWindow(self.data.display.consoles.border, TichiSystem:Get(&quot;borderWidth&quot;)+626, mainHeight-374)
+		TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.consoles.border)
+
+		if not self.data.display.labels.physical then
+			self.data.display.labels.physical = &quot;tichisystem.balancetracking.labels.physical&quot;
+			createLabel(self.data.display.labels.physical, 0, 0, 0, 0, 1) 
+		end
+		setBackgroundColor(self.data.display.labels.physical, 0, 50, 0, 255)
+		resizeWindow(self.data.display.labels.physical, 50, fontHeight*2)
+		moveWindow(self.data.display.labels.physical, TichiSystem:Get(&quot;borderWidth&quot;)+631, mainHeight-369)
+		echo(self.data.display.labels.physical, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;phys&lt;/center&gt;&lt;/p&gt;]])
+		TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.physical)
+
+		if not self.data.display.labels.mental then
+			self.data.display.labels.mental = &quot;tichisystem.balancetracking.labels.mental&quot;
+			createLabel(self.data.display.labels.mental, 0, 0, 0, 0, 1) 
+		end
+		setBackgroundColor(self.data.display.labels.mental, 0, 50, 0, 255)
+		resizeWindow(self.data.display.labels.mental, 50, fontHeight*2)
+		moveWindow(self.data.display.labels.mental, TichiSystem:Get(&quot;borderWidth&quot;)+682, mainHeight-369)
+		echo(self.data.display.labels.mental, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;equi&lt;/center&gt;&lt;/p&gt;]])
+		TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.mental)
+
+		if not self.data.display.labels.potion then
+			self.data.display.labels.potion = &quot;tichisystem.balancetracking.labels.potion&quot;
+			createLabel(self.data.display.labels.potion, 0, 0, 0, 0, 1) 
+		end
+		setBackgroundColor(self.data.display.labels.potion, 0, 50, 0, 255)
+		resizeWindow(self.data.display.labels.potion, 50, fontHeight*2)
+		moveWindow(self.data.display.labels.potion, TichiSystem:Get(&quot;borderWidth&quot;)+733, mainHeight-369)
+		echo(self.data.display.labels.potion, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;poti&lt;/center&gt;&lt;/p&gt;]])
+		TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.potion)
+
+		if not self.data.display.labels.salve then
+			self.data.display.labels.salve = &quot;tichisystem.balancetracking.labels.salve&quot;
+			createLabel(self.data.display.labels.salve, 0, 0, 0, 0, 1) 
+		end
+		setBackgroundColor(self.data.display.labels.salve, 0, 50, 0, 255)
+		resizeWindow(self.data.display.labels.salve, 50, fontHeight*2)
+		moveWindow(self.data.display.labels.salve, TichiSystem:Get(&quot;borderWidth&quot;)+784, mainHeight-369)
+		echo(self.data.display.labels.salve, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;salv&lt;/center&gt;&lt;/p&gt;]])
+		TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.salve)
+
+		if not self.data.display.labels.herb then
+			self.data.display.labels.herb = &quot;tichisystem.balancetracking.labels.herb&quot;
+			createLabel(self.data.display.labels.herb, 0, 0, 0, 0, 1) 
+		end
+		setBackgroundColor(self.data.display.labels.herb, 0, 50, 0, 255)
+		resizeWindow(self.data.display.labels.herb, 50, fontHeight*2)
+		moveWindow(self.data.display.labels.herb, TichiSystem:Get(&quot;borderWidth&quot;)+835, mainHeight-369)
+		echo(self.data.display.labels.herb, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;herb&lt;/center&gt;&lt;/p&gt;]])
+		TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.herb)
+
+		if not self.data.display.labels.smoke then
+			self.data.display.labels.smoke = &quot;tichisystem.balancetracking.labels.smoke&quot;
+			createLabel(self.data.display.labels.smoke, 0, 0, 0, 0, 1) 
+		end
+		setBackgroundColor(self.data.display.labels.smoke, 0, 50, 0, 255)
+		resizeWindow(self.data.display.labels.smoke, 50, fontHeight*2)
+		moveWindow(self.data.display.labels.smoke, TichiSystem:Get(&quot;borderWidth&quot;)+886, mainHeight-369)
+		echo(self.data.display.labels.smoke, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;smok&lt;/center&gt;&lt;/p&gt;]])
+		TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.smoke)
+
+		resetFormat()
 	end
-	setBackgroundColor(self.data.display.consoles.border, 0, 0, 0, 255)
-	resizeWindow(self.data.display.consoles.border, 315, fontHeight*2+10)
-	moveWindow(self.data.display.consoles.border, TichiSystem:Get(&quot;borderWidth&quot;)+626, mainHeight-374)
-	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.consoles.border)
-
-	if not self.data.display.labels.physical then
-		self.data.display.labels.physical = &quot;tichisystem.balancetracking.labels.physical&quot;
-		createLabel(self.data.display.labels.physical, 0, 0, 0, 0, 1) 
-	end
-	setBackgroundColor(self.data.display.labels.physical, 0, 50, 0, 255)
-	resizeWindow(self.data.display.labels.physical, 50, fontHeight*2)
-	moveWindow(self.data.display.labels.physical, TichiSystem:Get(&quot;borderWidth&quot;)+631, mainHeight-369)
-	echo(self.data.display.labels.physical, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;phys&lt;/center&gt;&lt;/p&gt;]])
-	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.physical)
-
-	if not self.data.display.labels.mental then
-		self.data.display.labels.mental = &quot;tichisystem.balancetracking.labels.mental&quot;
-		createLabel(self.data.display.labels.mental, 0, 0, 0, 0, 1) 
-	end
-	setBackgroundColor(self.data.display.labels.mental, 0, 50, 0, 255)
-	resizeWindow(self.data.display.labels.mental, 50, fontHeight*2)
-	moveWindow(self.data.display.labels.mental, TichiSystem:Get(&quot;borderWidth&quot;)+682, mainHeight-369)
-	echo(self.data.display.labels.mental, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;equi&lt;/center&gt;&lt;/p&gt;]])
-	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.mental)
-
-	if not self.data.display.labels.potion then
-		self.data.display.labels.potion = &quot;tichisystem.balancetracking.labels.potion&quot;
-		createLabel(self.data.display.labels.potion, 0, 0, 0, 0, 1) 
-	end
-	setBackgroundColor(self.data.display.labels.potion, 0, 50, 0, 255)
-	resizeWindow(self.data.display.labels.potion, 50, fontHeight*2)
-	moveWindow(self.data.display.labels.potion, TichiSystem:Get(&quot;borderWidth&quot;)+733, mainHeight-369)
-	echo(self.data.display.labels.potion, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;poti&lt;/center&gt;&lt;/p&gt;]])
-	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.potion)
-
-	if not self.data.display.labels.salve then
-		self.data.display.labels.salve = &quot;tichisystem.balancetracking.labels.salve&quot;
-		createLabel(self.data.display.labels.salve, 0, 0, 0, 0, 1) 
-	end
-	setBackgroundColor(self.data.display.labels.salve, 0, 50, 0, 255)
-	resizeWindow(self.data.display.labels.salve, 50, fontHeight*2)
-	moveWindow(self.data.display.labels.salve, TichiSystem:Get(&quot;borderWidth&quot;)+784, mainHeight-369)
-	echo(self.data.display.labels.salve, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;salv&lt;/center&gt;&lt;/p&gt;]])
-	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.salve)
-
-	if not self.data.display.labels.herb then
-		self.data.display.labels.herb = &quot;tichisystem.balancetracking.labels.herb&quot;
-		createLabel(self.data.display.labels.herb, 0, 0, 0, 0, 1) 
-	end
-	setBackgroundColor(self.data.display.labels.herb, 0, 50, 0, 255)
-	resizeWindow(self.data.display.labels.herb, 50, fontHeight*2)
-	moveWindow(self.data.display.labels.herb, TichiSystem:Get(&quot;borderWidth&quot;)+835, mainHeight-369)
-	echo(self.data.display.labels.herb, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;herb&lt;/center&gt;&lt;/p&gt;]])
-	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.herb)
-
-	if not self.data.display.labels.smoke then
-		self.data.display.labels.smoke = &quot;tichisystem.balancetracking.labels.smoke&quot;
-		createLabel(self.data.display.labels.smoke, 0, 0, 0, 0, 1) 
-	end
-	setBackgroundColor(self.data.display.labels.smoke, 0, 50, 0, 255)
-	resizeWindow(self.data.display.labels.smoke, 50, fontHeight*2)
-	moveWindow(self.data.display.labels.smoke, TichiSystem:Get(&quot;borderWidth&quot;)+886, mainHeight-369)
-	echo(self.data.display.labels.smoke, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;smok&lt;/center&gt;&lt;/p&gt;]])
-	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.smoke)
-
-	resetFormat()
 end
 
 function BalanceTracking:Lose(balance)
@@ -2415,45 +2614,47 @@ function BalanceTracking:RemoveTimers(balance)
 end
 
 function BalanceTracking:UpdateDisplay()
-	self:InitializeDisplay()
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;system&quot;) then
+		self:InitializeDisplay()
 
-	if self.data.lost[&quot;physical&quot;] then
-		setBackgroundColor(self.data.display.labels.physical, 150, 0, 0, 255)
-	else
-		setBackgroundColor(self.data.display.labels.physical, 0, 50, 0, 255)
+		if self.data.lost[&quot;physical&quot;] then
+			setBackgroundColor(self.data.display.labels.physical, 150, 0, 0, 255)
+		else
+			setBackgroundColor(self.data.display.labels.physical, 0, 50, 0, 255)
+		end
+
+		if self.data.lost[&quot;mental&quot;] then
+			setBackgroundColor(self.data.display.labels.mental, 150, 0, 0, 255)
+		else
+			setBackgroundColor(self.data.display.labels.mental, 0, 50, 0, 255)
+		end
+
+		if self.data.lost[&quot;potion&quot;] then
+			setBackgroundColor(self.data.display.labels.potion, 150, 0, 0, 255)
+		else
+			setBackgroundColor(self.data.display.labels.potion, 0, 50, 0, 255)
+		end
+
+		if self.data.lost[&quot;salve&quot;] then
+			setBackgroundColor(self.data.display.labels.salve, 150, 0, 0, 255)
+		else
+			setBackgroundColor(self.data.display.labels.salve, 0, 50, 0, 255)
+		end
+
+		if self.data.lost[&quot;herb&quot;] then
+			setBackgroundColor(self.data.display.labels.herb, 150, 0, 0, 255)
+		else
+			setBackgroundColor(self.data.display.labels.herb, 0, 50, 0, 255)
+		end
+
+		if self.data.lost[&quot;smoke&quot;] then
+			setBackgroundColor(self.data.display.labels.smoke, 150, 0, 0, 255)
+		else
+			setBackgroundColor(self.data.display.labels.smoke, 0, 50, 0, 255)
+		end
+
+		resetFormat()
 	end
-
-	if self.data.lost[&quot;mental&quot;] then
-		setBackgroundColor(self.data.display.labels.mental, 150, 0, 0, 255)
-	else
-		setBackgroundColor(self.data.display.labels.mental, 0, 50, 0, 255)
-	end
-
-	if self.data.lost[&quot;potion&quot;] then
-		setBackgroundColor(self.data.display.labels.potion, 150, 0, 0, 255)
-	else
-		setBackgroundColor(self.data.display.labels.potion, 0, 50, 0, 255)
-	end
-
-	if self.data.lost[&quot;salve&quot;] then
-		setBackgroundColor(self.data.display.labels.salve, 150, 0, 0, 255)
-	else
-		setBackgroundColor(self.data.display.labels.salve, 0, 50, 0, 255)
-	end
-
-	if self.data.lost[&quot;herb&quot;] then
-		setBackgroundColor(self.data.display.labels.herb, 150, 0, 0, 255)
-	else
-		setBackgroundColor(self.data.display.labels.herb, 0, 50, 0, 255)
-	end
-
-	if self.data.lost[&quot;smoke&quot;] then
-		setBackgroundColor(self.data.display.labels.smoke, 150, 0, 0, 255)
-	else
-		setBackgroundColor(self.data.display.labels.smoke, 0, 50, 0, 255)
-	end
-
-	resetFormat()
 end</script>
                 <eventHandlerList>
                     <string>sysWindowResizeEvent</string>
@@ -2463,8 +2664,10 @@ end</script>
                 <name>tsAfflictions</name>
                 <packageName></packageName>
                 <script>function tsAfflictions(event)
-	if event == &quot;sysWindowResizeEvent&quot; then
-		Afflictions:UpdateDisplay()
+	if TichiSystem:IsInitialized() then
+		if event == &quot;sysWindowResizeEvent&quot; then
+			Afflictions:UpdateDisplay()
+		end
 	end
 end
 
@@ -2932,34 +3135,34 @@ end
 function Afflictions:InitializeDisplay()
 	self:InitializeData()
 
-	local mainWidth, mainHeight = getMainWindowSize()
-	mainWidth = mainWidth - TichiSystem:Get(&quot;borderWidth&quot;)
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;system&quot;) then
+		local mainWidth, mainHeight = getMainWindowSize()
+		mainWidth = mainWidth - TichiSystem:Get(&quot;borderWidth&quot;)
 
-	local fontWidth, fontHeight = calcFontSize(10)
+		local fontWidth, fontHeight = calcFontSize(10)
 
-	if not self.data.display.consoles.border then
-		self.data.display.consoles.border = &quot;tichisystem.afflictions.consoles.border&quot;
-		createMiniConsole(self.data.display.consoles.border, 0, 0, 0, 0)
+		if not self.data.display.consoles.border then
+			self.data.display.consoles.border = &quot;tichisystem.afflictions.consoles.border&quot;
+			createMiniConsole(self.data.display.consoles.border, 0, 0, 0, 0)
+		end
+		setBackgroundColor(self.data.display.consoles.border, 0, 0, 0, 255)
+		resizeWindow(self.data.display.consoles.border, mainWidth-961, fontHeight*2+10)
+		moveWindow(self.data.display.consoles.border, TichiSystem:Get(&quot;borderWidth&quot;)+942, mainHeight-374)
+		TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.consoles.border)
+
+		if not self.data.display.consoles.affs then
+			self.data.display.consoles.affs = &quot;tichisystem.afflictions.consoles.affs&quot;
+			createMiniConsole(self.data.display.consoles.affs, 0, 0, 0, 0)
+		end
+		setBackgroundColor(self.data.display.consoles.affs, 0, 0, 0, 255)
+		resizeWindow(self.data.display.consoles.affs, mainWidth-971, fontHeight*2)
+		moveWindow(self.data.display.consoles.affs, TichiSystem:Get(&quot;borderWidth&quot;)+947, mainHeight-369)
+		setMiniConsoleFontSize(self.data.display.consoles.affs, 10)
+		setWindowWrap(self.data.display.consoles.affs, math.floor((mainWidth-971)/fontWidth))
+		TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.consoles.affs)
+
+		resetFormat()
 	end
-	setBackgroundColor(self.data.display.consoles.border, 0, 0, 0, 255)
-	resizeWindow(self.data.display.consoles.border, mainWidth-961, fontHeight*2+10)
-	moveWindow(self.data.display.consoles.border, TichiSystem:Get(&quot;borderWidth&quot;)+942, mainHeight-374)
-	showWindow(self.data.display.consoles.border)
-	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.consoles.border)
-
-	if not self.data.display.consoles.affs then
-		self.data.display.consoles.affs = &quot;tichisystem.afflictions.consoles.affs&quot;
-		createMiniConsole(self.data.display.consoles.affs, 0, 0, 0, 0)
-	end
-	setBackgroundColor(self.data.display.consoles.affs, 0, 0, 0, 255)
-	resizeWindow(self.data.display.consoles.affs, mainWidth-971, fontHeight*2)
-	moveWindow(self.data.display.consoles.affs, TichiSystem:Get(&quot;borderWidth&quot;)+947, mainHeight-369)
-	setMiniConsoleFontSize(self.data.display.consoles.affs, 10)
-	setWindowWrap(self.data.display.consoles.affs, math.floor((mainWidth-971)/fontWidth))
-	showWindow(self.data.display.consoles.affs)
-	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.consoles.affs)
-
-	resetFormat()
 end
 
 function Afflictions:KillTimers(aff)
@@ -3027,29 +3230,31 @@ function Afflictions:RemoveFlag(name)
 end
 
 function Afflictions:UpdateDisplay()
-	self:InitializeDisplay()
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;system&quot;) then
+		self:InitializeDisplay()
 
-	clearWindow(self.data.display.consoles.affs)
-	local first = true
-	for k, _ in pairs(self.data.affs) do
-		if not first then
-			echo(self.data.display.consoles.affs, &quot;, &quot;)
-		else
-			first = false
-		end
+		clearWindow(self.data.display.consoles.affs)
+		local first = true
+		for k, _ in pairs(self.data.affs) do
+			if not first then
+				echo(self.data.display.consoles.affs, &quot;, &quot;)
+			else
+				first = false
+			end
 
-		if self.data.curing[k] then
-			setFgColor(self.data.display.consoles.affs, 255, 0, 0)
-			echo(self.data.display.consoles.affs, k)
+			if self.data.curing[k] then
+				setFgColor(self.data.display.consoles.affs, 255, 0, 0)
+				echo(self.data.display.consoles.affs, k)
+				resetFormat(self.data.display.consoles.affs)
+			else
+				echo(self.data.display.consoles.affs, k)
+			end
+
 			resetFormat(self.data.display.consoles.affs)
-		else
-			echo(self.data.display.consoles.affs, k)
 		end
 
-		resetFormat(self.data.display.consoles.affs)
+		resetFormat()
 	end
-
-	resetFormat()
 end
 
 function Afflictions:Writhing(aff)
@@ -3075,8 +3280,10 @@ end</script>
                 <name>tsHunting</name>
                 <packageName></packageName>
                 <script>function tsHunting(event)
-	if event == &quot;sysWindowResizeEvent&quot; then
-		Hunting:UpdateDisplay()
+	if TichiSystem:IsInitialized() then
+		if event == &quot;sysWindowResizeEvent&quot; then
+			Hunting:UpdateDisplay()
+		end
 	end
 end
 
@@ -3246,32 +3453,32 @@ end
 function Hunting:InitializeDisplay()
 	self:InitializeData()
 
-	local mainWidth, mainHeight = getMainWindowSize()
-	mainWidth = mainWidth - TichiSystem:Get(&quot;borderWidth&quot;)
-	local fontWidth, fontHeight = calcFontSize(10)
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;system&quot;) then
+		local mainWidth, mainHeight = getMainWindowSize()
+		mainWidth = mainWidth - TichiSystem:Get(&quot;borderWidth&quot;)
+		local fontWidth, fontHeight = calcFontSize(10)
 
-	if not self.data.display.consoles.border then
-		self.data.display.consoles.border = &quot;tichisystem.hunting.consoles.border&quot;
-		createMiniConsole(self.data.display.consoles.border, 0, 0, 0, 0)
+		if not self.data.display.consoles.border then
+			self.data.display.consoles.border = &quot;tichisystem.hunting.consoles.border&quot;
+			createMiniConsole(self.data.display.consoles.border, 0, 0, 0, 0)
+		end
+		setBackgroundColor(self.data.display.consoles.border, 0, 0, 0, 255)
+		resizeWindow(self.data.display.consoles.border, 315, fontHeight+10)
+		moveWindow(self.data.display.consoles.border, TichiSystem:Get(&quot;borderWidth&quot;)+626, mainHeight-374+(fontHeight*2+10)+1)
+		TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.consoles.border)
+
+		if not self.data.display.consoles.all then
+			self.data.display.consoles.all = &quot;tichisystem.hunting.consoles.all&quot;
+			createMiniConsole(self.data.display.consoles.all, 0, 0, 0, 0)
+		end
+		setBackgroundColor(self.data.display.consoles.all, 0, 0, 0, 255)
+		resizeWindow(self.data.display.consoles.all, 305, fontHeight)
+		moveWindow(self.data.display.consoles.all, TichiSystem:Get(&quot;borderWidth&quot;)+631, mainHeight-374+(fontHeight*2+10)+6)
+		setMiniConsoleFontSize(self.data.display.consoles.all, 10)
+		TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.consoles.all)
+
+		resetFormat()
 	end
-	setBackgroundColor(self.data.display.consoles.border, 0, 0, 0, 255)
-	resizeWindow(self.data.display.consoles.border, 315, fontHeight+10)
-	moveWindow(self.data.display.consoles.border, TichiSystem:Get(&quot;borderWidth&quot;)+626, mainHeight-374+(fontHeight*2+10)+1)
-	showWindow(self.data.display.consoles.border)
-	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.consoles.border)
-
-	if not self.data.display.consoles.all then
-		self.data.display.consoles.all = &quot;tichisystem.hunting.consoles.all&quot;
-		createMiniConsole(self.data.display.consoles.all, 0, 0, 0, 0)
-	end
-	setBackgroundColor(self.data.display.consoles.all, 0, 0, 0, 255)
-	resizeWindow(self.data.display.consoles.all, 305, fontHeight)
-	moveWindow(self.data.display.consoles.all, TichiSystem:Get(&quot;borderWidth&quot;)+631, mainHeight-374+(fontHeight*2+10)+6)
-	setMiniConsoleFontSize(self.data.display.consoles.all, 10)
-	showWindow(self.data.display.consoles.all)
-	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.consoles.all)
-
-	resetFormat()
 end
 
 function Hunting:IsAttacking()
@@ -3337,21 +3544,23 @@ function Hunting:StopOnKill()
 end
 
 function Hunting:UpdateDisplay()
-	self:InitializeDisplay()
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;system&quot;) then
+		self:InitializeDisplay()
 
-	clearWindow(self.data.display.consoles.all)
+		clearWindow(self.data.display.consoles.all)
 
-	if not self.data.attackTarget then
-		echo(self.data.display.consoles.all, &quot;T: &quot; .. (self.data.target or &quot;none&quot;) .. &quot;, A: &quot; .. (self.data.attack or &quot;none&quot;) .. &quot;, M: &quot; .. (self.data.mode or &quot;none&quot;))
-	else
-		echo(self.data.display.consoles.all, &quot;T: &quot;)
-		setFgColor(self.data.display.consoles.all, 100, 100, 0)
-		echo(self.data.display.consoles.all, self.data.attackTarget)
-		resetFormat(self.data.display.consoles.all)
-		echo(self.data.display.consoles.all, &quot;, A: &quot; .. (self.data.attack or &quot;none&quot;) .. &quot;, M: &quot; .. (self.data.mode or &quot;none&quot;))
+		if not self.data.attackTarget then
+			echo(self.data.display.consoles.all, &quot;T: &quot; .. (self.data.target or &quot;none&quot;) .. &quot;, A: &quot; .. (self.data.attack or &quot;none&quot;) .. &quot;, M: &quot; .. (self.data.mode or &quot;none&quot;))
+		else
+			echo(self.data.display.consoles.all, &quot;T: &quot;)
+			setFgColor(self.data.display.consoles.all, 100, 100, 0)
+			echo(self.data.display.consoles.all, self.data.attackTarget)
+			resetFormat(self.data.display.consoles.all)
+			echo(self.data.display.consoles.all, &quot;, A: &quot; .. (self.data.attack or &quot;none&quot;) .. &quot;, M: &quot; .. (self.data.mode or &quot;none&quot;))
+		end
+
+		resetFormat()
 	end
-
-	resetFormat()
 end</script>
                 <eventHandlerList>
                     <string>sysWindowResizeEvent</string>
@@ -3589,21 +3798,29 @@ function mk_create_map()
 end
 
 function mk_resize_map()
-	local WindowWidth, WindowHeight = getMainWindowSize()
-	local x, y = calcFontSize( mk_font_size )
-	resizeWindow( &quot;mk_map&quot;, x*45, y*26 )
-	moveWindow( &quot;mk_map&quot;, 0, 0) -- -20 to keep the scroll bar visisble
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;map&quot;) then
+		local WindowWidth, WindowHeight = getMainWindowSize()
+		local x, y = calcFontSize( mk_font_size )
+		resizeWindow( &quot;mk_map&quot;, x*45, y*26 )
+		moveWindow( &quot;mk_map&quot;, 0, 0) -- -20 to keep the scroll bar visisble
+	end
 end
 
 function mk_cut_n_paste()
-	selectCurrentLine()
-	copy()
-	appendBuffer(&quot;mk_map&quot;)
-	deleteLine()
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;map&quot;) then
+		selectCurrentLine()
+		copy()
+		appendBuffer(&quot;mk_map&quot;)
+		deleteLine()
+	end
 end
 
 mk_create_map()
-</script>
+if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;map&quot;) then
+	showWindow(&quot;mk_map&quot;)
+else
+	hideWindow(&quot;mk_map&quot;)
+end</script>
                 <eventHandlerList/>
             </Script>
             <Script isActive="yes" isFolder="no">
