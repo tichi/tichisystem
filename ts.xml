@@ -1034,7 +1034,7 @@ resetFormat()</script>
                 <regexCodeList/>
                 <regexCodePropertyList/>
             </TriggerGroup>
-            <Trigger isActive="no" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+            <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
                 <name>Connected</name>
                 <script>echo(&quot;raising connected event&quot;)
 raiseEvent(&quot;tsConnected&quot;)</script>
@@ -1375,6 +1375,29 @@ end</script>
                     <regex>^showgui channels$</regex>
                 </Alias>
             </AliasGroup>
+            <Alias isActive="yes" isFolder="no">
+                <name>Show TS GUI</name>
+                <script>TichiSystem:Open()</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^showgui system$</regex>
+            </Alias>
+            <Alias isActive="yes" isFolder="no">
+                <name>Show Map GUI</name>
+                <script>TichiSystem:Open(&quot;map&quot;)</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^showgui map$</regex>
+            </Alias>
+            <Alias isActive="yes" isFolder="no">
+                <name>Show All GUIs</name>
+                <script>expandAlias(&quot;showgui system&quot;)
+expandAlias(&quot;showgui channels&quot;)
+expandAlias(&quot;showgui map&quot;)</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^showgui all$</regex>
+            </Alias>
         </AliasGroup>
     </AliasPackage>
     <ActionPackage/>
@@ -1384,9 +1407,13 @@ end</script>
             <packageName></packageName>
             <script>function tsTichiSystem(event)
 	if (event == &quot;tsConnected&quot;) then
-		TichiSystem:Initialize()
-	elseif event == &quot;sysWindowResizeEvent&quot; then
-		TichiSystem:UpdateDisplay()
+		TichiSystem:Initialize(true)
+	end
+	
+	if TichiSystem.data.initialized then
+		if event == &quot;sysWindowResizeEvent&quot; then
+			TichiSystem:UpdateDisplay()
+		end
 	end
 end
 
@@ -1399,7 +1426,7 @@ function TichiSystem:AddToBucket(bucket, window)
 end
 
 function TichiSystem:Close(name)
-	local showgui = self:Get(&quot;showgui&quot;)
+	local showgui = self:Get(&quot;showgui&quot;, true)
 
 	for k, v in ipairs(showgui) do
 		if v == name then
@@ -1414,7 +1441,7 @@ end
 function TichiSystem:Echo(msg)
 	self:InitializeData()
 
-	if self:Get(&quot;showgui&quot;) and table.contains(self:Get(&quot;showgui&quot;), &quot;system&quot;) then
+	if self:Get(&quot;showgui&quot;) and table.contains(self:Get(&quot;showgui&quot;, true), &quot;system&quot;) then
 		if type(msg) == &quot;function&quot; then
 			msg(self.data.display.consoles.system)
 		else
@@ -1424,9 +1451,13 @@ function TichiSystem:Echo(msg)
 	end
 end
 
-function TichiSystem:Get(name)
+function TichiSystem:Get(name, table)
 	if self.data.config[name] then
-		return self.data.config[name]
+		if table and type(self.data.config[name]) ~= &quot;table&quot; then
+			return {self.data.config[name]}
+		else
+			return self.data.config[name]
+		end
 	end
 
 	if name == &quot;timerDuration&quot; then
@@ -1435,15 +1466,17 @@ function TichiSystem:Get(name)
 		local fontWidth, fontHeight = calcFontSize(10)
 		return fontWidth*45
 	elseif name == &quot;showgui&quot; then
-		return {&quot;system&quot;, &quot;channels&quot;, &quot;map&quot;}
+		return {}
 	end
 end
 
-function TichiSystem:Initialize()
-	self:InitializeData(true)
+function TichiSystem:Initialize(reset)
+	self:InitializeData(reset)
 	self:LoadPermanentData()
 
-	if self:Get(&quot;showgui&quot;) and table.contains(self:Get(&quot;showgui&quot;), &quot;system&quot;) then
+	if self:Get(&quot;showgui&quot;) and table.contains(self:Get(&quot;showgui&quot;, true), &quot;system&quot;) then
+		self:InitializeDisplay()
+
 		self.data.display.buckets.gui = {
 		}
 
@@ -1451,8 +1484,6 @@ function TichiSystem:Initialize()
 			self.data.display.consoles.systempadding,
 			self.data.display.consoles.system
 		}
-
-		self:InitializeDisplay()
 
 		clearWindow(self.data.display.consoles.system)
 	end
@@ -1470,14 +1501,26 @@ function TichiSystem:Initialize()
 	Afflictions:Initialize()
 	Learning:Initialize()
 	Hunting:Initialize()
+	mk_create_map()
 
-	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;map&quot;) then
+	if self:Get(&quot;showgui&quot;) and table.contains(self:Get(&quot;showgui&quot;, true), &quot;map&quot;) then
 		showWindow(&quot;mk_map&quot;)
+		if not self.data.display.labels.mapclose then
+			self.data.display.labels.mapclose = &quot;tichisystem.labels.mapclose&quot;
+			createLabel(self.data.display.labels.mapclose, 0, 0, 0, 0, 1)
+		end
+		resizeWindow(self.data.display.labels.mapclose, 25, 25)
+		moveWindow(self.data.display.labels.mapclose, TichiSystem:Get(&quot;borderWidth&quot;)-25, 0)
+		echo(self.data.display.labels.mapclose, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 0, 0);&quot;&gt;&lt;center&gt;&lt;b&gt;X&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;]])
+		setLabelClickCallback(self.data.display.labels.mapclose, &quot;TichiSystemOnClickMapCloseLabel&quot;)
+		showWindow(self.data.display.labels.mapclose)
 	else
 		hideWindow(&quot;mk_map&quot;)
 	end
 
-	if self:Get(&quot;showgui&quot;) and table.contains(self:Get(&quot;showgui&quot;), &quot;system&quot;) then
+	self:SetBorders()
+
+	if self:Get(&quot;showgui&quot;) and table.contains(self:Get(&quot;showgui&quot;, true), &quot;system&quot;) then
 		self:OnClickSystemLabel()
 	end
 
@@ -1513,62 +1556,74 @@ end
 function TichiSystem:InitializeDisplay()
 	self:InitializeData()
 
-	local mainWidth, mainHeight = getMainWindowSize()
-	mainWidth = mainWidth - self:Get(&quot;borderWidth&quot;)
+	if self:Get(&quot;showgui&quot;) and table.contains(self:Get(&quot;showgui&quot;, true), &quot;system&quot;) then
+		local mainWidth, mainHeight = getMainWindowSize()
+		mainWidth = mainWidth - self:Get(&quot;borderWidth&quot;)
 
-	if not self.data.display.labels.gui then
-		self.data.display.labels.gui = &quot;tichisystem.labels.gui&quot;
-		createLabel(self.data.display.labels.gui, 0, 0, 0, 0, 1) 
+		if not self.data.display.labels.gui then
+			self.data.display.labels.gui = &quot;tichisystem.labels.gui&quot;
+			createLabel(self.data.display.labels.gui, 0, 0, 0, 0, 1) 
+		end
+		setBackgroundColor(self.data.display.labels.gui, 0, 33, 33, 255)
+		resizeWindow(self.data.display.labels.gui, 50, 24)
+		moveWindow(self.data.display.labels.gui, self:Get(&quot;borderWidth&quot;)+625, mainHeight-400)
+		echo(self.data.display.labels.gui, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;GUI&lt;/center&gt;&lt;/p&gt;]])
+		setLabelClickCallback(self.data.display.labels.gui, &quot;TichiSystemOnClickGUILabel&quot;)
+		showWindow(self.data.display.labels.gui)
+
+		if not self.data.display.consoles.border then
+			self.data.display.consoles.border = &quot;tichisystem.consoles.border&quot;
+			createMiniConsole(self.data.display.consoles.border, 0, 0, 0, 0)
+		end
+		setBackgroundColor(self.data.display.consoles.border, 0, 33, 33, 255)
+		resizeWindow(self.data.display.consoles.border, mainWidth-625-15, 375)
+		moveWindow(self.data.display.consoles.border, self:Get(&quot;borderWidth&quot;)+625, mainHeight-375)
+		showWindow(self.data.display.consoles.border)
+
+		if not self.data.display.labels.system then
+			self.data.display.labels.system = &quot;tichisystem.labels.system&quot;
+			createLabel(self.data.display.labels.system, 0, 0, 0, 0, 1)
+		end
+		setBackgroundColor(self.data.display.labels.system, 0, 33, 33, 255)
+		resizeWindow(self.data.display.labels.system, 50, 25)
+		moveWindow(self.data.display.labels.system, self:Get(&quot;borderWidth&quot;)+676, mainHeight-400)
+		echo(self.data.display.labels.system, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;&lt;b&gt;&lt;u&gt;TS&lt;/u&gt;&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;]])
+		setLabelClickCallback(self.data.display.labels.system, &quot;TichiSystemOnClickSystemLabel&quot;)
+		showWindow(self.data.display.labels.system)
+
+		if not self.data.display.consoles.systempadding then
+			self.data.display.consoles.systempadding = &quot;tichisystem.consoles.systempadding&quot;
+			createMiniConsole(self.data.display.consoles.systempadding, 0, 0, 0, 0)
+		end
+		clearWindow(self.data.display.consoles.systempadding)
+		setBackgroundColor(self.data.display.consoles.systempadding, 0, 0, 0, 255)
+		resizeWindow(self.data.display.consoles.systempadding, mainWidth-629-15, 373)
+		moveWindow(self.data.display.consoles.systempadding, self:Get(&quot;borderWidth&quot;)+626, mainHeight-374)
+
+		local fontWidth, fontHeight = calcFontSize(10)
+
+		if not self.data.display.consoles.system then
+			self.data.display.consoles.system = &quot;tichisystem.consoles.system&quot;
+			createMiniConsole(self.data.display.consoles.system, 0, 0, 0, 0)
+		end
+		setBackgroundColor(self.data.display.consoles.system, 0, 0, 0, 255)
+		resizeWindow(self.data.display.consoles.system, mainWidth-639-15, 363)
+		moveWindow(self.data.display.consoles.system, self:Get(&quot;borderWidth&quot;)+631, mainHeight-368)
+		setMiniConsoleFontSize(self.data.display.consoles.system, 10)
+		setWindowWrap(self.data.display.consoles.system, math.floor(mainWidth-639-15/fontWidth))
+
+		if not self.data.display.labels.close then
+			self.data.display.labels.close = &quot;tichisystem.labels.close&quot;
+			createLabel(self.data.display.labels.close, 0, 0, 0, 0, 1)
+		end
+		resizeWindow(self.data.display.labels.close, 25, 25)
+		moveWindow(self.data.display.labels.close, mainWidth-25-16+TichiSystem:Get(&quot;borderWidth&quot;), mainHeight-400)
+		echo(self.data.display.labels.close, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 0, 0);&quot;&gt;&lt;center&gt;&lt;b&gt;X&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;]])
+		setLabelClickCallback(self.data.display.labels.close, &quot;TichiSystemOnClickCloseLabel&quot;)
+		showWindow(self.data.display.labels.close)
+
+		resetFormat()
 	end
-	setBackgroundColor(self.data.display.labels.gui, 0, 33, 33, 255)
-	resizeWindow(self.data.display.labels.gui, 50, 24)
-	moveWindow(self.data.display.labels.gui, self:Get(&quot;borderWidth&quot;)+625, mainHeight-400)
-	echo(self.data.display.labels.gui, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;GUI&lt;/center&gt;&lt;/p&gt;]])
-	setLabelClickCallback(self.data.display.labels.gui, &quot;TichiSystemOnClickGUILabel&quot;)
-	showWindow(self.data.display.labels.gui)
-
-	if not self.data.display.consoles.border then
-		self.data.display.consoles.border = &quot;tichisystem.consoles.border&quot;
-		createMiniConsole(self.data.display.consoles.border, 0, 0, 0, 0)
-	end
-	setBackgroundColor(self.data.display.consoles.border, 0, 33, 33, 255)
-	resizeWindow(self.data.display.consoles.border, mainWidth-625-15, 375)
-	moveWindow(self.data.display.consoles.border, self:Get(&quot;borderWidth&quot;)+625, mainHeight-375)
-	showWindow(self.data.display.consoles.border)
-
-	if not self.data.display.labels.system then
-		self.data.display.labels.system = &quot;tichisystem.labels.system&quot;
-		createLabel(self.data.display.labels.system, 0, 0, 0, 0, 1)
-	end
-	setBackgroundColor(self.data.display.labels.system, 0, 33, 33, 255)
-	resizeWindow(self.data.display.labels.system, 50, 25)
-	moveWindow(self.data.display.labels.system, self:Get(&quot;borderWidth&quot;)+676, mainHeight-400)
-	echo(self.data.display.labels.system, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;&lt;b&gt;&lt;u&gt;TS&lt;/u&gt;&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;]])
-	setLabelClickCallback(self.data.display.labels.system, &quot;TichiSystemOnClickSystemLabel&quot;)
-	showWindow(self.data.display.labels.system)
-
-	if not self.data.display.consoles.systempadding then
-		self.data.display.consoles.systempadding = &quot;tichisystem.consoles.systempadding&quot;
-		createMiniConsole(self.data.display.consoles.systempadding, 0, 0, 0, 0)
-	end
-	clearWindow(self.data.display.consoles.systempadding)
-	setBackgroundColor(self.data.display.consoles.systempadding, 0, 0, 0, 255)
-	resizeWindow(self.data.display.consoles.systempadding, mainWidth-629-15, 373)
-	moveWindow(self.data.display.consoles.systempadding, self:Get(&quot;borderWidth&quot;)+626, mainHeight-374)
-
-	local fontWidth, fontHeight = calcFontSize(10)
-
-	if not self.data.display.consoles.system then
-		self.data.display.consoles.system = &quot;tichisystem.consoles.system&quot;
-		createMiniConsole(self.data.display.consoles.system, 0, 0, 0, 0)
-	end
-	setBackgroundColor(self.data.display.consoles.system, 0, 0, 0, 255)
-	resizeWindow(self.data.display.consoles.system, mainWidth-639-15, 363)
-	moveWindow(self.data.display.consoles.system, self:Get(&quot;borderWidth&quot;)+631, mainHeight-368)
-	setMiniConsoleFontSize(self.data.display.consoles.system, 10)
-	setWindowWrap(self.data.display.consoles.system, math.floor(mainWidth-639-15/fontWidth))
-
-	resetFormat()
 end
 
 function TichiSystem:InitializePermanentData()
@@ -1608,6 +1663,41 @@ function TichiSystem:LoadPermanentData()
 			self.data.config[v[&quot;name&quot;]] = v[&quot;value&quot;]
 		end
 	end
+end
+
+function TichiSystemOnClickCloseLabel()
+	TichiSystem:OnClickCloseLabel()
+end
+
+function TichiSystem:OnClickCloseLabel()
+	for k, v in pairs(self.data.display.labels) do
+		if k ~= &quot;mapclose&quot; then
+			hideWindow(v)
+		end
+	end
+
+	for k, v in pairs(self.data.display.consoles) do
+		hideWindow(v)
+	end
+
+	for k, v in pairs(self.data.display.buckets) do
+		for x, y in pairs(v) do
+			hideWindow(y)
+		end
+	end
+
+	self:Close(&quot;system&quot;)
+end
+
+function TichiSystemOnClickMapCloseLabel()
+	TichiSystem:OnClickMapCloseLabel()
+end
+
+function TichiSystem:OnClickMapCloseLabel()
+	hideWindow(&quot;mk_map&quot;)
+	hideWindow(self.data.display.labels.mapclose)
+
+	self:Close(&quot;map&quot;)
 end
 
 function TichiSystemOnClickGUILabel()
@@ -1653,10 +1743,35 @@ function TichiSystem:OnClickSystemLabel()
 end
 
 function TichiSystem:Open(name)
-	local showgui = self:Get(&quot;showgui&quot;)
+	if not name then
+		name = &quot;system&quot;
+	end
+
+	local showgui = self:Get(&quot;showgui&quot;, true)
+	if type(showgui) == &quot;string&quot; then
+		showgui = {showgui}
+	end
 	table.insert(showgui, name)
 
 	self:Set(&quot;showgui&quot;, showgui)
+
+	if name == &quot;system&quot; then
+		self:Initialize()
+	elseif name == &quot;map&quot; then
+		mk_create_map()
+		showWindow(&quot;mk_map&quot;)
+		if not self.data.display.labels.mapclose then
+			self.data.display.labels.mapclose = &quot;tichisystem.labels.mapclose&quot;
+			createLabel(self.data.display.labels.mapclose, 0, 0, 0, 0, 1)
+		end
+		resizeWindow(self.data.display.labels.mapclose, 25, 25)
+		moveWindow(self.data.display.labels.mapclose, TichiSystem:Get(&quot;borderWidth&quot;)-25, 0)
+		echo(self.data.display.labels.mapclose, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 0, 0);&quot;&gt;&lt;center&gt;&lt;b&gt;X&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;]])
+		setLabelClickCallback(self.data.display.labels.mapclose, &quot;TichiSystemOnClickMapCloseLabel&quot;)
+		showWindow(self.data.display.labels.mapclose)
+	end
+
+	self:SetBorders()
 end
 
 function TichiSystem:Set(name, value)
@@ -1676,6 +1791,17 @@ function TichiSystem:Set(name, value)
 	end
 end
 
+function TichiSystem:SetBorders()
+	setBorderLeft(0)
+
+	if self:Get(&quot;showgui&quot;) and table.contains(self:Get(&quot;showgui&quot;, true), &quot;map&quot;) then
+		local x, y = calcFontSize( mk_font_size )
+		setBorderLeft(x*45)
+	end
+
+	raiseEvent(&quot;sysWindowResizeEvent&quot;)
+end
+
 function TichiSystem:ShowHideBucket(name)
 	for k, v in pairs(self.data.display.buckets) do
 		for _, y in pairs(v) do
@@ -1688,12 +1814,14 @@ function TichiSystem:ShowHideBucket(name)
 end
 
 function TichiSystem:UpdateDisplay()
-	self:InitializeDisplay()
+	if self:Get(&quot;showgui&quot;) and table.contains(self:Get(&quot;showgui&quot;, true), &quot;system&quot;) then
+		self:InitializeDisplay()
 
-	if self.data.display.selectedTab == &quot;gui&quot; then
-		TichiSystemOnClickGUILabel()
-	elseif self.data.display.selectedTab == &quot;system&quot; then
-		TichiSystemOnClickSystemLabel()
+		if self.data.display.selectedTab == &quot;gui&quot; then
+			TichiSystemOnClickGUILabel()
+		elseif self.data.display.selectedTab == &quot;system&quot; then
+			TichiSystemOnClickSystemLabel()
+		end
 	end
 end</script>
             <eventHandlerList>
@@ -1760,7 +1888,7 @@ end
 function Movement:InitializeDisplay()
 	self:InitializeData()
 
-	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;system&quot;) then
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;, true), &quot;system&quot;) then
 		local mainWidth, mainHeight = getMainWindowSize()
 		mainWidth = mainWidth - TichiSystem:Get(&quot;borderWidth&quot;)
 		local fontWidth, fontHeight = calcFontSize(10)
@@ -1828,7 +1956,7 @@ function Movement:SetMode(mode)
 end
 
 function Movement:UpdateDisplay()
-	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;system&quot;) then
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;, true), &quot;system&quot;) then
 		self:InitializeDisplay()
 
 		clearWindow(self.data.display.consoles.all)
@@ -1857,7 +1985,7 @@ if not Channels then
 end
 
 function Channels:Capture(channel)
-	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;channels&quot;) then
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;, true), &quot;channels&quot;) then
 		selectString(line, 1)
 		copy()
 		appendBuffer(self.data.display.consoles.all)
@@ -1894,7 +2022,7 @@ end
 function Channels:Initialize()
 	self:InitializeData(true)
 
-	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;channels&quot;) then
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;, true), &quot;channels&quot;) then
 		self:InitializeDisplay()
 
 		self.data.display.buckets.all = {
@@ -1955,7 +2083,7 @@ function Channels:InitializeData(reset)
 end
 
 function Channels:InitializeDisplay()
-	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;channels&quot;) then
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;, true), &quot;channels&quot;) then
 		self:InitializeData()
 
 		local mainWidth, mainHeight = getMainWindowSize()
@@ -2402,7 +2530,7 @@ function Channels:ShowHideBucket(name)
 end
 
 function Channels:UpdateDisplay()
-	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;channels&quot;) then
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;, true), &quot;channels&quot;) then
 		self:InitializeDisplay()
 
 		if self.data.display.selectedTab == &quot;all&quot; then
@@ -2511,7 +2639,7 @@ end
 function BalanceTracking:InitializeDisplay()
 	self:InitializeData()
 
-	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;system&quot;) then
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;, true), &quot;system&quot;) then
 		local mainWidth, mainHeight = getMainWindowSize()
 		mainWidth = mainWidth - TichiSystem:Get(&quot;borderWidth&quot;)
 
@@ -2614,7 +2742,7 @@ function BalanceTracking:RemoveTimers(balance)
 end
 
 function BalanceTracking:UpdateDisplay()
-	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;system&quot;) then
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;, true), &quot;system&quot;) then
 		self:InitializeDisplay()
 
 		if self.data.lost[&quot;physical&quot;] then
@@ -3135,7 +3263,7 @@ end
 function Afflictions:InitializeDisplay()
 	self:InitializeData()
 
-	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;system&quot;) then
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;, true), &quot;system&quot;) then
 		local mainWidth, mainHeight = getMainWindowSize()
 		mainWidth = mainWidth - TichiSystem:Get(&quot;borderWidth&quot;)
 
@@ -3230,7 +3358,7 @@ function Afflictions:RemoveFlag(name)
 end
 
 function Afflictions:UpdateDisplay()
-	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;system&quot;) then
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;, true), &quot;system&quot;) then
 		self:InitializeDisplay()
 
 		clearWindow(self.data.display.consoles.affs)
@@ -3453,7 +3581,7 @@ end
 function Hunting:InitializeDisplay()
 	self:InitializeData()
 
-	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;system&quot;) then
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;, true), &quot;system&quot;) then
 		local mainWidth, mainHeight = getMainWindowSize()
 		mainWidth = mainWidth - TichiSystem:Get(&quot;borderWidth&quot;)
 		local fontWidth, fontHeight = calcFontSize(10)
@@ -3544,7 +3672,7 @@ function Hunting:StopOnKill()
 end
 
 function Hunting:UpdateDisplay()
-	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;), &quot;system&quot;) then
+	if TichiSystem:Get(&quot;showgui&quot;) and table.contains(TichiSystem:Get(&quot;showgui&quot;, true), &quot;system&quot;) then
 		self:InitializeDisplay()
 
 		clearWindow(self.data.display.consoles.all)
@@ -3794,7 +3922,6 @@ function mk_create_map()
 	local x, y = calcFontSize( mk_font_size )
 	resizeWindow( &quot;mk_map&quot;, x*45, y*25 )
 	moveWindow( &quot;mk_map&quot;, 0, 0) -- -20 to keep the scroll bar visisble
-	setBorderLeft(x*45)
 end
 
 function mk_resize_map()
