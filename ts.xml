@@ -1,0 +1,3784 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MudletPackage>
+<MudletPackage version="1.0">
+    <TriggerPackage>
+        <TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+            <name>tsTichiSystem</name>
+            <script></script>
+            <triggerType>0</triggerType>
+            <conditonLineDelta>3</conditonLineDelta>
+            <mStayOpen>0</mStayOpen>
+            <mCommand></mCommand>
+            <packageName></packageName>
+            <mFgColor>#ff0000</mFgColor>
+            <mBgColor>#ffff00</mBgColor>
+            <mSoundFile></mSoundFile>
+            <colorTriggerFgColor>#000000</colorTriggerFgColor>
+            <colorTriggerBgColor>#000000</colorTriggerBgColor>
+            <regexCodeList/>
+            <regexCodePropertyList/>
+            <TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                <name>tsChannels</name>
+                <script></script>
+                <triggerType>0</triggerType>
+                <conditonLineDelta>3</conditonLineDelta>
+                <mStayOpen>0</mStayOpen>
+                <mCommand></mCommand>
+                <packageName></packageName>
+                <mFgColor>#ff0000</mFgColor>
+                <mBgColor>#ffff00</mBgColor>
+                <mSoundFile></mSoundFile>
+                <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                <regexCodeList/>
+                <regexCodePropertyList/>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Capture Channel</name>
+                    <script>Channels:Capture(matches[2])</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>3</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>^\((\w+)\): \w+ says?, &quot;.+&quot;</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>1</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Capture Tell</name>
+                    <script>Channels:Capture(&quot;tells&quot;)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>99</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>^\w+ tells you, &quot;.+&quot;</string>
+                        <string>^You tell .+, &quot;.+&quot;</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>1</integer>
+                        <integer>1</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+            </TriggerGroup>
+            <TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                <name>tsBalanceTracking</name>
+                <script></script>
+                <triggerType>0</triggerType>
+                <conditonLineDelta>0</conditonLineDelta>
+                <mStayOpen>0</mStayOpen>
+                <mCommand></mCommand>
+                <packageName></packageName>
+                <mFgColor>#ff0000</mFgColor>
+                <mBgColor>#ffff00</mBgColor>
+                <mSoundFile></mSoundFile>
+                <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                <regexCodeList/>
+                <regexCodePropertyList/>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Equilibrium Lost</name>
+                    <script>BalanceTracking:Lose(&quot;mental&quot;)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>99</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>You throw your arms wide and a cry rings out from your lips, a clarion call to the ancient spirits of nature to taste the joy of life once more.</string>
+                        <string>You concentrate for a moment, and your skin becomes rough and thick like tree bark.</string>
+                        <string>You caress the tattoo and immediately you feel a cloak of protection surround you.</string>
+                        <string>You feel the knowledge of the owl descend upon you as you caress the owl tattoo.</string>
+                        <string>Your body positively glows with health and vitality.</string>
+                        <string>You prick up your ears.</string>
+                        <string>Your eyes flicker this way and that as you watch for pursuers.</string>
+                        <string>You pause and concentrate on the image of a striped ocelot, sending your thoughts into the lands around you.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Equilibrium Gained</name>
+                    <script>BalanceTracking:Gain(&quot;mental&quot;)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>99</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>You have regained your mental equilibrium.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Physical Balance Lost</name>
+                    <script>BalanceTracking:Lose(&quot;physical&quot;)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>3</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>You begin to writhe helplessly, throwing your body off balance.</string>
+                        <string>A mutant rat scurries between and around your feet, effectively knocking you to the ground.</string>
+                        <string>You spring forwards onto .+, and maul (him|her) viciously\.</string>
+                        <string>^You strike brutally at (.+), and shred (his|her) skin\.$</string>
+                        <string>You inhale deeply, allowing the air to fill your mighty lungs.</string>
+                        <string>You will now call on your additional stores of endurance when you get tired.</string>
+                        <string>You unroll two spools of cloth and tightly bandage them around yourself.</string>
+                        <string>You conceal yourself using all the guile you possess.</string>
+                        <string>Your reflexes are poised and ready for action.</string>
+                        <string>Your reflexes slow to normal speed.</string>
+                        <string>Throwing his weight behind it, a Nagiri warrior bashes you with his shield.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>1</integer>
+                        <integer>1</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Physical Balance Gained</name>
+                    <script>BalanceTracking:Gain(&quot;physical&quot;)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>99</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>You have recovered balance.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Potion Balance Lost</name>
+                    <script>BalanceTracking:Lose(&quot;potion&quot;)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>3</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>You take a drink of an elixir of (health|mana) from .+\.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>1</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Potion Balance Gained</name>
+                    <script>BalanceTracking:Gain(&quot;potion&quot;)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>3</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>You may drink another healing elixir.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Salve Balance Lost</name>
+                    <script>BalanceTracking:Lose(&quot;salve&quot;)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>3</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>You quickly rub some \w+ salve on .+\.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>1</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Salve Balance Gained</name>
+                    <script>BalanceTracking:Gain(&quot;salve&quot;)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>3</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>You may apply another salve.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Herb Balance Lost</name>
+                    <script>BalanceTracking:Lose(&quot;herb&quot;)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>3</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>You quickly eat an? (dandelion root|endive root|fenugreek|galingale flower|ginger root|hyssop stem|juniper berry|kelp|laurel|linseed|lovage|maidenhair leaf|mandrake root|myrrh gum|nightshade root|orphine seed|prickly pear|primrose|quince fruit|ribwort|moonwort|spearwort|toadstool|violet root|wormwood root)\.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>1</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Herb Balance Gained</name>
+                    <script>BalanceTracking:Gain(&quot;herb&quot;)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>99</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>You may eat another herb or plant.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Smoking Balance Lost</name>
+                    <script>BalanceTracking:Lose(&quot;smoke&quot;)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>3</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>You take a long drag off your pipe, filling your lungs with </string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Smoking Balance Gained</name>
+                    <script>BalanceTracking:Gain(&quot;smoke&quot;)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>99</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>You have recovered your breath and can smoke once more.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+            </TriggerGroup>
+            <TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                <name>tsAfflictions</name>
+                <script></script>
+                <triggerType>0</triggerType>
+                <conditonLineDelta>0</conditonLineDelta>
+                <mStayOpen>0</mStayOpen>
+                <mCommand></mCommand>
+                <packageName></packageName>
+                <mFgColor>#ff0000</mFgColor>
+                <mBgColor>#ffff00</mBgColor>
+                <mSoundFile></mSoundFile>
+                <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                <regexCodeList/>
+                <regexCodePropertyList/>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Low Health Healed</name>
+                    <script>Afflictions:Remove(&quot;lowhealth&quot;)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>3</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>The elixir heals your body.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Low Mana Healed</name>
+                    <script>Afflictions:Remove(&quot;lowmana&quot;)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>99</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>Your mind feels rejuvenated.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="yes" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="yes" isColorTriggerFg="yes" isColorTriggerBg="yes">
+                    <name>Affliction Gained</name>
+                    <script>Afflictions:Add(multimatches[3][1])</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>1</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#800000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>FG4BG2</string>
+                        <string>You are afflicted with </string>
+                        <string>FG16BG2</string>
+                        <string>(.+)</string>
+                        <string>FG4BG2</string>
+                        <string>.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>6</integer>
+                        <integer>0</integer>
+                        <integer>6</integer>
+                        <integer>1</integer>
+                        <integer>6</integer>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="yes" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="yes" isColorTriggerFg="yes" isColorTriggerBg="yes">
+                    <name>Affliction Lost</name>
+                    <script>Afflictions:Remove(multimatches[3][1])</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>1</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#800000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>FG4BG2</string>
+                        <string>You have cured </string>
+                        <string>FG16BG2</string>
+                        <string>(.+)</string>
+                        <string>FG4BG2</string>
+                        <string>.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>6</integer>
+                        <integer>0</integer>
+                        <integer>6</integer>
+                        <integer>1</integer>
+                        <integer>6</integer>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Sleeping</name>
+                    <script>Afflictions:AddFlag(&quot;sleeping&quot;)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>99</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>You are asleep and can do nothing. WAKE will attempt to wake you.</string>
+                        <string>You close your eyes, curl up in a ball, and fall asleep.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Done Sleeping</name>
+                    <script>Afflictions:RemoveFlag(&quot;sleeping&quot;)
+Afflictions:Cure()</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>99</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>You open your eyes and stretch languidly, feeling deliciously well-rested.</string>
+                        <string>You open your eyes and yawn mightily.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Sitting</name>
+                    <script>Afflictions:AddFlag(&quot;sitting&quot;)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>3</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>You sit yourself down.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Prompt - LowHealth and LowMana</name>
+                    <script>if tonumber(matches[2]) &lt; 85 then
+	Afflictions:Add(&quot;lowhealth&quot;)
+end
+
+if tonumber(matches[3]) &lt; 85 then
+	Afflictions:Add(&quot;lowmana&quot;)
+end</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>3</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>H:\d+/(\d+)% M:\d+/(\d+)% E:\d+/\d+% W:\d+/\d+% NL:\d+\.?\d+% &lt;[e-][b-] ?.*&gt; </string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>1</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Impaled Gained</name>
+                    <script>Afflictions:Add(&quot;impaled&quot;)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>3</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>You are impaled and must writhe off before you may do that.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Impaled Lost</name>
+                    <script>Afflictions:Remove(&quot;impaled&quot;)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>0</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>With an heroic effort you manage to writhe yourself free from the weapon that impaled you.</string>
+                        <string>You begin to writhe helplessly, throwing your body off balance.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+            </TriggerGroup>
+            <TriggerGroup isActive="no" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                <name>tsLearning</name>
+                <script></script>
+                <triggerType>0</triggerType>
+                <conditonLineDelta>3</conditonLineDelta>
+                <mStayOpen>0</mStayOpen>
+                <mCommand></mCommand>
+                <packageName></packageName>
+                <mFgColor>#ff0000</mFgColor>
+                <mBgColor>#ffff00</mBgColor>
+                <mSoundFile></mSoundFile>
+                <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                <regexCodeList/>
+                <regexCodePropertyList/>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Confirm Learning</name>
+                    <script>Learning:Confirm()</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>99</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string> bows to you, and begins to tell you about the art of </string>
+                        <string> bows to you, beginning the lesson in </string>
+                        <string> beckons you close to share the secrets of your lesson.</string>
+                        <string>Checking first that (she|he) is well prepared, .+ begins to teach you a lesson in Trailblazing.</string>
+                        <string> begins the lesson by bowing deeply to you.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>1</integer>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>End Learning</name>
+                    <script>Learning:Execute(true)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>3</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string> returns to a relaxed posture and declares the lesson finished.</string>
+                        <string> bows to you, ending a lesson in </string>
+                        <string> releases the spirit, admonishes you to treat all animals with respect, and ends the lesson.</string>
+                        <string> decides that you will survive a bit better in the wilds now, and sends you off to practice what you have learned.</string>
+                        <string> bows to you and declares that your lesson is at an end.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+            </TriggerGroup>
+            <TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                <name>tsHunting</name>
+                <script></script>
+                <triggerType>0</triggerType>
+                <conditonLineDelta>0</conditonLineDelta>
+                <mStayOpen>0</mStayOpen>
+                <mCommand></mCommand>
+                <packageName></packageName>
+                <mFgColor>#ff0000</mFgColor>
+                <mBgColor>#ffff00</mBgColor>
+                <mSoundFile></mSoundFile>
+                <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                <regexCodeList/>
+                <regexCodePropertyList/>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Stop Attacks</name>
+                    <script>if Hunting.data.roomAttack then
+	send(&quot;ih&quot;)
+else
+	Hunting:EndAttacks()
+end</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>3</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>You currently walk in divine grace and may neither be harmed nor harm another. </string>
+                        <string>You detect nothing here by that name.</string>
+                        <string>I do not recognize anything called that here.</string>
+                        <string>Ahh, I am truly sorry, but I do not see anyone by that name here.</string>
+                        <string>Nothing can be seen here by that name.</string>
+                        <string>You do not see that individual here.</string>
+                        <string>Ahh, I am truly sorry, but I do not see anyone by that name here.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Kill</name>
+                    <script>Hunting:PickUp()
+selectString(line, 1)
+fg(&quot;red&quot;)
+resetFormat()
+if Hunting:StopOnKill() then
+	Hunting:EndAttacks()
+end</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>3</conditonLineDelta>
+                    <mStayOpen>2</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#000000</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>You have slain </string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                    <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="yes" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                        <name>Gold Pickup</name>
+                        <script>Hunting:PickUp(&quot;gold&quot;)
+selectString(line, 1)
+setFgColor(170, 170, 0)
+resetFormat()</script>
+                        <triggerType>0</triggerType>
+                        <conditonLineDelta>99</conditonLineDelta>
+                        <mStayOpen>0</mStayOpen>
+                        <mCommand></mCommand>
+                        <packageName></packageName>
+                        <mFgColor>#aaaa00</mFgColor>
+                        <mBgColor>#000000</mBgColor>
+                        <mSoundFile></mSoundFile>
+                        <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                        <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                        <regexCodeList>
+                            <string>.+ sovereigns? .+ from the corpse\.</string>
+                        </regexCodeList>
+                        <regexCodePropertyList>
+                            <integer>1</integer>
+                        </regexCodePropertyList>
+                    </Trigger>
+                </TriggerGroup>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Put Away Gold</name>
+                    <script>send(&quot;put gold in cloak&quot;, false)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>3</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>The ghost smirks, and hands you a few gold coins.</string>
+                        <string>You pick up some gold sovereigns.</string>
+                        <string>A lamiran hermit cackles as he tosses you a handful of gold.</string>
+                        <string>a Norrjin Aide gives some gold sovereigns to you.</string>
+                        <string>Lily, the Tailoress says, &quot;Why thank you! This colour and texture is marvelous, just perfect for a pair of boots. Please bring me any more you find.&quot;</string>
+                        <string>The foreman leads your caravan a short distance away where its contents are sorted and unloaded. The foreman returns to you and hands you a heavy bag containing </string>
+                        <string>Tolgar, a mangy Lycaean grins broadly and gives you a bit of gold.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Death</name>
+                    <script>Afflictions:Clear()
+selectString(line, 1)
+fg(&quot;red&quot;)
+resetFormat()</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>3</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>&lt;dead&gt;</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Start Storing Room Items</name>
+                    <script>Hunting:ClearRoomItems()
+enableTrigger(&quot;StoreRoomItems&quot;)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>3</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>You see the following objects:</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>StoreRoomItems</name>
+                    <script></script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>99</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList/>
+                    <regexCodePropertyList/>
+                    <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                        <name>Stop Storing Room Items</name>
+                        <script>disableTrigger(&quot;StoreRoomItems&quot;)
+Hunting:GetRoomTarget()</script>
+                        <triggerType>0</triggerType>
+                        <conditonLineDelta>3</conditonLineDelta>
+                        <mStayOpen>0</mStayOpen>
+                        <mCommand></mCommand>
+                        <packageName></packageName>
+                        <mFgColor>#ff0000</mFgColor>
+                        <mBgColor>#ffff00</mBgColor>
+                        <mSoundFile></mSoundFile>
+                        <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                        <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                        <regexCodeList>
+                            <string>Number of objects:</string>
+                        </regexCodeList>
+                        <regexCodePropertyList>
+                            <integer>0</integer>
+                        </regexCodePropertyList>
+                    </Trigger>
+                    <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                        <name>Store Room Item</name>
+                        <script>Hunting:AddRoomItem(matches[2], matches[3], matches[4])</script>
+                        <triggerType>0</triggerType>
+                        <conditonLineDelta>3</conditonLineDelta>
+                        <mStayOpen>0</mStayOpen>
+                        <mCommand></mCommand>
+                        <packageName></packageName>
+                        <mFgColor>#ff0000</mFgColor>
+                        <mBgColor>#ffff00</mBgColor>
+                        <mSoundFile></mSoundFile>
+                        <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                        <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                        <regexCodeList>
+                            <string>^&quot;(.+?)(\d+)&quot;\s+(.+)</string>
+                        </regexCodeList>
+                        <regexCodePropertyList>
+                            <integer>1</integer>
+                        </regexCodePropertyList>
+                    </Trigger>
+                </TriggerGroup>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Bandits</name>
+                    <script>Hunting:ContinuousAttack(&quot;bandit&quot;, false)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>4</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>The hairs on your neck tingle from an unknown presence.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+            </TriggerGroup>
+            <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                <name>Alertness</name>
+                <script>selectString(line, 1)
+fg(&quot;yellow&quot;)
+resetFormat()</script>
+                <triggerType>0</triggerType>
+                <conditonLineDelta>4</conditonLineDelta>
+                <mStayOpen>0</mStayOpen>
+                <mCommand></mCommand>
+                <packageName></packageName>
+                <mFgColor>#ff0000</mFgColor>
+                <mBgColor>#ffff00</mBgColor>
+                <mSoundFile></mSoundFile>
+                <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                <regexCodeList>
+                    <string>Your enhanced senses inform you that </string>
+                </regexCodeList>
+                <regexCodePropertyList>
+                    <integer>0</integer>
+                </regexCodePropertyList>
+            </Trigger>
+            <TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                <name>tsMovement</name>
+                <script></script>
+                <triggerType>0</triggerType>
+                <conditonLineDelta>26</conditonLineDelta>
+                <mStayOpen>0</mStayOpen>
+                <mCommand></mCommand>
+                <packageName></packageName>
+                <mFgColor>#ff0000</mFgColor>
+                <mBgColor>#ffff00</mBgColor>
+                <mSoundFile></mSoundFile>
+                <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                <regexCodeList/>
+                <regexCodePropertyList/>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Start Caravan Movement</name>
+                    <script>Movement:SetMode(&quot;caravan&quot;)</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>99</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>You make a request for a caravan, and a huge caravan is led out to you.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Stop Caravan Movement</name>
+                    <script>Movement:SetMode()</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>3</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>The foreman leads your caravan a short distance away where its contents are sorted and unloaded.</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+            </TriggerGroup>
+            <TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                <name>tsDefenses</name>
+                <script></script>
+                <triggerType>0</triggerType>
+                <conditonLineDelta>3</conditonLineDelta>
+                <mStayOpen>0</mStayOpen>
+                <mCommand></mCommand>
+                <packageName></packageName>
+                <mFgColor>#ff0000</mFgColor>
+                <mBgColor>#ffff00</mBgColor>
+                <mSoundFile></mSoundFile>
+                <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                <regexCodeList/>
+                <regexCodePropertyList/>
+            </TriggerGroup>
+        </TriggerGroup>
+        <TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+            <name>achaea-fixed-map-bottom-right</name>
+            <script></script>
+            <triggerType>0</triggerType>
+            <conditonLineDelta>3</conditonLineDelta>
+            <mStayOpen>0</mStayOpen>
+            <mCommand></mCommand>
+            <packageName>achaea-fixed-map-bottom-right</packageName>
+            <mFgColor>#ff0000</mFgColor>
+            <mBgColor>#ffff00</mBgColor>
+            <mSoundFile></mSoundFile>
+            <colorTriggerFgColor>#000000</colorTriggerFgColor>
+            <colorTriggerBgColor>#000000</colorTriggerBgColor>
+            <regexCodeList/>
+            <regexCodePropertyList/>
+            <TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                <name>Achaea Map Window</name>
+                <script>clearWindow(&quot;mk_map&quot;)
+</script>
+                <triggerType>0</triggerType>
+                <conditonLineDelta>99</conditonLineDelta>
+                <mStayOpen>24</mStayOpen>
+                <mCommand></mCommand>
+                <packageName></packageName>
+                <mFgColor>#ff0000</mFgColor>
+                <mBgColor>#ffff00</mBgColor>
+                <mSoundFile></mSoundFile>
+                <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                <regexCodeList>
+                    <string>^-+.*-* ?v\d+ ?-+$</string>
+                    <string>--- Area 168: The Celidon Council - v8132 ---</string>
+                </regexCodeList>
+                <regexCodePropertyList>
+                    <integer>1</integer>
+                    <integer>0</integer>
+                </regexCodePropertyList>
+                <Trigger isActive="no" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="yes" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>Fat Plus</name>
+                    <script>selectCaptureGroup(1)
+setBold(true)
+
+</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>0</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#fcb707</mFgColor>
+                    <mBgColor>#3d00b8</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>+</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>0</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>capture map</name>
+                    <script>selectCurrentLine()
+-- copy the rich text into a buffer
+copy()
+-- paste it into our map miniConsole
+appendBuffer(&quot;mk_map&quot;)
+-- erase from main screen
+deleteLine()</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>0</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>return true</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>4</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+            </TriggerGroup>
+            <TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                <name>Midkemia Misc</name>
+                <script></script>
+                <triggerType>0</triggerType>
+                <conditonLineDelta>0</conditonLineDelta>
+                <mStayOpen>0</mStayOpen>
+                <mCommand></mCommand>
+                <packageName></packageName>
+                <mFgColor>#ff0000</mFgColor>
+                <mBgColor>#ffff00</mBgColor>
+                <mSoundFile></mSoundFile>
+                <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                <regexCodeList/>
+                <regexCodePropertyList/>
+                <Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+                    <name>tab remover</name>
+                    <script>-- tabs don't render nicely in the current 1.0.5 display
+while 	selectString(&quot;\t&quot;,1) &gt; -1 do
+	replace(&quot; &quot;)
+end</script>
+                    <triggerType>0</triggerType>
+                    <conditonLineDelta>99</conditonLineDelta>
+                    <mStayOpen>0</mStayOpen>
+                    <mCommand></mCommand>
+                    <packageName></packageName>
+                    <mFgColor>#ff0000</mFgColor>
+                    <mBgColor>#ffff00</mBgColor>
+                    <mSoundFile></mSoundFile>
+                    <colorTriggerFgColor>#000000</colorTriggerFgColor>
+                    <colorTriggerBgColor>#000000</colorTriggerBgColor>
+                    <regexCodeList>
+                        <string>\t</string>
+                    </regexCodeList>
+                    <regexCodePropertyList>
+                        <integer>1</integer>
+                    </regexCodePropertyList>
+                </Trigger>
+            </TriggerGroup>
+        </TriggerGroup>
+    </TriggerPackage>
+    <TimerPackage/>
+    <AliasPackage>
+        <AliasGroup isActive="yes" isFolder="yes">
+            <name>tsTichiSystem</name>
+            <script></script>
+            <command></command>
+            <packageName></packageName>
+            <regex></regex>
+            <Alias isActive="yes" isFolder="no">
+                <name>Lua</name>
+                <script>local f, e = loadstring(&quot;return &quot;..matches[2])
+if not f then
+	f, e = assert(loadstring(matches[2]))
+end
+
+local r = f()
+if r ~= nil then
+	display(r)
+end</script>
+                <command></command>
+                <packageName></packageName>
+                <regex>^lua (.*)$</regex>
+            </Alias>
+            <AliasGroup isActive="yes" isFolder="yes">
+                <name>tsLearning</name>
+                <script></script>
+                <command></command>
+                <packageName></packageName>
+                <regex></regex>
+                <Alias isActive="yes" isFolder="no">
+                    <name>TestLearn</name>
+                    <script>Learning:TestLearn(matches[2], matches[3])</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^testlearn (\w+) (\w+)$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Learn</name>
+                    <script>Learning:Learn(matches[3], matches[4], tonumber(matches[2]))</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^learn (\d+) (\w+) from (\w+)$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Player Learn</name>
+                    <script>Learning:Learn(matches[3], matches[4], tonumber(matches[2]), true)</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^plearn (\d+) (\w+) from (\w+)$</regex>
+                </Alias>
+            </AliasGroup>
+            <AliasGroup isActive="yes" isFolder="yes">
+                <name>tsHunting</name>
+                <script></script>
+                <command></command>
+                <packageName></packageName>
+                <regex></regex>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Set Target</name>
+                    <script>if (matches[2] ~= nil and matches[2] ~= &quot;&quot;) then
+	Hunting:SetTarget(matches[2])
+else
+	Hunting:SetTarget()
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^tar(?:| (\w+))$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Set Attack</name>
+                    <script>if (matches[2] ~= nil and matches[2] ~= &quot;&quot;) then
+	Hunting:SetAttack(matches[2])
+else
+	Hunting:SetAttack()
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^att(?:| (.+))$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Attack</name>
+                    <script>if matches[2] ~= nil and matches[2] ~= &quot;&quot; then
+	Hunting:Attack(matches[2])
+else
+	Hunting:Attack()
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^c(| (\w+))$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Start Continuous Attacks</name>
+                    <script>if matches[2] ~= nil and matches[2] ~= &quot;&quot; then
+	Hunting:ContinuousAttack(matches[2])
+else
+	Hunting:ContinuousAttack()
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^cc(| (\w+))$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Stop Continuous Attacks</name>
+                    <script>Hunting:EndAttacks()</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^scc$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Start Extended Continuous Attacks</name>
+                    <script>if matches[2] ~= nil and matches[2] ~= &quot;&quot; then
+	Hunting:ContinuousAttack(matches[2], false)
+else
+	Hunting:ContinuousAttack(nil, false)
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^ccc(| (\w+))$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Add Room Target</name>
+                    <script>Hunting:AddRoomTarget(matches[2])</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^atar (\w+)$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Remove Room Target</name>
+                    <script>Hunting:RemoveRoomTarget(matches[2])</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^rtar (\w+)$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Clear Room Targets</name>
+                    <script>Hunting:ClearRoomTargets()</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^ctar$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Start Extended RoomContinuous Attacks</name>
+                    <script>Hunting:ContinuousAttack(nil, false, true)</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^rc$</regex>
+                </Alias>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Set Hunting Mode</name>
+                    <script>if matches[2] ~= nil and matches[2] ~= &quot;&quot; then
+	Hunting:SetMode(matches[2])
+else
+	Hunting:SetMode()
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^ht(?:| (\w+))$</regex>
+                </Alias>
+            </AliasGroup>
+            <AliasGroup isActive="yes" isFolder="yes">
+                <name>tsMovement</name>
+                <script></script>
+                <command></command>
+                <packageName></packageName>
+                <regex></regex>
+                <Alias isActive="yes" isFolder="no">
+                    <name>Set Movement Mode</name>
+                    <script>if matches[2] ~= nil and matches[2] ~= &quot;&quot; then
+	Movement:SetMode(matches[2])
+else
+	Movement:SetMode()
+end</script>
+                    <command></command>
+                    <packageName></packageName>
+                    <regex>^mv(?:| (\w+))$</regex>
+                </Alias>
+            </AliasGroup>
+        </AliasGroup>
+    </AliasPackage>
+    <ActionPackage/>
+    <ScriptPackage>
+        <ScriptGroup isActive="yes" isFolder="yes">
+            <name>tsTichiSystem</name>
+            <packageName></packageName>
+            <script>function tsNewTichiSystem(event)
+	if (event == &quot;sysLoadEvent&quot;) then
+		TichiSystem:Initialize()
+	elseif event == &quot;sysWindowResizeEvent&quot; then
+		TichiSystem:UpdateDisplay()
+	end
+end
+
+if not TichiSystem then
+	TichiSystem = {}
+end
+
+function TichiSystem:AddToBucket(bucket, window)
+	table.insert(self.data.display.buckets[bucket], window)
+end
+
+function TichiSystem:Echo(msg)
+	self:InitializeData()
+
+	if type(msg) == &quot;function&quot; then
+		msg(self.data.display.consoles.system)
+	else
+		echo(self.data.display.consoles.system, msg)
+	end
+	resetFormat()
+end
+
+function TichiSystem:Get(name)
+	if name == &quot;timerDuration&quot; then
+		return 1.0
+	elseif name == &quot;borderWidth&quot; then
+		local fontWidth, fontHeight = calcFontSize(10)
+		return fontWidth*45
+	end
+end
+
+function TichiSystem:Initialize()
+	self:InitializeData(true)
+
+	self.data.display.buckets.gui = {
+	}
+
+	self.data.display.buckets.system = {
+		self.data.display.consoles.systempadding,
+		self.data.display.consoles.system
+	}
+
+	self:InitializeDisplay()
+
+	self:Echo(function(console)
+		setFgColor(console, 200, 200, 0)
+		echo(console, &quot;TichiSystem&quot;)
+		resetFormat(console)
+		echo(console, &quot; initialized.\n&quot;)
+	end)
+
+	Movement:Initialize()
+	Channels:Initialize()
+	BalanceTracking:Initialize()
+	Afflictions:Initialize()
+	Learning:Initialize()
+	Hunting:Initialize()
+
+	self:OnClickSystemLabel()
+end
+
+function TichiSystem:InitializeData(reset)
+	if not self.data then
+		self.data = {}
+	end
+
+	if not self.data.display then
+		self.data.display = {}
+	end
+
+	if not self.data.display.labels then
+		self.data.display.labels = {}
+	end
+
+	if not self.data.display.consoles then
+		self.data.display.consoles = {}
+	end
+
+	if not self.data.display.buckets or reset then
+		self.data.display.buckets = {}
+	end
+end
+
+function TichiSystem:InitializeDisplay()
+	self:InitializeData()
+
+	local mainWidth, mainHeight = getMainWindowSize()
+	mainWidth = mainWidth - self:Get(&quot;borderWidth&quot;)
+
+	if not self.data.display.labels.gui then
+		self.data.display.labels.gui = &quot;tichisystem.labels.gui&quot;
+		createLabel(self.data.display.labels.gui, 0, 0, 0, 0, 1) 
+	end
+	setBackgroundColor(self.data.display.labels.gui, 0, 33, 33, 255)
+	resizeWindow(self.data.display.labels.gui, 50, 24)
+	moveWindow(self.data.display.labels.gui, self:Get(&quot;borderWidth&quot;)+625, mainHeight-400)
+	echo(self.data.display.labels.gui, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;GUI&lt;/center&gt;&lt;/p&gt;]])
+	setLabelClickCallback(self.data.display.labels.gui, &quot;TichiSystemOnClickGUILabel&quot;)
+	showWindow(self.data.display.labels.gui)
+
+	if not self.data.display.consoles.border then
+		self.data.display.consoles.border = &quot;tichisystem.consoles.border&quot;
+		createMiniConsole(self.data.display.consoles.border, 0, 0, 0, 0)
+	end
+	setBackgroundColor(self.data.display.consoles.border, 0, 33, 33, 255)
+	resizeWindow(self.data.display.consoles.border, mainWidth-625-15, 375)
+	moveWindow(self.data.display.consoles.border, self:Get(&quot;borderWidth&quot;)+625, mainHeight-375)
+	showWindow(self.data.display.consoles.border)
+
+	if not self.data.display.labels.system then
+		self.data.display.labels.system = &quot;tichisystem.labels.system&quot;
+		createLabel(self.data.display.labels.system, 0, 0, 0, 0, 1)
+	end
+	setBackgroundColor(self.data.display.labels.system, 0, 33, 33, 255)
+	resizeWindow(self.data.display.labels.system, 50, 25)
+	moveWindow(self.data.display.labels.system, self:Get(&quot;borderWidth&quot;)+676, mainHeight-400)
+	echo(self.data.display.labels.system, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;&lt;b&gt;&lt;u&gt;TS&lt;/u&gt;&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;]])
+	setLabelClickCallback(self.data.display.labels.system, &quot;TichiSystemOnClickSystemLabel&quot;)
+	showWindow(self.data.display.labels.system)
+
+	if not self.data.display.consoles.systempadding then
+		self.data.display.consoles.systempadding = &quot;tichisystem.consoles.systempadding&quot;
+		createMiniConsole(self.data.display.consoles.systempadding, 0, 0, 0, 0)
+	end
+	clearWindow(self.data.display.consoles.systempadding)
+	setBackgroundColor(self.data.display.consoles.systempadding, 0, 0, 0, 255)
+	resizeWindow(self.data.display.consoles.systempadding, mainWidth-629-15, 373)
+	moveWindow(self.data.display.consoles.systempadding, self:Get(&quot;borderWidth&quot;)+626, mainHeight-374)
+
+	local fontWidth, fontHeight = calcFontSize(10)
+
+	if not self.data.display.consoles.system then
+		self.data.display.consoles.system = &quot;tichisystem.consoles.system&quot;
+		createMiniConsole(self.data.display.consoles.system, 0, 0, 0, 0)
+	end
+	setBackgroundColor(self.data.display.consoles.system, 0, 0, 0, 255)
+	resizeWindow(self.data.display.consoles.system, mainWidth-639-15, 363)
+	moveWindow(self.data.display.consoles.system, self:Get(&quot;borderWidth&quot;)+631, mainHeight-368)
+	setMiniConsoleFontSize(self.data.display.consoles.system, 10)
+	setWindowWrap(self.data.display.consoles.system, math.floor(mainWidth-639-15/fontWidth))
+
+	resetFormat()
+end
+
+function TichiSystemOnClickGUILabel()
+	TichiSystem:OnClickGUILabel()
+end
+
+function TichiSystem:OnClickGUILabel()
+	self:InitializeDisplay()
+
+	resizeWindow(self.data.display.labels.gui, 50, 25)
+	clearWindow(self.data.display.labels.gui)
+	echo(self.data.display.labels.gui, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;&lt;b&gt;&lt;u&gt;GUI&lt;/u&gt;&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.system, 50, 24)
+	clearWindow(self.data.display.labels.system)
+	echo(self.data.display.labels.system, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;TS&lt;/center&gt;]])
+
+	self.data.display.selectedTab = &quot;gui&quot;
+
+	self:ShowHideBucket(&quot;gui&quot;)
+	resetFormat()
+end
+
+function TichiSystemOnClickSystemLabel()
+	TichiSystem:OnClickSystemLabel()
+end
+
+function TichiSystem:OnClickSystemLabel()
+	self:InitializeDisplay()
+
+	resizeWindow(self.data.display.labels.gui, 50, 24)
+	clearWindow(self.data.display.labels.gui)
+	echo(self.data.display.labels.gui, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;GUI&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.system, 50, 25)
+	clearWindow(self.data.display.labels.system)
+	echo(self.data.display.labels.system, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;&lt;b&gt;&lt;u&gt;TS&lt;/u&gt;&lt;/b&gt;&lt;/center&gt;]])
+
+	self.data.display.selectedTab = &quot;system&quot;
+
+	self:ShowHideBucket(&quot;system&quot;)
+	resetFormat()
+end
+
+function TichiSystem:ShowHideBucket(name)
+	for k, v in pairs(self.data.display.buckets) do
+		for _, y in pairs(v) do
+			hideWindow(y)
+		end
+	end
+	for _, y in pairs(self.data.display.buckets[name]) do
+		showWindow(y)
+	end
+end
+
+function TichiSystem:UpdateDisplay()
+	self:InitializeDisplay()
+
+	if self.data.display.selectedTab == &quot;gui&quot; then
+		TichiSystemOnClickGUILabel()
+	elseif self.data.display.selectedTab == &quot;system&quot; then
+		TichiSystemOnClickSystemLabel()
+	end
+end</script>
+            <eventHandlerList>
+                <string>sysLoadEvent</string>
+                <string>sysWindowResizeEvent</string>
+            </eventHandlerList>
+            <ScriptGroup isActive="yes" isFolder="yes">
+                <name>tsMovement</name>
+                <packageName></packageName>
+                <script>function tsMovement(event)
+	if event == &quot;sysWindowResizeEvent&quot; then
+		Movement:UpdateDisplay()
+	end
+end
+
+if not Movement then
+	Movement = {}
+end
+
+function Movement:Initialize()
+	self:InitializeData(true)
+	self:UpdateDisplay()
+
+	TichiSystem:Echo(function(console)
+		setFgColor(console, 200, 200, 0)
+		echo(console, &quot;Movement&quot;)
+		resetFormat(console)
+		echo(console, &quot; initialized.\n&quot;)
+	end)
+end
+
+function Movement:InitializeData(reset)
+	if not self.data or reset then
+		self.data = {}
+	end
+
+	if not self.data.timers then
+		self.data.timers = {}
+	end
+
+	if not self.data.timers.swim then
+		self.data.timers.swim = {}
+	end
+
+	if not self.data.triggers then
+		self.data.triggers = {}
+	end
+
+	if not self.data.triggers.swim then
+		self.data.triggers.swim = {}
+	end
+
+	if not self.data.display then
+		self.data.display = {}
+	end
+
+	if not self.data.display.consoles then
+		self.data.display.consoles = {}
+	end
+end
+
+function Movement:InitializeDisplay()
+	self:InitializeData()
+
+	local mainWidth, mainHeight = getMainWindowSize()
+	mainWidth = mainWidth - TichiSystem:Get(&quot;borderWidth&quot;)
+	local fontWidth, fontHeight = calcFontSize(10)
+
+	if not self.data.display.consoles.border then
+		self.data.display.consoles.border = &quot;tichisystem.movement.consoles.border&quot;
+		createMiniConsole(self.data.display.consoles.border, 0, 0, 0, 0)
+	end
+	setBackgroundColor(self.data.display.consoles.border, 0, 0, 0, 255)
+	resizeWindow(self.data.display.consoles.border, 315, fontHeight+10)
+	moveWindow(self.data.display.consoles.border, TichiSystem:Get(&quot;borderWidth&quot;)+626, mainHeight-374+(fontHeight*2+10)+1+(fontHeight+10)+1)
+	showWindow(self.data.display.consoles.border)
+	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.consoles.border)
+
+	if not self.data.display.consoles.all then
+		self.data.display.consoles.all = &quot;tichisystem.movement.consoles.all&quot;
+		createMiniConsole(self.data.display.consoles.all, 0, 0, 0, 0)
+	end
+	setBackgroundColor(self.data.display.consoles.all, 0, 0, 0, 255)
+	resizeWindow(self.data.display.consoles.all, 305, fontHeight)
+	moveWindow(self.data.display.consoles.all, TichiSystem:Get(&quot;borderWidth&quot;)+631, mainHeight-374+(fontHeight*2+10)+1+(fontHeight+10)+6)
+	setMiniConsoleFontSize(self.data.display.consoles.all, 10)
+	showWindow(self.data.display.consoles.all)
+	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.consoles.all)
+
+	resetFormat()
+end
+
+function Movement:KillTimers(group)
+	self:InitializeData()
+
+	for _, v in pairs(self.data.timers[group]) do
+		killTimer(v)
+	end
+
+	self.data.timers[group] = {}
+end
+
+function Movement:KillTriggers(group)
+	self:InitializeData()
+
+	for _, v in pairs(self.data.triggers[group]) do
+		killTrigger(v)
+	end
+end
+
+function Movement:Move(dir)
+	self:InitializeData()
+	
+	if not self.data.mode then
+		table.insert(self.data.triggers.swim, tempTrigger(&quot;You'll have to swim to make it through the water in that direction.&quot;, [[send(&quot;swim ]] .. dir .. [[&quot;, true) Movement:KillTimers(&quot;swim&quot;) Movement:KillTriggers(&quot;swim&quot;)]]))
+		table.insert(self.data.timers.swim, tempTimer(0.5, [[Movement:KillTriggers(&quot;swim&quot;)]]))
+
+		send(dir, true)
+	elseif self.data.mode == &quot;caravan&quot; then
+		send(&quot;lead caravan &quot; .. dir, true)
+	end
+end
+
+function Movement:SetMode(mode)
+	self:InitializeData()
+
+	self.data.mode = mode
+
+	self:UpdateDisplay()
+end
+
+function Movement:UpdateDisplay()
+	self:InitializeDisplay()
+
+	clearWindow(self.data.display.consoles.all)
+	setFgColor(self.data.display.consoles.all, 200, 200, 200)
+	echo(self.data.display.consoles.all, &quot;Movement mode: &quot; .. (self.data.mode or &quot;normal&quot;))
+	resetFormat()
+end</script>
+                <eventHandlerList>
+                    <string>sysWindowResizeEvent</string>
+                </eventHandlerList>
+            </ScriptGroup>
+            <ScriptGroup isActive="yes" isFolder="yes">
+                <name>tsChannels</name>
+                <packageName></packageName>
+                <script>function tsChannels(event)
+	if event == &quot;sysWindowResizeEvent&quot; then
+		Channels:UpdateDisplay()
+	end
+end
+
+if not Channels then
+	Channels = {}
+end
+
+function Channels:Capture(channel)
+	selectString(line, 1)
+	copy()
+	appendBuffer(self.data.display.consoles.all)
+
+	if channel == &quot;tells&quot; then
+		appendBuffer(self.data.display.consoles.tells)
+		self:Highlight(&quot;tells&quot;)
+	elseif channel == &quot;Hunters&quot; then
+		appendBuffer(self.data.display.consoles.guild)
+		self:Highlight(&quot;guild&quot;)
+	elseif channel == &quot;Celidon&quot; then
+		appendBuffer(self.data.display.consoles.city)
+		self:Highlight(&quot;city&quot;)
+	elseif channel == &quot;Congregation&quot; then
+		appendBuffer(self.data.display.consoles.congregation)
+		self:Highlight(&quot;congregation&quot;)
+	elseif channel == &quot;Ring&quot; then
+		appendBuffer(self.data.display.consoles.ring)
+		self:Highlight(&quot;ring&quot;)
+	end
+
+	deselect()
+	resetFormat()
+end
+
+function Channels:Highlight(tab)
+	if self.data.display.selectedTab ~= tab then
+		setBackgroundColor(self.data.display.labels[tab], 0, 100, 100, 255)
+	end
+	resetFormat()
+end
+
+function Channels:Initialize()
+	self:InitializeData(true)
+
+	self.data.display.buckets.all = {
+		self.data.display.consoles.all
+	}
+
+	self.data.display.buckets.tells = {
+		self.data.display.consoles.tells
+	}
+
+	self.data.display.buckets.guild = {
+		self.data.display.consoles.guild
+	}
+
+	self.data.display.buckets.city = {
+		self.data.display.consoles.city
+	}
+
+	self.data.display.buckets.congregation = {
+		self.data.display.consoles.congregation
+	}
+
+	self.data.display.buckets.ring = {
+		self.data.display.consoles.ring
+	}
+
+	self:InitializeDisplay()
+
+	self:OnClickAllLabel()
+
+	TichiSystem:Echo(function(console)
+		setFgColor(console, 200, 200, 0)
+		echo(console, &quot;Channels&quot;)
+		resetFormat(console)
+		echo(console, &quot; initialized.\n&quot;)
+	end)
+end
+
+function Channels:InitializeData(reset)
+	if not self.data then
+		self.data = {}
+	end
+
+	if not self.data.display then
+		self.data.display = {}
+	end
+
+	if not self.data.display.labels then
+		self.data.display.labels = {}
+	end
+
+	if not self.data.display.consoles then
+		self.data.display.consoles = {}
+	end
+
+	if not self.data.display.buckets or reset then
+		self.data.display.buckets = {}
+	end
+end
+
+function Channels:InitializeDisplay()
+	self:InitializeData()
+
+	local mainWidth, mainHeight = getMainWindowSize()
+	mainWidth = mainWidth - TichiSystem:Get(&quot;borderWidth&quot;)
+
+	if not self.data.display.labels.all then
+		self.data.display.labels.all = &quot;tichisystem.channels.labels.all&quot;
+		createLabel(self.data.display.labels.all, 0, 0, 0, 0, 1) 
+	end
+	--setBackgroundColor(self.data.display.labels.all, 0, 33, 33, 255)
+	resizeWindow(self.data.display.labels.all, 50, 24)
+	moveWindow(self.data.display.labels.all, TichiSystem:Get(&quot;borderWidth&quot;)+625, 0)
+	echo(self.data.display.labels.all, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;All&lt;/center&gt;&lt;/p&gt;]])
+	setLabelClickCallback(self.data.display.labels.all, &quot;ChannelsOnClickAllLabel&quot;)
+	showWindow(self.data.display.labels.all)
+
+	if not self.data.display.consoles.border then
+		self.data.display.consoles.border = &quot;tichisystem.channels.consoles.border&quot;
+		createMiniConsole(self.data.display.consoles.border, 0, 0, 0, 0)
+	end
+	setBackgroundColor(self.data.display.consoles.border, 0, 33, 33, 255)
+	resizeWindow(self.data.display.consoles.border, mainWidth-625-15, mainHeight-430)
+	moveWindow(self.data.display.consoles.border, TichiSystem:Get(&quot;borderWidth&quot;)+625, 25)
+	showWindow(self.data.display.consoles.border)
+
+	if not self.data.display.consoles.padding then
+		self.data.display.consoles.padding = &quot;tichisystem.channels.consoles.padding&quot;
+		createMiniConsole(self.data.display.consoles.padding, 0, 0, 0, 0)
+	end
+	clearWindow(self.data.display.consoles.padding)
+	setBackgroundColor(self.data.display.consoles.padding, 0, 0, 0, 255)
+	resizeWindow(self.data.display.consoles.padding, mainWidth-629-15, mainHeight-432)
+	moveWindow(self.data.display.consoles.padding, TichiSystem:Get(&quot;borderWidth&quot;)+626, 26)
+
+	local fontWidth, fontHeight = calcFontSize(10)
+
+	if not self.data.display.consoles.all then
+		self.data.display.consoles.all = &quot;tichisystem.channels.consoles.all&quot;
+		createMiniConsole(self.data.display.consoles.all, 0, 0, 0, 0)
+	end
+	setBackgroundColor(self.data.display.consoles.all, 0, 0, 0, 255)
+	resizeWindow(self.data.display.consoles.all, mainWidth-639-15, mainHeight-443)
+	moveWindow(self.data.display.consoles.all, TichiSystem:Get(&quot;borderWidth&quot;)+631, 31)
+	setMiniConsoleFontSize(self.data.display.consoles.all, 10)
+	setWindowWrap(self.data.display.consoles.all, math.floor((mainWidth-639-15)/fontWidth))
+
+	if not self.data.display.labels.tells then
+		self.data.display.labels.tells = &quot;tichisystem.channels.labels.tells&quot;
+		createLabel(self.data.display.labels.tells, 0, 0, 0, 0, 1)
+	end
+	--setBackgroundColor(self.data.display.labels.tells, 0, 33, 33, 255)
+	resizeWindow(self.data.display.labels.tells, 50, 25)
+	moveWindow(self.data.display.labels.tells, TichiSystem:Get(&quot;borderWidth&quot;)+676, 0)
+	echo(self.data.display.labels.tells, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;&lt;b&gt;&lt;u&gt;Tells&lt;/u&gt;&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;]])
+	setLabelClickCallback(self.data.display.labels.tells, &quot;ChannelsOnClickTellsLabel&quot;)
+	showWindow(self.data.display.labels.tells)
+
+	if not self.data.display.consoles.tells then
+		self.data.display.consoles.tells = &quot;tichisystem.channels.consoles.tells&quot;
+		createMiniConsole(self.data.display.consoles.tells, 0, 0, 0, 0)
+	end
+	setBackgroundColor(self.data.display.consoles.tells, 0, 0, 0, 255)
+	resizeWindow(self.data.display.consoles.tells, mainWidth-639-15, mainHeight-443)
+	moveWindow(self.data.display.consoles.tells, TichiSystem:Get(&quot;borderWidth&quot;)+631, 31)
+	setMiniConsoleFontSize(self.data.display.consoles.tells, 10)
+	setWindowWrap(self.data.display.consoles.tells, math.floor((mainWidth-639-15)/fontWidth))
+
+	if not self.data.display.labels.guild then
+		self.data.display.labels.guild = &quot;tichisystem.channels.labels.guild&quot;
+		createLabel(self.data.display.labels.guild, 0, 0, 0, 0, 1)
+	end
+	--setBackgroundColor(self.data.display.labels.guild, 0, 33, 33, 255)
+	resizeWindow(self.data.display.labels.guild, 50, 25)
+	moveWindow(self.data.display.labels.guild, TichiSystem:Get(&quot;borderWidth&quot;)+727, 0)
+	echo(self.data.display.labels.guild, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;&lt;b&gt;&lt;u&gt;Guild&lt;/u&gt;&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;]])
+	setLabelClickCallback(self.data.display.labels.guild, &quot;ChannelsOnClickGuildLabel&quot;)
+	showWindow(self.data.display.labels.guild)
+
+	if not self.data.display.consoles.guild then
+		self.data.display.consoles.guild = &quot;tichisystem.channels.consoles.guild&quot;
+		createMiniConsole(self.data.display.consoles.guild, 0, 0, 0, 0)
+	end
+	setBackgroundColor(self.data.display.consoles.guild, 0, 0, 0, 255)
+	resizeWindow(self.data.display.consoles.guild, mainWidth-639-15, mainHeight-443)
+	moveWindow(self.data.display.consoles.guild, TichiSystem:Get(&quot;borderWidth&quot;)+631, 31)
+	setMiniConsoleFontSize(self.data.display.consoles.guild, 10)
+	setWindowWrap(self.data.display.consoles.guild, math.floor((mainWidth-639-15)/fontWidth))
+
+	if not self.data.display.labels.city then
+		self.data.display.labels.city = &quot;tichisystem.channels.labels.city&quot;
+		createLabel(self.data.display.labels.city, 0, 0, 0, 0, 1)
+	end
+	--setBackgroundColor(self.data.display.labels.city, 0, 33, 33, 255)
+	resizeWindow(self.data.display.labels.city, 50, 25)
+	moveWindow(self.data.display.labels.city, TichiSystem:Get(&quot;borderWidth&quot;)+778, 0)
+	echo(self.data.display.labels.city, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;&lt;b&gt;&lt;u&gt;City&lt;/u&gt;&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;]])
+	setLabelClickCallback(self.data.display.labels.city, &quot;ChannelsOnClickCityLabel&quot;)
+	showWindow(self.data.display.labels.city)
+
+	if not self.data.display.consoles.city then
+		self.data.display.consoles.city = &quot;tichisystem.channels.consoles.city&quot;
+		createMiniConsole(self.data.display.consoles.city, 0, 0, 0, 0)
+	end
+	setBackgroundColor(self.data.display.consoles.city, 0, 0, 0, 255)
+	resizeWindow(self.data.display.consoles.city, mainWidth-639-15, mainHeight-443)
+	moveWindow(self.data.display.consoles.city, TichiSystem:Get(&quot;borderWidth&quot;)+631, 31)
+	setMiniConsoleFontSize(self.data.display.consoles.city, 10)
+	setWindowWrap(self.data.display.consoles.city, math.floor((mainWidth-639-15)/fontWidth))
+
+	if not self.data.display.labels.congregation then
+		self.data.display.labels.congregation = &quot;tichisystem.channels.labels.congregation&quot;
+		createLabel(self.data.display.labels.congregation, 0, 0, 0, 0, 1)
+	end
+	--setBackgroundColor(self.data.display.labels.congregation, 0, 33, 33, 255)
+	resizeWindow(self.data.display.labels.congregation, 125, 25)
+	moveWindow(self.data.display.labels.congregation, TichiSystem:Get(&quot;borderWidth&quot;)+829, 0)
+	echo(self.data.display.labels.congregation, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;&lt;b&gt;&lt;u&gt;Congregation&lt;/u&gt;&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;]])
+	setLabelClickCallback(self.data.display.labels.congregation, &quot;ChannelsOnClickCongregationLabel&quot;)
+	showWindow(self.data.display.labels.congregation)
+
+	if not self.data.display.consoles.congregation then
+		self.data.display.consoles.congregation = &quot;tichisystem.channels.consoles.congregation&quot;
+		createMiniConsole(self.data.display.consoles.congregation, 0, 0, 0, 0)
+	end
+	setBackgroundColor(self.data.display.consoles.congregation, 0, 0, 0, 255)
+	resizeWindow(self.data.display.consoles.congregation, mainWidth-639-15, mainHeight-443)
+	moveWindow(self.data.display.consoles.congregation, TichiSystem:Get(&quot;borderWidth&quot;)+631, 31)
+	setMiniConsoleFontSize(self.data.display.consoles.congregation, 10)
+	setWindowWrap(self.data.display.consoles.congregation, math.floor((mainWidth-639-15)/fontWidth))
+
+	if not self.data.display.labels.ring then
+		self.data.display.labels.ring = &quot;tichisystem.channels.labels.ring&quot;
+		createLabel(self.data.display.labels.ring, 0, 0, 0, 0, 1)
+	end
+	--setBackgroundColor(self.data.display.labels.ring, 0, 33, 33, 255)
+	resizeWindow(self.data.display.labels.ring, 50, 25)
+	moveWindow(self.data.display.labels.ring, TichiSystem:Get(&quot;borderWidth&quot;)+955, 0)
+	echo(self.data.display.labels.ring, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;&lt;b&gt;&lt;u&gt;Ring&lt;/u&gt;&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;]])
+	setLabelClickCallback(self.data.display.labels.ring, &quot;ChannelsOnClickRingLabel&quot;)
+	showWindow(self.data.display.labels.ring)
+
+	if not self.data.display.consoles.ring then
+		self.data.display.consoles.ring = &quot;tichisystem.channels.consoles.ring&quot;
+		createMiniConsole(self.data.display.consoles.ring, 0, 0, 0, 0)
+	end
+	setBackgroundColor(self.data.display.consoles.ring, 0, 0, 0, 255)
+	resizeWindow(self.data.display.consoles.ring, mainWidth-639-15, mainHeight-443)
+	moveWindow(self.data.display.consoles.ring, TichiSystem:Get(&quot;borderWidth&quot;)+631, 31)
+	setMiniConsoleFontSize(self.data.display.consoles.ring, 10)
+	setWindowWrap(self.data.display.consoles.ring, math.floor((mainWidth-639-15)/fontWidth))
+
+	resetFormat()
+end
+
+function ChannelsOnClickAllLabel()
+	Channels:OnClickAllLabel()
+end
+
+function Channels:OnClickAllLabel()
+	self:InitializeDisplay()
+
+	resizeWindow(self.data.display.labels.all, 50, 25)
+	clearWindow(self.data.display.labels.all)
+	echo(self.data.display.labels.all, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;&lt;b&gt;&lt;u&gt;All&lt;/u&gt;&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.tells, 50, 24)
+	clearWindow(self.data.display.labels.tells)
+	echo(self.data.display.labels.tells, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Tells&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.guild, 50, 24)
+	clearWindow(self.data.display.labels.guild)
+	echo(self.data.display.labels.guild, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Guild&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.city, 50, 24)
+	clearWindow(self.data.display.labels.city)
+	echo(self.data.display.labels.city, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;City&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.congregation, 125, 24)
+	clearWindow(self.data.display.labels.congregation)
+	echo(self.data.display.labels.congregation, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Congregation&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.ring, 50, 24)
+	clearWindow(self.data.display.labels.ring)
+	echo(self.data.display.labels.ring, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Ring&lt;/center&gt;&lt;/p&gt;]])
+
+	self.data.display.selectedTab = &quot;all&quot;
+	setBackgroundColor(self.data.display.labels.all, 0, 33, 33, 255)
+
+	self:ShowHideBucket(&quot;all&quot;)
+
+	resetFormat()
+end
+
+function ChannelsOnClickCityLabel()
+	Channels:OnClickCityLabel()
+end
+
+function Channels:OnClickCityLabel()
+	self:InitializeDisplay()
+
+	resizeWindow(self.data.display.labels.all, 50, 24)
+	clearWindow(self.data.display.labels.all)
+	echo(self.data.display.labels.all, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;All&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.tells, 50, 24)
+	clearWindow(self.data.display.labels.tells)
+	echo(self.data.display.labels.tells, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Tells&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.guild, 50, 24)
+	clearWindow(self.data.display.labels.guild)
+	echo(self.data.display.labels.guild, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Guild&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.city, 50, 25)
+	clearWindow(self.data.display.labels.city)
+	echo(self.data.display.labels.city, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;&lt;b&gt;&lt;u&gt;City&lt;/u&gt;&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.congregation, 125, 24)
+	clearWindow(self.data.display.labels.congregation)
+	echo(self.data.display.labels.congregation, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Congregation&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.ring, 50, 24)
+	clearWindow(self.data.display.labels.ring)
+	echo(self.data.display.labels.ring, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Ring&lt;/center&gt;&lt;/p&gt;]])
+
+	self.data.display.selectedTab = &quot;city&quot;
+	setBackgroundColor(self.data.display.labels.city, 0, 33, 33, 255)
+
+	self:ShowHideBucket(&quot;city&quot;)
+
+	resetFormat()
+end
+
+function ChannelsOnClickCongregationLabel()
+	Channels:OnClickCongregationLabel()
+end
+
+function Channels:OnClickCongregationLabel()
+	self:InitializeDisplay()
+
+	resizeWindow(self.data.display.labels.all, 50, 24)
+	clearWindow(self.data.display.labels.all)
+	echo(self.data.display.labels.all, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;All&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.tells, 50, 24)
+	clearWindow(self.data.display.labels.tells)
+	echo(self.data.display.labels.tells, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Tells&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.guild, 50, 24)
+	clearWindow(self.data.display.labels.guild)
+	echo(self.data.display.labels.guild, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Guild&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.city, 50, 24)
+	clearWindow(self.data.display.labels.city)
+	echo(self.data.display.labels.city, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;City&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.congregation, 125, 25)
+	clearWindow(self.data.display.labels.congregation)
+	echo(self.data.display.labels.congregation, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;&lt;b&gt;&lt;u&gt;Congregation&lt;/u&gt;&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.ring, 50, 24)
+	clearWindow(self.data.display.labels.ring)
+	echo(self.data.display.labels.ring, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Ring&lt;/center&gt;&lt;/p&gt;]])
+
+	self.data.display.selectedTab = &quot;congregation&quot;
+	setBackgroundColor(self.data.display.labels.congregation, 0, 33, 33, 255)
+
+	self:ShowHideBucket(&quot;congregation&quot;)
+
+	resetFormat()
+end
+
+function ChannelsOnClickGuildLabel()
+	Channels:OnClickGuildLabel()
+end
+
+function Channels:OnClickGuildLabel()
+	self:InitializeDisplay()
+
+	resizeWindow(self.data.display.labels.all, 50, 24)
+	clearWindow(self.data.display.labels.all)
+	echo(self.data.display.labels.all, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;All&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.tells, 50, 24)
+	clearWindow(self.data.display.labels.tells)
+	echo(self.data.display.labels.tells, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Tells&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.guild, 50, 25)
+	clearWindow(self.data.display.labels.guild)
+	echo(self.data.display.labels.guild, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;&lt;b&gt;&lt;u&gt;Guild&lt;/u&gt;&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.city, 50, 24)
+	clearWindow(self.data.display.labels.city)
+	echo(self.data.display.labels.city, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;City&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.congregation, 125, 24)
+	clearWindow(self.data.display.labels.congregation)
+	echo(self.data.display.labels.congregation, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Congregation&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.ring, 50, 24)
+	clearWindow(self.data.display.labels.ring)
+	echo(self.data.display.labels.ring, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Ring&lt;/center&gt;&lt;/p&gt;]])
+
+	self.data.display.selectedTab = &quot;guild&quot;
+	setBackgroundColor(self.data.display.labels.guild, 0, 33, 33, 255)
+
+	self:ShowHideBucket(&quot;guild&quot;)
+
+	resetFormat()
+end
+
+function ChannelsOnClickTellsLabel()
+	Channels:OnClickTellsLabel()
+end
+
+function Channels:OnClickTellsLabel()
+	self:InitializeDisplay()
+
+	resizeWindow(self.data.display.labels.all, 50, 24)
+	clearWindow(self.data.display.labels.all)
+	echo(self.data.display.labels.all, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;All&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.tells, 50, 25)
+	clearWindow(self.data.display.labels.tells)
+	echo(self.data.display.labels.tells, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;&lt;b&gt;&lt;u&gt;Tells&lt;/u&gt;&lt;/b&gt;&lt;/center&gt;]])
+
+	resizeWindow(self.data.display.labels.guild, 50, 24)
+	clearWindow(self.data.display.labels.guild)
+	echo(self.data.display.labels.guild, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Guild&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.city, 50, 24)
+	clearWindow(self.data.display.labels.city)
+	echo(self.data.display.labels.city, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;City&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.congregation, 125, 24)
+	clearWindow(self.data.display.labels.congregation)
+	echo(self.data.display.labels.congregation, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Congregation&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.ring, 50, 24)
+	clearWindow(self.data.display.labels.ring)
+	echo(self.data.display.labels.ring, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Ring&lt;/center&gt;&lt;/p&gt;]])
+
+	self.data.display.selectedTab = &quot;tells&quot;
+	setBackgroundColor(self.data.display.labels.tells, 0, 33, 33, 255)
+
+	self:ShowHideBucket(&quot;tells&quot;)
+
+	resetFormat()
+end
+
+function ChannelsOnClickRingLabel()
+	Channels:OnClickRingLabel()
+end
+
+function Channels:OnClickRingLabel()
+	self:InitializeDisplay()
+
+	resizeWindow(self.data.display.labels.all, 50, 24)
+	clearWindow(self.data.display.labels.all)
+	echo(self.data.display.labels.all, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;All&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.tells, 50, 24)
+	clearWindow(self.data.display.labels.tells)
+	echo(self.data.display.labels.tells, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Tells&lt;/center&gt;]])
+
+	resizeWindow(self.data.display.labels.guild, 50, 24)
+	clearWindow(self.data.display.labels.guild)
+	echo(self.data.display.labels.guild, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Guild&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.city, 50, 24)
+	clearWindow(self.data.display.labels.city)
+	echo(self.data.display.labels.city, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;City&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.congregation, 125, 24)
+	clearWindow(self.data.display.labels.congregation)
+	echo(self.data.display.labels.congregation, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;Congregation&lt;/center&gt;&lt;/p&gt;]])
+
+	resizeWindow(self.data.display.labels.ring, 50, 25)
+	clearWindow(self.data.display.labels.ring)
+	echo(self.data.display.labels.ring, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;&lt;b&gt;&lt;u&gt;Ring&lt;/u&gt;&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;]])
+
+	self.data.display.selectedTab = &quot;ring&quot;
+	setBackgroundColor(self.data.display.labels.ring, 0, 33, 33, 255)
+
+	self:ShowHideBucket(&quot;ring&quot;)
+
+	resetFormat()
+end
+
+function Channels:ShowHideBucket(name)
+	for k, v in pairs(self.data.display.buckets) do
+		for _, y in pairs(v) do
+			hideWindow(y)
+		end
+	end
+	for _, y in pairs(self.data.display.buckets[name]) do
+		showWindow(y)
+	end
+end
+
+function Channels:UpdateDisplay()
+	self:InitializeDisplay()
+
+	if self.data.display.selectedTab == &quot;all&quot; then
+		ChannelsOnClickAllLabel()
+	elseif self.data.display.selectedTab == &quot;tells&quot; then
+		ChannelsOnClickTellsLabel()
+	elseif self.data.display.selectedTab == &quot;guild&quot; then
+		ChannelsOnClickGuildLabel()
+	elseif self.data.display.selectedTab == &quot;city&quot; then
+		ChannelsOnClickCityLabel()
+	elseif self.data.display.selectedTab == &quot;congregation&quot; then
+		ChannelsOnClickCongregationLabel()
+	elseif self.data.display.selectedTab == &quot;ring&quot; then
+		ChannelsOnClickRingLabel()
+	end
+end</script>
+                <eventHandlerList>
+                    <string>sysWindowResizeEvent</string>
+                </eventHandlerList>
+            </ScriptGroup>
+            <ScriptGroup isActive="yes" isFolder="yes">
+                <name>tsBalanceTracking</name>
+                <packageName></packageName>
+                <script>function tsBalanceTracking(event)
+	if event == &quot;sysWindowResizeEvent&quot; then
+		BalanceTracking:UpdateDisplay()
+	end
+end
+
+if not BalanceTracking then
+	BalanceTracking = {}
+end
+
+function BalanceTracking:Check(balance)
+	self:InitializeData()
+
+	return not self.data.lost[balance]
+end
+
+function BalanceTracking:Confirm(balance)
+	self:InitializeData()
+
+	self.data.lost[balance] = true
+
+	if not self.data.timers[balance] then
+		self.data.timers[balance] = {}
+	end
+
+	table.insert(self.data.timers[balance], tempTimer(TichiSystem:Get(&quot;timerDuration&quot;), [[BalanceTracking:Gain(&quot;]] .. balance .. [[&quot;)]]))
+	self:UpdateDisplay()
+end
+
+function BalanceTracking:Gain(balance)
+	self:InitializeData()
+
+	self.data.lost[balance] = nil
+	self:RemoveTimers(balance)
+
+	self:UpdateDisplay()
+
+	Hunting:Execute()
+end
+
+function BalanceTracking:Initialize()
+	self:InitializeData()
+
+	self:InitializeDisplay()
+
+	TichiSystem:Echo(function(console)
+		setFgColor(console, 200, 200, 0)
+		echo(console, &quot;BalanceTracking&quot;)
+		resetFormat(console)
+		echo(console, &quot; initialized.\n&quot;)
+	end)
+end
+
+function BalanceTracking:InitializeData()
+	if not self.data then
+		self.data = {}
+	end
+
+	if not self.data.lost then
+		self.data.lost = {}
+	end
+
+	if not self.data.display then
+		self.data.display = {}
+	end
+
+	if not self.data.display.consoles then
+		self.data.display.consoles = {}
+	end
+
+	if not self.data.display.labels then
+		self.data.display.labels = {}
+	end
+
+	if not self.data.timers then
+		self.data.timers = {}
+	end
+end
+
+function BalanceTracking:InitializeDisplay()
+	self:InitializeData()
+
+	local mainWidth, mainHeight = getMainWindowSize()
+	mainWidth = mainWidth - TichiSystem:Get(&quot;borderWidth&quot;)
+
+	local fontWidth, fontHeight = calcFontSize(10)
+
+	if not self.data.display.consoles.border then
+		self.data.display.consoles.border = &quot;tichisystem.balancetracking.consoles.border&quot;
+		createMiniConsole(self.data.display.consoles.border, 0, 0, 0, 0)
+	end
+	setBackgroundColor(self.data.display.consoles.border, 0, 0, 0, 255)
+	resizeWindow(self.data.display.consoles.border, 315, fontHeight*2+10)
+	moveWindow(self.data.display.consoles.border, TichiSystem:Get(&quot;borderWidth&quot;)+626, mainHeight-374)
+	showWindow(self.data.display.consoles.border)
+	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.consoles.border)
+
+	if not self.data.display.labels.physical then
+		self.data.display.labels.physical = &quot;tichisystem.balancetracking.labels.physical&quot;
+		createLabel(self.data.display.labels.physical, 0, 0, 0, 0, 1) 
+	end
+	setBackgroundColor(self.data.display.labels.physical, 0, 50, 0, 255)
+	resizeWindow(self.data.display.labels.physical, 50, fontHeight*2)
+	moveWindow(self.data.display.labels.physical, TichiSystem:Get(&quot;borderWidth&quot;)+631, mainHeight-369)
+	echo(self.data.display.labels.physical, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;phys&lt;/center&gt;&lt;/p&gt;]])
+	showWindow(self.data.display.labels.physical)
+	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.physical)
+
+	if not self.data.display.labels.mental then
+		self.data.display.labels.mental = &quot;tichisystem.balancetracking.labels.mental&quot;
+		createLabel(self.data.display.labels.mental, 0, 0, 0, 0, 1) 
+	end
+	setBackgroundColor(self.data.display.labels.mental, 0, 50, 0, 255)
+	resizeWindow(self.data.display.labels.mental, 50, fontHeight*2)
+	moveWindow(self.data.display.labels.mental, TichiSystem:Get(&quot;borderWidth&quot;)+682, mainHeight-369)
+	echo(self.data.display.labels.mental, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;equi&lt;/center&gt;&lt;/p&gt;]])
+	showWindow(self.data.display.labels.mental)
+	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.mental)
+
+	if not self.data.display.labels.potion then
+		self.data.display.labels.potion = &quot;tichisystem.balancetracking.labels.potion&quot;
+		createLabel(self.data.display.labels.potion, 0, 0, 0, 0, 1) 
+	end
+	setBackgroundColor(self.data.display.labels.potion, 0, 50, 0, 255)
+	resizeWindow(self.data.display.labels.potion, 50, fontHeight*2)
+	moveWindow(self.data.display.labels.potion, TichiSystem:Get(&quot;borderWidth&quot;)+733, mainHeight-369)
+	echo(self.data.display.labels.potion, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;poti&lt;/center&gt;&lt;/p&gt;]])
+	showWindow(self.data.display.labels.potion)
+	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.potion)
+
+	if not self.data.display.labels.salve then
+		self.data.display.labels.salve = &quot;tichisystem.balancetracking.labels.salve&quot;
+		createLabel(self.data.display.labels.salve, 0, 0, 0, 0, 1) 
+	end
+	setBackgroundColor(self.data.display.labels.salve, 0, 50, 0, 255)
+	resizeWindow(self.data.display.labels.salve, 50, fontHeight*2)
+	moveWindow(self.data.display.labels.salve, TichiSystem:Get(&quot;borderWidth&quot;)+784, mainHeight-369)
+	echo(self.data.display.labels.salve, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;salv&lt;/center&gt;&lt;/p&gt;]])
+	showWindow(self.data.display.labels.salve)
+	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.salve)
+
+	if not self.data.display.labels.herb then
+		self.data.display.labels.herb = &quot;tichisystem.balancetracking.labels.herb&quot;
+		createLabel(self.data.display.labels.herb, 0, 0, 0, 0, 1) 
+	end
+	setBackgroundColor(self.data.display.labels.herb, 0, 50, 0, 255)
+	resizeWindow(self.data.display.labels.herb, 50, fontHeight*2)
+	moveWindow(self.data.display.labels.herb, TichiSystem:Get(&quot;borderWidth&quot;)+835, mainHeight-369)
+	echo(self.data.display.labels.herb, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;herb&lt;/center&gt;&lt;/p&gt;]])
+	showWindow(self.data.display.labels.herb)
+	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.herb)
+
+	if not self.data.display.labels.smoke then
+		self.data.display.labels.smoke = &quot;tichisystem.balancetracking.labels.smoke&quot;
+		createLabel(self.data.display.labels.smoke, 0, 0, 0, 0, 1) 
+	end
+	setBackgroundColor(self.data.display.labels.smoke, 0, 50, 0, 255)
+	resizeWindow(self.data.display.labels.smoke, 50, fontHeight*2)
+	moveWindow(self.data.display.labels.smoke, TichiSystem:Get(&quot;borderWidth&quot;)+886, mainHeight-369)
+	echo(self.data.display.labels.smoke, [[&lt;p style=&quot;font-size: 15px; color: rgb(200, 200, 200);&quot;&gt;&lt;center&gt;smok&lt;/center&gt;&lt;/p&gt;]])
+	showWindow(self.data.display.labels.smoke)
+	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.labels.smoke)
+
+	resetFormat()
+end
+
+function BalanceTracking:Lose(balance)
+	self:InitializeData()
+
+	self.data.lost[balance] = true
+	self:RemoveTimers(balance)
+
+	self:UpdateDisplay()
+end
+
+function BalanceTracking:RemoveTimers(balance)
+	self:InitializeData()
+
+	if not self.data.timers[balance] then
+		return
+	end
+
+	for _, v in pairs(self.data.timers[balance]) do
+		killTimer(v)
+	end
+	
+	self.data.timers[balance] = {}
+end
+
+function BalanceTracking:UpdateDisplay()
+	self:InitializeDisplay()
+
+	if self.data.lost[&quot;physical&quot;] then
+		setBackgroundColor(self.data.display.labels.physical, 150, 0, 0, 255)
+	else
+		setBackgroundColor(self.data.display.labels.physical, 0, 50, 0, 255)
+	end
+
+	if self.data.lost[&quot;mental&quot;] then
+		setBackgroundColor(self.data.display.labels.mental, 150, 0, 0, 255)
+	else
+		setBackgroundColor(self.data.display.labels.mental, 0, 50, 0, 255)
+	end
+
+	if self.data.lost[&quot;potion&quot;] then
+		setBackgroundColor(self.data.display.labels.potion, 150, 0, 0, 255)
+	else
+		setBackgroundColor(self.data.display.labels.potion, 0, 50, 0, 255)
+	end
+
+	if self.data.lost[&quot;salve&quot;] then
+		setBackgroundColor(self.data.display.labels.salve, 150, 0, 0, 255)
+	else
+		setBackgroundColor(self.data.display.labels.salve, 0, 50, 0, 255)
+	end
+
+	if self.data.lost[&quot;herb&quot;] then
+		setBackgroundColor(self.data.display.labels.herb, 150, 0, 0, 255)
+	else
+		setBackgroundColor(self.data.display.labels.herb, 0, 50, 0, 255)
+	end
+
+	if self.data.lost[&quot;smoke&quot;] then
+		setBackgroundColor(self.data.display.labels.smoke, 150, 0, 0, 255)
+	else
+		setBackgroundColor(self.data.display.labels.smoke, 0, 50, 0, 255)
+	end
+
+	resetFormat()
+end</script>
+                <eventHandlerList>
+                    <string>sysWindowResizeEvent</string>
+                </eventHandlerList>
+            </ScriptGroup>
+            <ScriptGroup isActive="yes" isFolder="yes">
+                <name>tsAfflictions</name>
+                <packageName></packageName>
+                <script>function tsAfflictions(event)
+	if event == &quot;sysWindowResizeEvent&quot; then
+		Afflictions:UpdateDisplay()
+	end
+end
+
+if not Afflictions then
+	Afflictions = {}
+end
+
+function Afflictions:Add(aff)
+	if aff == &quot;amnesia&quot; then
+		return
+	end
+
+	self:InitializeData()
+
+	self.data.affs[aff] = true
+
+	self:UpdateDisplay()
+
+	self:Cure()
+end
+
+function Afflictions:AddFlag(name)
+	self:InitializeData()
+
+	self.data.flags[name] = true
+end
+
+function Afflictions:Check(aff)
+	self:InitializeData()
+
+	return (self.data.affs[aff] == true)
+end
+
+function Afflictions:Clear()
+	self:InitializeData()
+
+	self.data.affs = {}
+	self.data.curing = {}
+
+	self:UpdateDisplay()
+end
+
+function Afflictions:Cure()
+	for _, v in pairs(self.data.priorities) do
+		if self.data.affs[v] then
+			if (v ~= &quot;prone&quot; or (not self.data.flags[&quot;sleeping&quot;] and not self.data.flags[&quot;sitting&quot;])) and ((v ~= &quot;lowhealth&quot; and v ~= &quot;lowmana&quot;) or not self.data.flags[&quot;sipping&quot;]) and not self.data.affs[&quot;stun&quot;] then
+				local haveBalance = false
+				if self.data.balances[v] == &quot;balance&quot; then
+					haveBalance = (BalanceTracking:Check(&quot;physical&quot;) and BalanceTracking:Check(&quot;mental&quot;))
+				elseif self.data.balances[v] ~= &quot;none&quot; then
+					haveBalance = BalanceTracking:Check(self.data.balances[v])
+				else
+					haveBalance = true
+				end
+
+				if haveBalance then
+					self.data.curing[v] = true
+
+					if not self.data.timers[v] then
+						self.data.timers[v] = {}
+					end
+
+					if not self.data.triggers[v] then
+						self.data.triggers[v] = {}
+					end
+					
+					if self.data.cures[v] == &quot;writhe&quot; and not self.data.flags[&quot;writhing&quot;] then
+						Afflictions:AddFlag(&quot;writhing&quot;)
+						table.insert(self.data.timers[v], tempTimer(TichiSystem:Get(&quot;timerDuration&quot;), [[Afflictions:KillTriggers(&quot;]] .. v .. [[&quot;) Afflictions:RemoveFlag(&quot;writhing&quot;) Afflictions:Cure()]]))
+						table.insert(self.data.triggers[v], tempTrigger(&quot;You begin to struggle free of your entanglement.&quot;, [[Afflictions:Writhing(&quot;]] .. v .. [[&quot;)]]))
+						table.insert(self.data.triggers[v], tempTrigger(&quot;You begin to writhe furiously to escape &quot;, [[Afflictions:Writhing(&quot;]] .. v .. [[&quot;)]]))
+						send(self.data.cures[v])
+					elseif string.find(self.data.cures[v], &quot;eat&quot;) and not self.data.flags[&quot;rifting&quot;] and not self.data.flags[&quot;eating&quot;] then
+						echo(&quot;eating cure!&quot;)
+						plant = string.sub(self.data.cures[v], 5)
+						Afflictions:AddFlag(&quot;rifting&quot;)
+						table.insert(self.data.timers[v], tempTimer(TichiSystem:Get(&quot;timerDuration&quot;), [[Affliction:KillTriggers(&quot;]] .. v .. [[&quot;) Afflictions:RemoveFlag(&quot;rifting&quot;) Afflictions:Cure()]]))
+						table.insert(self.data.triggers[v], tempTrigger(&quot;You remove 1 &quot; .. self.data.plants[plant], [[Afflictions:Eating(&quot;]] .. v .. [[&quot;)]]))
+						send(&quot;outr &quot; .. plant)
+					elseif self.data.balances[v] ~= &quot;balance&quot; and self.data.balances[v] ~= &quot;none&quot; then
+						BalanceTracking:Confirm(self.data.balances[v])
+						table.insert(self.data.timers[v], tempTimer(TichiSystem:Get(&quot;timerDuration&quot;), [[BalanceTracking:Gain(&quot;]] .. self.data.balances[v] .. [[&quot;) Afflictions:Cure()]]))
+						if self.data.balances[v] == &quot;smoke&quot; then
+							send(&quot;light pipes&quot;)
+							table.insert(self.data.timers[v], tempTimer(TichiSystem:Get(&quot;timerDuration&quot;), [[Affliction:KillTriggers(&quot;]] .. v .. [[&quot;)]]))
+							plant = string.sub(self.data.cures[v], 17)
+							table.insert(self.data.triggers[v], tempTrigger(&quot;You cannot find a lit pipe with that in it.&quot;, [[Affliction:KillTimers(&quot;]] .. v .. [[&quot;) send(&quot;outr ]] .. plant .. [[&quot;) send(&quot;put ]] .. plant .. [[ in pipe&quot;) send(&quot;]] .. self.data.cures[v] .. [[&quot;) Affliction:KillTriggers(&quot;]] .. v .. [[&quot;)]]))
+						end
+						send(self.data.cures[v])
+					else
+						table.insert(self.data.timers[v], tempTimer(TichiSystem:Get(&quot;timerDuration&quot;), [[Afflictions:Cure()]]))
+						send(self.data.cures[v])
+					end
+				end
+			end
+		end
+	end
+
+	self:UpdateDisplay()
+end
+
+function Afflictions:Eating(aff)
+	if not self.data.flags[&quot;eating&quot;] then
+		self:KillTimers(aff)
+		self:KillTriggers(aff)
+	
+		if not self.data.timers[aff] then
+			self.data.timers[aff] = {}
+		end
+
+		if not self.data.triggers[aff] then
+			self.data.triggers[aff] = {}
+		end
+
+		self:AddFlag(&quot;eating&quot;)
+
+		plant = string.sub(self.data.cures[aff], 5)
+
+		table.insert(self.data.timers[aff], tempTimer(TichiSystem:Get(&quot;timerDuration&quot;), [[Afflictions:KillTriggers(&quot;]] .. aff .. [[&quot;) Afflictions:RemoveFlag(&quot;eating&quot;) Afflictions:Eating(&quot;]] .. aff .. [[&quot;)]]))
+		send(&quot;eat &quot; .. plant)
+	end
+end
+
+function Afflictions:Initialize()
+	self:InitializeData(true)
+
+	self:InitializeDisplay()
+
+	TichiSystem:Echo(function(console)
+		setFgColor(console, 200, 200, 0)
+		echo(console, &quot;Afflictions&quot;)
+		resetFormat(console)
+		echo(console, &quot; initialized.\n&quot;)
+	end)
+end
+
+function Afflictions:InitializeData(reset)
+	if not self.data or reset then
+		self.data = {}
+	end
+
+	if not self.data.display then
+		self.data.display = {}
+	end
+
+	if not self.data.display.consoles then
+		self.data.display.consoles = {}
+	end
+
+	if not self.data.affs then
+		self.data.affs = {}
+	end
+
+	if not self.data.priorities then
+		self.data.priorities = {}
+
+		table.insert(self.data.priorities, &quot;cyanide&quot;)
+		table.insert(self.data.priorities, &quot;lowhealth&quot;)
+		table.insert(self.data.priorities, &quot;lowmana&quot;)
+		table.insert(self.data.priorities, &quot;ablaze&quot;)
+		table.insert(self.data.priorities, &quot;webbed&quot;)
+		table.insert(self.data.priorities, &quot;impaled&quot;)
+		table.insert(self.data.priorities, &quot;transfixed&quot;)
+		table.insert(self.data.priorities, &quot;bound&quot;)
+		table.insert(self.data.priorities, &quot;entangled&quot;)
+		table.insert(self.data.priorities, &quot;entangled by net&quot;)
+		table.insert(self.data.priorities, &quot;broken back&quot;)
+		table.insert(self.data.priorities, &quot;sprained back&quot;)
+		table.insert(self.data.priorities, &quot;metrazol&quot;)
+		table.insert(self.data.priorities, &quot;paralysis&quot;)
+		table.insert(self.data.priorities, &quot;damaged left leg&quot;)
+		table.insert(self.data.priorities, &quot;damaged right leg&quot;)
+		table.insert(self.data.priorities, &quot;mangled left leg&quot;)
+		table.insert(self.data.priorities, &quot;mangled right leg&quot;)
+		table.insert(self.data.priorities, &quot;crippled left leg&quot;)
+		table.insert(self.data.priorities, &quot;crippled right leg&quot;)
+		table.insert(self.data.priorities, &quot;prone&quot;)
+		table.insert(self.data.priorities, &quot;calotropis&quot;)
+		table.insert(self.data.priorities, &quot;concussion&quot;)
+		table.insert(self.data.priorities, &quot;damaged head&quot;)
+		table.insert(self.data.priorities, &quot;damaged torso&quot;)
+		table.insert(self.data.priorities, &quot;mangled torso&quot;)
+		table.insert(self.data.priorities, &quot;damaged left arm&quot;)
+		table.insert(self.data.priorities, &quot;damaged right arm&quot;)
+		table.insert(self.data.priorities, &quot;mangled left arm&quot;)
+		table.insert(self.data.priorities, &quot;mangled right arm&quot;)
+		table.insert(self.data.priorities, &quot;crippled left arm&quot;)
+		table.insert(self.data.priorities, &quot;crippled right arm&quot;)
+		table.insert(self.data.priorities, &quot;actinium&quot;)
+		table.insert(self.data.priorities, &quot;bloodtears&quot;)
+		table.insert(self.data.priorities, &quot;disfigurement&quot;)
+		table.insert(self.data.priorities, &quot;addiction&quot;)
+		table.insert(self.data.priorities, &quot;nausea&quot;)
+		table.insert(self.data.priorities, &quot;agoraphobia&quot;)
+		table.insert(self.data.priorities, &quot;anorexia&quot;)
+		table.insert(self.data.priorities, &quot;asthma&quot;)
+		table.insert(self.data.priorities, &quot;butisol&quot;)
+		table.insert(self.data.priorities, &quot;claustrophobia&quot;)
+		table.insert(self.data.priorities, &quot;clumsiness&quot;)
+		table.insert(self.data.priorities, &quot;fear&quot;)
+		table.insert(self.data.priorities, &quot;confusion&quot;)
+		table.insert(self.data.priorities, &quot;deadening&quot;)
+		table.insert(self.data.priorities, &quot;dementia&quot;)
+		table.insert(self.data.priorities, &quot;dissonance&quot;)
+		table.insert(self.data.priorities, &quot;dizziness&quot;)
+		table.insert(self.data.priorities, &quot;dryblood&quot;)
+		table.insert(self.data.priorities, &quot;entropy&quot;)
+		table.insert(self.data.priorities, &quot;frozen&quot;)
+		table.insert(self.data.priorities, &quot;generosity&quot;)
+		table.insert(self.data.priorities, &quot;haemophilia&quot;)
+		table.insert(self.data.priorities, &quot;hallucinations&quot;)
+		table.insert(self.data.priorities, &quot;healthleech&quot;)
+		table.insert(self.data.priorities, &quot;hemotoxin&quot;)
+		table.insert(self.data.priorities, &quot;heroism&quot;)
+		table.insert(self.data.priorities, &quot;hypersomnia&quot;)
+		table.insert(self.data.priorities, &quot;hypochondria&quot;)
+		table.insert(self.data.priorities, &quot;impatience&quot;)
+		table.insert(self.data.priorities, &quot;justice&quot;)
+		table.insert(self.data.priorities, &quot;lethargy&quot;)
+		table.insert(self.data.priorities, &quot;loneliness&quot;)
+		table.insert(self.data.priorities, &quot;lovers&quot;)
+		table.insert(self.data.priorities, &quot;masochism&quot;)
+		table.insert(self.data.priorities, &quot;paranoia&quot;)
+		table.insert(self.data.priorities, &quot;peace&quot;)
+		table.insert(self.data.priorities, &quot;recklessness&quot;)
+		table.insert(self.data.priorities, &quot;rigidity&quot;)
+		table.insert(self.data.priorities, &quot;scars&quot;)
+		table.insert(self.data.priorities, &quot;sensitivity&quot;)
+		table.insert(self.data.priorities, &quot;shivering&quot;)
+		table.insert(self.data.priorities, &quot;shyness&quot;)
+		table.insert(self.data.priorities, &quot;slow elixirs&quot;)
+		table.insert(self.data.priorities, &quot;slow herbs&quot;)
+		table.insert(self.data.priorities, &quot;stupidity&quot;)
+		table.insert(self.data.priorities, &quot;stuttering&quot;)
+		table.insert(self.data.priorities, &quot;sulfonal&quot;)
+		table.insert(self.data.priorities, &quot;sunallergy&quot;)
+		table.insert(self.data.priorities, &quot;vertigo&quot;)
+		table.insert(self.data.priorities, &quot;weariness&quot;)
+		table.insert(self.data.priorities, &quot;withered throat&quot;)
+		table.insert(self.data.priorities, &quot;aeon&quot;)
+		table.insert(self.data.priorities, &quot;disloyalty&quot;)
+		table.insert(self.data.priorities, &quot;epilepsy&quot;)
+		table.insert(self.data.priorities, &quot;hellsight&quot;)
+		table.insert(self.data.priorities, &quot;madness&quot;)
+		table.insert(self.data.priorities, &quot;manaleech&quot;)
+		table.insert(self.data.priorities, &quot;slickness&quot;)
+		table.insert(self.data.priorities, &quot;slow balance&quot;)
+		table.insert(self.data.priorities, &quot;slow equilibrium&quot;)
+	end
+
+	if not self.data.balances then
+		self.data.balances = {}
+		self.data.balances[&quot;cyanide&quot;] = &quot;potion&quot;
+		self.data.balances[&quot;lowhealth&quot;] = &quot;potion&quot;
+		self.data.balances[&quot;lowmana&quot;] = &quot;potion&quot;
+		self.data.balances[&quot;webbed&quot;] = &quot;balance&quot;
+		self.data.balances[&quot;impaled&quot;] = &quot;balance&quot;
+		self.data.balances[&quot;prone&quot;] = &quot;balance&quot;
+		self.data.balances[&quot;bound&quot;] = &quot;balance&quot;
+		self.data.balances[&quot;entangled&quot;] = &quot;balance&quot;
+		self.data.balances[&quot;entangled by net&quot;] = &quot;balance&quot;
+		self.data.balances[&quot;transfixed&quot;] = &quot;balance&quot;
+		self.data.balances[&quot;ablaze&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;crippled left leg&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;crippled right leg&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;crippled left arm&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;crippled right arm&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;actinium&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;bloodtears&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;broken back&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;calotropis&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;concussion&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;damaged head&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;damaged left arm&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;damaged right arm&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;damaged left leg&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;damaged right leg&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;damaged torso&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;disfigurement&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;mangled left arm&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;mangled right arm&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;mangled left leg&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;mangled right leg&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;mangled torso&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;anorexia&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;frozen&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;scars&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;shivering&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;slow elixirs&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;slow herbs&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;sprained back&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;stuttering&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;withered throat&quot;] = &quot;salve&quot;
+		self.data.balances[&quot;fear&quot;] = &quot;none&quot;
+		self.data.balances[&quot;nausea&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;addiction&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;agoraphobia&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;asthma&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;butisol&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;claustrophobia&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;clumsiness&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;confusion&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;deadening&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;dementia&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;dissonance&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;dizziness&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;dryblood&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;entropy&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;generosity&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;haemophilia&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;hallucinations&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;healthleech&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;hemotoxin&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;heroism&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;hypersomnia&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;hypochondria&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;impatience&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;justice&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;lethargy&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;loneliness&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;lovers&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;masochism&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;metrazol&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;paralysis&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;paranoia&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;peace&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;recklessness&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;rigidity&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;sensitivity&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;shyness&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;stupidity&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;sulfonal&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;sunallergy&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;vertigo&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;weariness&quot;] = &quot;herb&quot;
+		self.data.balances[&quot;aeon&quot;] = &quot;smoke&quot;
+		self.data.balances[&quot;disloyalty&quot;] = &quot;smoke&quot;
+		self.data.balances[&quot;epilepsy&quot;] = &quot;smoke&quot;
+		self.data.balances[&quot;hellsight&quot;] = &quot;smoke&quot;
+		self.data.balances[&quot;madness&quot;] = &quot;smoke&quot;
+		self.data.balances[&quot;manaleech&quot;] = &quot;smoke&quot;
+		self.data.balances[&quot;slickness&quot;] = &quot;smoke&quot;
+		self.data.balances[&quot;slow balance&quot;] = &quot;smoke&quot;
+		self.data.balances[&quot;slow equilibrium&quot;] = &quot;smoke&quot;
+	end
+
+	if not self.data.cures then
+		self.data.cures = {}
+		self.data.cures[&quot;cyanide&quot;] = &quot;sip immunity&quot;
+		self.data.cures[&quot;lowhealth&quot;] = &quot;sip health&quot;
+		self.data.cures[&quot;lowmana&quot;] = &quot;sip mana&quot;
+		self.data.cures[&quot;ablaze&quot;] = &quot;apply mending&quot;
+		self.data.cures[&quot;webbed&quot;] = &quot;writhe&quot;
+		self.data.cures[&quot;impaled&quot;] = &quot;writhe&quot;
+		self.data.cures[&quot;bound&quot;] = &quot;writhe&quot;
+		self.data.cures[&quot;entangled&quot;] = &quot;writhe&quot;
+		self.data.cures[&quot;entangled by net&quot;] = &quot;writhe&quot;
+		self.data.cures[&quot;transfixed&quot;] = &quot;writhe&quot;
+		self.data.cures[&quot;crippled left leg&quot;] = &quot;apply mending to legs&quot;
+		self.data.cures[&quot;crippled right leg&quot;] = &quot;apply mending to legs&quot;
+		self.data.cures[&quot;crippled left arm&quot;] = &quot;apply mending to arms&quot;
+		self.data.cures[&quot;crippled right arm&quot;] = &quot;apply mending to arms&quot;
+		self.data.cures[&quot;actinium&quot;] = &quot;apply mending&quot;
+		self.data.cures[&quot;bloodtears&quot;] = &quot;apply mending to head&quot;
+		self.data.cures[&quot;scars&quot;] = &quot;apply mending to head&quot;
+		self.data.cures[&quot;broken back&quot;] = &quot;apply restoration to back&quot;
+		self.data.cures[&quot;concussion&quot;] = &quot;apply restoration to head&quot;
+		self.data.cures[&quot;damaged head&quot;] = &quot;apply restoration to head&quot;
+		self.data.cures[&quot;damaged left arm&quot;] = &quot;apply restoration to arms&quot;
+		self.data.cures[&quot;damaged right arm&quot;] = &quot;apply restoration to arms&quot;
+		self.data.cures[&quot;damaged left leg&quot;] = &quot;apply restoration to legs&quot;
+		self.data.cures[&quot;damaged right leg&quot;] = &quot;apply restoration to legs&quot;
+		self.data.cures[&quot;mangled left arm&quot;] = &quot;apply restoration to arms&quot;
+		self.data.cures[&quot;mangled right arm&quot;] = &quot;apply restoration to arms&quot;
+		self.data.cures[&quot;mangled left leg&quot;] = &quot;apply restoration to legs&quot;
+		self.data.cures[&quot;mangled right leg&quot;] = &quot;apply restoration to legs&quot;
+		self.data.cures[&quot;damaged torso&quot;] = &quot;apply restoration to torso&quot;
+		self.data.cures[&quot;mangled torso&quot;] = &quot;apply restoration to torso&quot;
+		self.data.cures[&quot;sprained back&quot;] = &quot;apply restoration to back&quot;
+		self.data.cures[&quot;calotropis&quot;] = &quot;apply epidermal&quot;
+		self.data.cures[&quot;disfigurement&quot;] = &quot;apply epidermal&quot;
+		self.data.cures[&quot;anorexia&quot;] = &quot;apply epidermal&quot;
+		self.data.cures[&quot;slow elixirs&quot;] = &quot;apply epidermal&quot;
+		self.data.cures[&quot;slow herbs&quot;] = &quot;apply epidermal&quot;
+		self.data.cures[&quot;stuttering&quot;] = &quot;apply epidermal&quot;
+		self.data.cures[&quot;withered throat&quot;] = &quot;apply epidermal&quot;
+		self.data.cures[&quot;frozen&quot;] = &quot;apply caloric&quot;
+		self.data.cures[&quot;shivering&quot;] = &quot;apply caloric&quot;
+		self.data.cures[&quot;prone&quot;] = &quot;stand&quot;
+		self.data.cures[&quot;fear&quot;] = &quot;compose&quot;
+		self.data.cures[&quot;nausea&quot;] = &quot;eat nightshade&quot;
+		self.data.cures[&quot;addiction&quot;] = &quot;eat nightshade&quot;
+		self.data.cures[&quot;dryblood&quot;] = &quot;eat nightshade&quot;
+		self.data.cures[&quot;haemophilia&quot;] = &quot;eat nightshade&quot;
+		self.data.cures[&quot;lethargy&quot;] = &quot;eat nightshade&quot;
+		self.data.cures[&quot;sulfonal&quot;] = &quot;eat nightshade&quot;
+		self.data.cures[&quot;sunallergy&quot;] = &quot;eat nightshade&quot;
+		self.data.cures[&quot;agoraphobia&quot;] = &quot;eat orphine&quot;
+		self.data.cures[&quot;claustrophobia&quot;] = &quot;eat orphine&quot;
+		self.data.cures[&quot;loneliness&quot;] = &quot;eat orphine&quot;
+		self.data.cures[&quot;masochism&quot;] = &quot;eat orphine&quot;
+		self.data.cures[&quot;stupidity&quot;] = &quot;eat orphine&quot;
+		self.data.cures[&quot;vertigo&quot;] = &quot;eat orphine&quot;
+		self.data.cures[&quot;asthma&quot;] = &quot;eat kelp&quot;
+		self.data.cures[&quot;butisol&quot;] = &quot;eat kelp&quot;
+		self.data.cures[&quot;clumsiness&quot;] = &quot;eat kelp&quot;
+		self.data.cures[&quot;healthleech&quot;] = &quot;eat kelp&quot;
+		self.data.cures[&quot;hemotoxin&quot;] = &quot;eat kelp&quot;
+		self.data.cures[&quot;hypochondria&quot;] = &quot;eat kelp&quot;
+		self.data.cures[&quot;rigidity&quot;] = &quot;eat kelp&quot;
+		self.data.cures[&quot;weariness&quot;] = &quot;eat kelp&quot;
+		self.data.cures[&quot;confusion&quot;] = &quot;eat wormwood&quot;
+		self.data.cures[&quot;dementia&quot;] = &quot;eat wormwood&quot;
+		self.data.cures[&quot;entropy&quot;] = &quot;eat wormwood&quot;
+		self.data.cures[&quot;hallucinations&quot;] = &quot;eat wormwood&quot;
+		self.data.cures[&quot;hypersomnia&quot;] = &quot;eat wormwood&quot;
+		self.data.cures[&quot;paranoia&quot;] = &quot;eat wormwood&quot;
+		self.data.cures[&quot;mandrake&quot;] = &quot;eat mandrake&quot;
+		self.data.cures[&quot;dissonance&quot;] = &quot;eat mandrake&quot;
+		self.data.cures[&quot;dizziness&quot;] = &quot;eat mandrake&quot;
+		self.data.cures[&quot;heroism&quot;] = &quot;eat mandrake&quot;
+		self.data.cures[&quot;impatience&quot;] = &quot;eat mandrake&quot;
+		self.data.cures[&quot;recklessness&quot;] = &quot;eat mandrake&quot;
+		self.data.cures[&quot;shyness&quot;] = &quot;eat mandrake&quot;
+		self.data.cures[&quot;generosity&quot;] = &quot;eat galingale&quot;
+		self.data.cures[&quot;justice&quot;] = &quot;eat galingale&quot;
+		self.data.cures[&quot;lovers&quot;] = &quot;eat galingale&quot;
+		self.data.cures[&quot;peace&quot;] = &quot;eat galingale&quot;
+		self.data.cures[&quot;metrazol&quot;] = &quot;eat maidenhair&quot;
+		self.data.cures[&quot;paralysis&quot;] = &quot;eat maidenhair&quot;
+		self.data.cures[&quot;sensitivity&quot;] = &quot;eat maidenhair&quot;
+		self.data.cures[&quot;aeon&quot;] = &quot;smoke pipe with laurel&quot;
+		self.data.cures[&quot;epilepsy&quot;] = &quot;smoke pipe with laurel&quot;
+		self.data.cures[&quot;hellsight&quot;] = &quot;smoke pipe with laurel&quot;
+		self.data.cures[&quot;madness&quot;] = &quot;smoke pipe with laurel&quot;
+		self.data.cures[&quot;slow equilibrium&quot;] = &quot;smoke pipe with laurel&quot;
+		self.data.cures[&quot;disloyalty&quot;] = &quot;smoke pipe with lovage&quot;
+		self.data.cures[&quot;manaleech&quot;] = &quot;smoke pipe with lovage&quot;
+		self.data.cures[&quot;slickness&quot;] = &quot;smoke pipe with lovage&quot;
+		self.data.cures[&quot;slow balance&quot;] = &quot;smoke pipe with lovage&quot;
+	end
+
+	if not self.data.curing then
+		self.data.curing = {}
+	end
+
+	if not self.data.timers then
+		self.data.timers = {}
+	end
+
+	if not self.data.flags then
+		self.data.flags = {}
+	end
+
+	if not self.data.triggers then
+		self.data.triggers = {}
+	end
+
+	if not self.data.plants then
+		self.data.plants = {}
+		self.data.plants[&quot;nightshade&quot;] = &quot;nightshade root&quot;
+	end
+end
+
+function Afflictions:InitializeDisplay()
+	self:InitializeData()
+
+	local mainWidth, mainHeight = getMainWindowSize()
+	mainWidth = mainWidth - TichiSystem:Get(&quot;borderWidth&quot;)
+
+	local fontWidth, fontHeight = calcFontSize(10)
+
+	if not self.data.display.consoles.border then
+		self.data.display.consoles.border = &quot;tichisystem.afflictions.consoles.border&quot;
+		createMiniConsole(self.data.display.consoles.border, 0, 0, 0, 0)
+	end
+	setBackgroundColor(self.data.display.consoles.border, 0, 0, 0, 255)
+	resizeWindow(self.data.display.consoles.border, mainWidth-961, fontHeight*2+10)
+	moveWindow(self.data.display.consoles.border, TichiSystem:Get(&quot;borderWidth&quot;)+942, mainHeight-374)
+	showWindow(self.data.display.consoles.border)
+	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.consoles.border)
+
+	if not self.data.display.consoles.affs then
+		self.data.display.consoles.affs = &quot;tichisystem.afflictions.consoles.affs&quot;
+		createMiniConsole(self.data.display.consoles.affs, 0, 0, 0, 0)
+	end
+	setBackgroundColor(self.data.display.consoles.affs, 0, 0, 0, 255)
+	resizeWindow(self.data.display.consoles.affs, mainWidth-971, fontHeight*2)
+	moveWindow(self.data.display.consoles.affs, TichiSystem:Get(&quot;borderWidth&quot;)+947, mainHeight-369)
+	setMiniConsoleFontSize(self.data.display.consoles.affs, 10)
+	setWindowWrap(self.data.display.consoles.affs, math.floor((mainWidth-971)/fontWidth))
+	showWindow(self.data.display.consoles.affs)
+	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.consoles.affs)
+
+	resetFormat()
+end
+
+function Afflictions:KillTimers(aff)
+	self:InitializeData()
+	if self.data.timers[aff] then
+		for _, v in pairs(self.data.timers[aff]) do
+			killTimer(v)
+		end
+	end
+
+	self.data.timers[aff] = nil
+end
+
+function Afflictions:KillTriggers(aff)
+	self:InitializeData()
+	if self.data.triggers[aff] then
+		for _, v in pairs(self.data.triggers[aff]) do
+			killTrigger(v)
+		end
+	end
+
+	self.data.triggers[aff] = nil
+end
+
+function Afflictions:Remove(aff)
+	self:InitializeData()
+
+	if self.data.timers[aff] then
+		for _, v in pairs(self.data.timers[aff]) do
+			killTimer(v)
+		end
+
+		self.data.timers[aff] = nil
+	end
+
+	self.data.affs[aff] = nil
+	self.data.curing[aff] = nil
+
+	if self.data.cures[aff] == &quot;writhe&quot; then
+		self:RemoveFlag(&quot;writhing&quot;)
+	elseif aff == &quot;prone&quot; then
+		self:RemoveFlag(&quot;sitting&quot;)
+	elseif aff == &quot;lowhealth&quot; or aff == &quot;lowmana&quot; then
+		self:RemoveFlag(&quot;sipping&quot;)
+	elseif string.find(self.data.cures[aff], &quot;eat&quot;) then
+		self:RemoveFlag(&quot;eating&quot;)
+		self:RemoveFlag(&quot;rifting&quot;)
+	end
+
+	self:UpdateDisplay()
+
+	if string.find(aff, &quot;left arm&quot;) then
+		send(&quot;wield shield&quot;)
+	end
+
+	self:Cure()
+
+	Hunting:Execute()
+end
+
+function Afflictions:RemoveFlag(name)
+	self:InitializeData()
+
+	self.data.flags[name] = nil
+end
+
+function Afflictions:UpdateDisplay()
+	self:InitializeDisplay()
+
+	clearWindow(self.data.display.consoles.affs)
+	local first = true
+	for k, _ in pairs(self.data.affs) do
+		if not first then
+			echo(self.data.display.consoles.affs, &quot;, &quot;)
+		else
+			first = false
+		end
+
+		if self.data.curing[k] then
+			setFgColor(self.data.display.consoles.affs, 255, 0, 0)
+			echo(self.data.display.consoles.affs, k)
+			resetFormat(self.data.display.consoles.affs)
+		else
+			echo(self.data.display.consoles.affs, k)
+		end
+
+		resetFormat(self.data.display.consoles.affs)
+	end
+
+	resetFormat()
+end
+
+function Afflictions:Writhing(aff)
+	Afflictions:KillTimers(aff)
+	Afflictions:KillTriggers(aff)
+	
+	if not self.data.timers[aff] then
+		self.data.timers[aff] = {}
+	end
+
+	if not self.data.triggers[aff] then
+		self.data.triggers[aff] = {}
+	end
+
+	table.insert(self.data.timers[aff], tempTimer(TichiSystem:Get(&quot;timerDuration&quot;), [[Afflictions:KillTriggers(&quot;]] .. v .. [[&quot;) Afflictions:RemoveFlag(&quot;writhing&quot;) Afflictions:Cure()]]))
+ 	table.insert(self.data.triggers[aff], tempTrigger(&quot;You twist and turn as you attempt to escape from your entanglement.&quot;, [[Afflictions:Writhing(&quot;]] .. aff .. [[&quot;)]]))
+end</script>
+                <eventHandlerList>
+                    <string>sysWindowResizeEvent</string>
+                </eventHandlerList>
+            </ScriptGroup>
+            <ScriptGroup isActive="yes" isFolder="yes">
+                <name>tsHunting</name>
+                <packageName></packageName>
+                <script>function tsHunting(event)
+	if event == &quot;sysWindowResizeEvent&quot; then
+		Hunting:UpdateDisplay()
+	end
+end
+
+if not Hunting then
+	Hunting = {}
+end
+
+function Hunting:AddRoomItem(name, id, desc)
+	self:InitializeData()
+
+	if not desc:find(&quot;the corpse of&quot;) then
+		table.insert(self.data.room.items, {name = name, id = id})
+	end
+end
+
+function Hunting:AddRoomTarget(name)
+	self:InitializeData()
+
+	self.data.room.targets[name] = true
+end
+
+function Hunting:Attack(name)
+	if not name then
+		name = self.data.target
+	end
+
+	if not name then
+		TichiSystem:Echo(&quot;Invalid target.&quot;)
+		return
+	end
+
+	if not self.data.attack then
+		TichiSystem:Echo(&quot;Invalid attack.&quot;)
+		return
+	end
+
+	BalanceTracking:Confirm(&quot;physical&quot;)
+
+	self.data.lastTarget = name
+
+	local attack = string.gsub(self.data.attack, &quot;{t}&quot;, name)
+	send(attack)
+end
+
+function Hunting:ClearRoomItems()
+	self:InitializeData()
+
+	self.data.room.items = {}
+	resetFormat()
+end
+
+function Hunting:ClearRoomTargets()
+	self:InitializeData()
+
+	self.data.room.targets = {}
+end
+
+function Hunting:ContinuousAttack(name, stopOnKill, roomAttack)
+	if not name then
+		name = self.data.target
+	end
+
+	if stopOnKill == nil then
+		stopOnKill = true
+	end
+
+	self.data.attacking = true
+	self.data.stopOnKill = stopOnKill
+	self.data.roomAttack = roomAttack
+
+	if self.data.roomAttack then
+		send(&quot;ih&quot;)
+		return
+	end
+
+	self.data.attackTarget = name
+
+	Hunting:UpdateDisplay()
+
+	Hunting:Execute()
+end
+
+function Hunting:EndAttacks()
+	self:InitializeData()
+	self.data.attacking = nil
+	self.data.attackTarget = nil
+	self.data.roomAttack = nil
+	self.data.stopOnKill = nil
+
+	Hunting:UpdateDisplay()
+end
+
+function Hunting:Execute()
+	if BalanceTracking:Check(&quot;physical&quot;) and BalanceTracking:Check(&quot;mental&quot;) and table.size(self.data.corpses) &gt; 0 and not Afflictions:Check(&quot;webbed&quot;) and not Afflictions:Check(&quot;prone&quot;) and not Afflictions:Check(&quot;crippled left leg&quot;) and not Afflictions:Check(&quot;crippled right leg&quot;) and not Afflictions:Check(&quot;crippled left arm&quot;) and not Afflictions:Check(&quot;crippled right arm&quot;) and not Afflictions:Check(&quot;impaled&quot;) and not Afflictions:Check(&quot;stun&quot;) and not Afflictions:Check(&quot;transfixed&quot;) and not Afflictions:Check(&quot;blackout&quot;) then
+		local target = self.data.corpses[1]
+		table.remove(self.data.corpses, 1)
+		send(&quot;g &quot; .. target)
+		Hunting:Execute()
+	elseif BalanceTracking:Check(&quot;physical&quot;) and BalanceTracking:Check(&quot;mental&quot;) and self.data.attacking and not Afflictions:Check(&quot;webbed&quot;) and not Afflictions:Check(&quot;prone&quot;) and not Afflictions:Check(&quot;crippled left leg&quot;) and not Afflictions:Check(&quot;crippled right leg&quot;) and not Afflictions:Check(&quot;crippled left arm&quot;) and not Afflictions:Check(&quot;crippled right arm&quot;) and not Afflictions:Check(&quot;impaled&quot;) and not Afflictions:Check(&quot;stun&quot;) and not Afflictions:Check(&quot;transfixed&quot;) and not Afflictions:Check(&quot;blackout&quot;) then
+		Hunting:Attack(self.data.attackTarget)
+	end
+end
+
+function Hunting:GetRoomTarget()
+	self:InitializeData()
+
+	for k, v in pairs(self.data.room.items) do
+		if self.data.room.targets[v.name] then
+			Hunting:RestartAttacks(v.name)
+			return
+		end
+	end
+
+	Hunting:EndAttacks()
+end
+
+function Hunting:Initialize()
+	self:InitializeData()
+	self:UpdateDisplay()
+
+	TichiSystem:Echo(function(console)
+		setFgColor(console, 200, 200, 0)
+		echo(console, &quot;Hunting&quot;)
+		resetFormat(console)
+		echo(console, &quot; initialized.\n&quot;)
+	end)
+end
+
+function Hunting:InitializeData()
+	if not self.data then
+		self.data = {}
+	end
+
+	if not self.data.display then
+		self.data.display = {}
+	end
+
+	if not self.data.display.consoles then
+		self.data.display.consoles = {}
+	end
+
+	if not self.data.timers then
+		self.data.timers = {}
+	end
+
+	if not self.data.timers.attacks then
+		self.data.timers.attacks = {}
+	end
+
+	if not self.data.corpses then
+		self.data.corpses = {}
+	end
+
+	if not self.data.room then
+		self.data.room = {}
+	end
+
+	if not self.data.room.items then
+		self.data.room.items = {}
+	end
+
+	if not self.data.room.targets then
+		self.data.room.targets = {}
+	end
+end
+
+function Hunting:InitializeDisplay()
+	self:InitializeData()
+
+	local mainWidth, mainHeight = getMainWindowSize()
+	mainWidth = mainWidth - TichiSystem:Get(&quot;borderWidth&quot;)
+	local fontWidth, fontHeight = calcFontSize(10)
+
+	if not self.data.display.consoles.border then
+		self.data.display.consoles.border = &quot;tichisystem.hunting.consoles.border&quot;
+		createMiniConsole(self.data.display.consoles.border, 0, 0, 0, 0)
+	end
+	setBackgroundColor(self.data.display.consoles.border, 0, 0, 0, 255)
+	resizeWindow(self.data.display.consoles.border, 315, fontHeight+10)
+	moveWindow(self.data.display.consoles.border, TichiSystem:Get(&quot;borderWidth&quot;)+626, mainHeight-374+(fontHeight*2+10)+1)
+	showWindow(self.data.display.consoles.border)
+	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.consoles.border)
+
+	if not self.data.display.consoles.all then
+		self.data.display.consoles.all = &quot;tichisystem.hunting.consoles.all&quot;
+		createMiniConsole(self.data.display.consoles.all, 0, 0, 0, 0)
+	end
+	setBackgroundColor(self.data.display.consoles.all, 0, 0, 0, 255)
+	resizeWindow(self.data.display.consoles.all, 305, fontHeight)
+	moveWindow(self.data.display.consoles.all, TichiSystem:Get(&quot;borderWidth&quot;)+631, mainHeight-374+(fontHeight*2+10)+6)
+	setMiniConsoleFontSize(self.data.display.consoles.all, 10)
+	showWindow(self.data.display.consoles.all)
+	TichiSystem:AddToBucket(&quot;gui&quot;, self.data.display.consoles.all)
+
+	resetFormat()
+end
+
+function Hunting:IsAttacking()
+	self:InitializeData()
+
+	return (self.data.attacking == true)
+end
+
+function Hunting:PickUp(item)
+	if self.data.mode == &quot;group&quot; then
+		return
+	end
+
+	if not item then
+		item = self.data.attackTarget
+	end
+
+	table.insert(self.data.corpses, item)
+end
+
+function Hunting:RemoveRoomTarget(name)
+	self:InitializeData()
+
+	self.data.room.targets[name] = nil
+end
+
+function Hunting:RestartAttacks(name)
+	self.data.attackTarget = name
+
+	Hunting:UpdateDisplay()
+
+	Hunting:Execute()
+end
+
+function Hunting:SetAttack(cmd)
+	self:InitializeData()
+
+	self.data.attack = cmd
+
+	self:UpdateDisplay()
+end
+
+function Hunting:SetMode(mode)
+	self:InitializeData()
+
+	self.data.mode = mode
+
+	self:UpdateDisplay()
+end
+
+function Hunting:SetTarget(name)
+	self:InitializeData()
+
+	self.data.target = name
+
+	self:UpdateDisplay()
+end
+
+function Hunting:StopOnKill()
+	self:InitializeData()
+
+	return (self.data.stopOnKill == true)
+end
+
+function Hunting:UpdateDisplay()
+	self:InitializeDisplay()
+
+	clearWindow(self.data.display.consoles.all)
+
+	if not self.data.attackTarget then
+		echo(self.data.display.consoles.all, &quot;T: &quot; .. (self.data.target or &quot;none&quot;) .. &quot;, A: &quot; .. (self.data.attack or &quot;none&quot;) .. &quot;, M: &quot; .. (self.data.mode or &quot;none&quot;))
+	else
+		echo(self.data.display.consoles.all, &quot;T: &quot;)
+		setFgColor(self.data.display.consoles.all, 100, 100, 0)
+		echo(self.data.display.consoles.all, self.data.attackTarget)
+		resetFormat(self.data.display.consoles.all)
+		echo(self.data.display.consoles.all, &quot;, A: &quot; .. (self.data.attack or &quot;none&quot;) .. &quot;, M: &quot; .. (self.data.mode or &quot;none&quot;))
+	end
+
+	resetFormat()
+end</script>
+                <eventHandlerList>
+                    <string>sysWindowResizeEvent</string>
+                </eventHandlerList>
+            </ScriptGroup>
+            <ScriptGroup isActive="yes" isFolder="yes">
+                <name>tsLearning</name>
+                <packageName></packageName>
+                <script>if not Learning then
+	Learning = {}
+end
+
+function Learning:Confirm()
+	self:InitializeData()
+
+	self:RemoveTimers()
+end
+
+function Learning:End()
+	self:InitializeData()
+
+--	self:HideLearningWindow()
+
+	self.data.skill = nil
+	self.data.teacher = nil
+	self.data.lessonsLeft = nil
+	self.data.lastLearningAttempt = nil
+
+	disableTrigger(&quot;tsLearning&quot;)
+end
+
+function Learning:Execute(update)
+	self:InitializeData()
+	
+	if update then
+		local lessonslearned = self:Get(self.data.skill)
+		self:Set(self.data.skill, lessonslearned + self.data.lastLearningAttempt)
+		self.data.lessonsLeft = self.data.lessonsLeft - self.data.lastLearningAttempt
+
+--		Learning:UpdateLearningWindow()
+	end
+
+	if self.data.lessonsLeft == 0 then
+		Learning:End()
+	else
+		if self.data.isPlayer then
+			maxLessons = 30
+		else
+			maxLessons = 15
+		end
+		if self.data.lessonsLeft &gt; maxLessons then
+			self.data.lastLearningAttempt = maxLessons
+		else
+			self.data.lastLearningAttempt = self.data.lessonsLeft
+		end
+
+--		self:UpdateLearningWindow()
+
+		enableTrigger(&quot;tsLearning&quot;)
+		local timerLength = TichiSystem:Get(&quot;timerDuration&quot;)
+		if self.data.isPlayer then
+			timerLength = 60
+		end
+		table.insert(self.data.timers, tempTimer(timerLength, [[Learning:End()]]))
+		send(&quot;learn &quot; .. self.data.lastLearningAttempt .. &quot; &quot; .. self.data.skill .. &quot; from &quot; .. self.data.teacher)
+	end
+end
+
+function Learning:Exists(skill)
+	self:InitializePermanentData()
+	skill = skill:lower()
+
+	local tsDB = db:get_database(&quot;tsDB&quot;)
+	local result = db:fetch(tsDB.learning, db:eq(tsDB.learning.skill, skill))
+	if table.size(result) == 0 then
+		return false
+	else
+		return result[1]
+	end
+end
+
+function Learning:Get(skill)
+	self:InitializePermanentData()
+	skill = skill:lower()
+
+	local tsDB = db:get_database(&quot;tsDB&quot;)
+	local result = db:fetch(tsDB.learning, db:eq(tsDB.learning.skill, skill))
+	if table.size(result) == 0 then
+		return 0
+	else
+		return result[1][&quot;lessonslearned&quot;]
+	end
+end
+
+function Learning:Initialize()
+	self:InitializeData()
+	self:InitializePermanentData()
+
+	TichiSystem:Echo(function(console)
+		setFgColor(console, 200, 200, 0)
+		echo(console, &quot;Learning&quot;)
+		resetFormat(console)
+		echo(console, &quot; initialized.\n&quot;)
+	end)
+end
+
+function Learning:InitializeData(reset)
+	if not self.data or reset then
+		self.data = {}
+	end
+
+	if not self.data.timers then
+		self.data.timers = {}
+	end
+end
+
+function Learning:InitializePermanentData()
+	db:create(&quot;tsDB&quot;, {
+		learning={
+			skill=&quot;&quot;,
+			lessonslearned=0,
+			_index={&quot;skill&quot;},
+			_unique={&quot;skill&quot;},
+			_violations=&quot;REPLACE&quot;
+		}
+	})
+end
+
+function Learning:Learn(skill, teacher, lessons, isPlayer)
+	self:InitializeData()
+
+	self.data.skill = skill
+	self.data.teacher = teacher
+	self.data.lessonsLeft = lessons
+	self.data.isPlayer = isPlayer
+
+	self:Execute()
+end
+
+function Learning:RemoveTimers()
+	self:InitializeData()
+
+	for _, v in pairs(self.data.timers) do
+		killTimer(v)
+	end
+	
+	self.data.timers = {}
+end
+
+function Learning:Set(skill, lessonslearned)
+	self:InitializePermanentData()
+	skill = skill:lower()
+
+	local tsDB = db:get_database(&quot;tsDB&quot;)
+	local result = Learning:Exists(skill)
+	if result then
+		result[&quot;lessonslearned&quot;] = lessonslearned
+		db:update(tsDB.learning, result)
+	else
+		db:add(tsDB.learning, {skill=skill, lessonslearned=lessonslearned})
+	end
+end
+
+function Learning:TestLearn(skill, teacher)
+	local lessonslearned = self:Get(skill)
+	self:Set(skill, lessonslearned + 1)
+
+	send(&quot;learn 1 &quot; .. skill .. &quot; from &quot; .. teacher)
+end
+
+
+
+--[[function Learning:CheckLearningWindow()
+	self:CheckDataStores()
+
+	if not self.data.window then
+		self.data.window = &quot;learning&quot;
+		createMiniConsole(self.data.window,0,0,0,0)
+	end
+
+	WindowWidth, WindowHeight = getMainWindowSize()
+	setBackgroundColor(self.data.window,0,0,0,0)
+	setMiniConsoleFontSize(self.data.window, 10)
+	local x, y = calcFontSize(10)
+	resizeWindow(self.data.window, x*45, y*7)
+	moveWindow(self.data.window, WindowWidth-x*90-20, 0)
+	setTextFormat(self.data.window, 0, 0, 0, 200, 200, 200, 0, 0, 0)
+
+	resetFormat()
+end
+
+function Learning:UpdateLearningWindow()
+	self:CheckLearningWindow()
+
+	clearWindow(self.data.window)
+
+	setFgColor(self.data.window, 200, 200, 200)
+	echo(self.data.window, &quot;Learning:\n\n&quot;)
+
+	echo(self.data.window, &quot;Skill: &quot; .. self.data.skill:title() .. &quot;\n&quot;)
+	echo(self.data.window, &quot;Lessons Left: &quot; .. self.data.lessonsLeft .. &quot;\n&quot;)
+	
+	resetFormat(self.data.window)
+
+	resetFormat()
+end
+
+function Learning:HideLearningWindow()
+	resizeWindow(self.data.window, 0, 0)
+end]]--</script>
+                <eventHandlerList/>
+            </ScriptGroup>
+        </ScriptGroup>
+        <ScriptGroup isActive="yes" isFolder="yes">
+            <name>achaea-fixed-map-bottom-right</name>
+            <packageName>achaea-fixed-map-bottom-right</packageName>
+            <script></script>
+            <eventHandlerList/>
+            <Script isActive="yes" isFolder="no">
+                <name>Map</name>
+                <packageName></packageName>
+                <script>-- settings:
+mk_font_size = 10
+
+-- don't touch stuff below!
+function mk_create_map()
+	WindowWidth, WindowHeight = getMainWindowSize()
+	createMiniConsole(&quot;mk_map&quot;,0,0,0,0)
+	setBackgroundColor(&quot;mk_map&quot;,0,0,0,0)
+	setMiniConsoleFontSize(&quot;mk_map&quot;, mk_font_size)
+	local x, y = calcFontSize( mk_font_size )
+	resizeWindow( &quot;mk_map&quot;, x*45, y*25 )
+	moveWindow( &quot;mk_map&quot;, 0, 0) -- -20 to keep the scroll bar visisble
+	setBorderLeft(x*45)
+end
+
+function mk_resize_map()
+	local WindowWidth, WindowHeight = getMainWindowSize()
+	local x, y = calcFontSize( mk_font_size )
+	resizeWindow( &quot;mk_map&quot;, x*45, y*26 )
+	moveWindow( &quot;mk_map&quot;, 0, 0) -- -20 to keep the scroll bar visisble
+end
+
+function mk_cut_n_paste()
+	selectCurrentLine()
+	copy()
+	appendBuffer(&quot;mk_map&quot;)
+	deleteLine()
+end
+
+mk_create_map()
+</script>
+                <eventHandlerList/>
+            </Script>
+            <Script isActive="yes" isFolder="no">
+                <name>handleWindowResizeEvent</name>
+                <packageName></packageName>
+                <script>-------------------------------------------------
+--         Put your Lua functions here.        --
+--                                             --
+-- Note that you can also use external Scripts --
+-------------------------------------------------
+function handleWindowResizeEvent()
+	mk_resize_map()
+end</script>
+                <eventHandlerList/>
+            </Script>
+        </ScriptGroup>
+    </ScriptPackage>
+    <KeyPackage>
+        <KeyGroup isActive="yes" isFolder="yes">
+            <name>tsTichiSystem</name>
+            <packageName></packageName>
+            <script></script>
+            <command></command>
+            <keyCode>-1</keyCode>
+            <keyModifier>-1</keyModifier>
+            <Key isActive="yes" isFolder="no">
+                <name>Initialize System</name>
+                <packageName></packageName>
+                <script>TichiSystem:Initialize()</script>
+                <command></command>
+                <keyCode>16777264</keyCode>
+                <keyModifier>0</keyModifier>
+            </Key>
+            <KeyGroup isActive="yes" isFolder="yes">
+                <name>tsMovement</name>
+                <packageName></packageName>
+                <script></script>
+                <command></command>
+                <keyCode>-1</keyCode>
+                <keyModifier>-1</keyModifier>
+                <Key isActive="yes" isFolder="no">
+                    <name>North</name>
+                    <packageName></packageName>
+                    <script>Movement:Move(&quot;n&quot;)</script>
+                    <command></command>
+                    <keyCode>56</keyCode>
+                    <keyModifier>536870912</keyModifier>
+                </Key>
+                <Key isActive="yes" isFolder="no">
+                    <name>Northeast</name>
+                    <packageName></packageName>
+                    <script>Movement:Move(&quot;ne&quot;)</script>
+                    <command></command>
+                    <keyCode>57</keyCode>
+                    <keyModifier>536870912</keyModifier>
+                </Key>
+                <Key isActive="yes" isFolder="no">
+                    <name>East</name>
+                    <packageName></packageName>
+                    <script>Movement:Move(&quot;e&quot;)</script>
+                    <command></command>
+                    <keyCode>54</keyCode>
+                    <keyModifier>536870912</keyModifier>
+                </Key>
+                <Key isActive="yes" isFolder="no">
+                    <name>Southeast</name>
+                    <packageName></packageName>
+                    <script>Movement:Move(&quot;se&quot;)</script>
+                    <command></command>
+                    <keyCode>51</keyCode>
+                    <keyModifier>536870912</keyModifier>
+                </Key>
+                <Key isActive="yes" isFolder="no">
+                    <name>South</name>
+                    <packageName></packageName>
+                    <script>Movement:Move(&quot;s&quot;)</script>
+                    <command></command>
+                    <keyCode>50</keyCode>
+                    <keyModifier>536870912</keyModifier>
+                </Key>
+                <Key isActive="yes" isFolder="no">
+                    <name>Southwest</name>
+                    <packageName></packageName>
+                    <script>Movement:Move(&quot;sw&quot;)</script>
+                    <command></command>
+                    <keyCode>49</keyCode>
+                    <keyModifier>536870912</keyModifier>
+                </Key>
+                <Key isActive="yes" isFolder="no">
+                    <name>West</name>
+                    <packageName></packageName>
+                    <script>Movement:Move(&quot;w&quot;)</script>
+                    <command></command>
+                    <keyCode>52</keyCode>
+                    <keyModifier>536870912</keyModifier>
+                </Key>
+                <Key isActive="yes" isFolder="no">
+                    <name>Northwest</name>
+                    <packageName></packageName>
+                    <script>Movement:Move(&quot;nw&quot;)</script>
+                    <command></command>
+                    <keyCode>55</keyCode>
+                    <keyModifier>536870912</keyModifier>
+                </Key>
+                <Key isActive="yes" isFolder="no">
+                    <name>Up</name>
+                    <packageName></packageName>
+                    <script>Movement:Move(&quot;u&quot;)</script>
+                    <command></command>
+                    <keyCode>45</keyCode>
+                    <keyModifier>536870912</keyModifier>
+                </Key>
+                <Key isActive="yes" isFolder="no">
+                    <name>Down</name>
+                    <packageName></packageName>
+                    <script>Movement:Move(&quot;d&quot;)</script>
+                    <command></command>
+                    <keyCode>43</keyCode>
+                    <keyModifier>536870912</keyModifier>
+                </Key>
+                <Key isActive="yes" isFolder="no">
+                    <name>In</name>
+                    <packageName></packageName>
+                    <script>Movement:Move(&quot;in&quot;)</script>
+                    <command></command>
+                    <keyCode>46</keyCode>
+                    <keyModifier>536870912</keyModifier>
+                </Key>
+                <Key isActive="yes" isFolder="no">
+                    <name>Out</name>
+                    <packageName></packageName>
+                    <script>Movement:Move(&quot;out&quot;)</script>
+                    <command></command>
+                    <keyCode>48</keyCode>
+                    <keyModifier>536870912</keyModifier>
+                </Key>
+            </KeyGroup>
+            <Key isActive="yes" isFolder="no">
+                <name>Look</name>
+                <packageName></packageName>
+                <script></script>
+                <command>look</command>
+                <keyCode>53</keyCode>
+                <keyModifier>536870912</keyModifier>
+            </Key>
+            <KeyGroup isActive="yes" isFolder="yes">
+                <name>tsHunting</name>
+                <packageName></packageName>
+                <script></script>
+                <command></command>
+                <keyCode>-1</keyCode>
+                <keyModifier>-1</keyModifier>
+                <Key isActive="yes" isFolder="no">
+                    <name>sh</name>
+                    <packageName></packageName>
+                    <script>Hunting:EndAttacks()
+send(&quot;touch shield&quot;)</script>
+                    <command></command>
+                    <keyCode>16777266</keyCode>
+                    <keyModifier>0</keyModifier>
+                </Key>
+                <Key isActive="yes" isFolder="no">
+                    <name>End Attack</name>
+                    <packageName></packageName>
+                    <script>Hunting:EndAttacks()</script>
+                    <command></command>
+                    <keyCode>16777265</keyCode>
+                    <keyModifier>0</keyModifier>
+                </Key>
+            </KeyGroup>
+        </KeyGroup>
+    </KeyPackage>
+</MudletPackage>
