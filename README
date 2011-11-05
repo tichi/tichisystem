@@ -1,0 +1,20 @@
+Welcome to the Tichi System!
+
+This system is designed to make life in Imperian easier. To install it, simply download the package and use the package manager in Mudlet to install it. NOTE: This package includes Vadi's map window as well as the Tichi System!
+
+Current features:
+	- Tabbed channel windows for All, Guild, City, Ring, Congregation, and Tells. The chat lines are left in the main window as well.
+	- Map, courtesy of Vadi's awesome packages
+	- GUI that displays current balance states, afflictions, target, attack, hunting type, and movement type (explained in the remaining features).
+	- Curing system (displays current afflictions)
+	- Balance tracking (displays current balance states)
+	- Hunting scripts (displays current target, attack string, and the hunting type).
+		- You can set the current target with "tar <target>", the current attack string with "att <attack string with {t} for the target>", and the current hunting type with "ht <type". The hunting type currently is limited to empty (ht) and group (ht group). When group is the hunting type, you do not pick up corpses or gold, as intended for group hunting where one single person is usually in charge of that.
+		- c causes you to attack a single time, cc causes you to attack until your target is dead, ccc causes you to attack until all of the mobs in the room that match your current target are dead
+		- Area combat is also possible. You can set a list of targets with "atar <target>", remove one with "rtar <target>", or clear all of them with "ctar". You then can do rc to attack everything in the room that matches one of your targets. Please note, this particular script uses IH to find the targets, to please make sure the targets you add match the short names of the mobs in IH.
+	- Movement scripts (displays the current movement type).
+		- You can set the current movement type to empty (mv) or caravan (mv caravan). When set to caravan, it causes all movement to attempt to lead a caravan.
+		- When attempting to move into a room with water, it detects the "failure" to move message and swims for you.
+	- Learning scripts
+		- You can learn any number of lessons, and it will automatically split it into rounds of 15 lessons.
+		- Using plearn allows you to learn 30 lesson groups, and causes the confirm timers to take longer to run to account for the other player taking a second to accept to teach you.
