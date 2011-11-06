@@ -5,7 +5,7 @@ This system is designed to make life in Imperian easier. To install it, simply d
 Current features:
 	- Tabbed channel windows for All, Guild, City, Ring, Congregation, and Tells. The chat lines are left in the main window as well.
 	- Map, courtesy of Vadi's awesome packages
-	- GUI that displays current balance states, afflictions, target, attack, hunting type, and movement type (explained in the remaining features).
+	- GUI that displays current balance states, afflictions, target, attack, hunting type, movement type, and a calendar (explained in the remaining features). Each GUI element has an X in the top corner to close it, and it will remain closed until "showgui <element name>" is used.
 	- Curing system (displays current afflictions)
 	- Balance tracking (displays current balance states)
 	- Hunting scripts (displays current target, attack string, and the hunting type).
@@ -18,3 +18,5 @@ Current features:
 	- Learning scripts
 		- You can learn any number of lessons, and it will automatically split it into rounds of 15 lessons.
 		- Using plearn allows you to learn 30 lesson groups, and causes the confirm timers to take longer to run to account for the other player taking a second to accept to teach you.
+	- Calendar scripts
+		- Displays the current month, year, time of the year, and day. Clicking on the month name pops up a window with the herbs growing this month, and those in green are in their last month of growing.
